@@ -1,10 +1,17 @@
 import React from 'react';
+import { render } from 'react-dom';
+import WorkOut from './workout';
+import AppContext from './app-context';
+//import App from '../app';
 
-export default function Navbar(props) {
+export default class NavBar extends React.Component{
+
+  render(props){
+
   return (
     <div>
       <div id = "navBarContainer">
-        <div id = "navBarWorkOut">
+        <div id = "navBarWorkOut" onClick = {this.props.handleClick}>
           <span class="material-icons md-60">
             fitness_center
           </span>
@@ -12,7 +19,7 @@ export default function Navbar(props) {
             Workout
           </div>
         </div>
-        <div id="navBarPlans">
+        <div id="navBarPlans" onClick={this.props.handleClick}>
           <span class="material-icons md-60">
             folder_special
           </span>
@@ -20,7 +27,7 @@ export default function Navbar(props) {
             Plans
           </div>
         </div>
-        <div id="navBarJournal">
+        <div id="navBarJournal" onClick={this.props.handleClick}>
           <span class="material-icons md-60">
             text_snippet
           </span>
@@ -28,7 +35,7 @@ export default function Navbar(props) {
             Journal
           </div>
         </div>
-        <div id="navBarUser">
+        <div id="navBarUser" onClick={this.props.handleClick}>
           <span class="material-icons md-60">
             account_circle
           </span>
@@ -39,4 +46,6 @@ export default function Navbar(props) {
       </div>
     </div>
   );
+  }
 }
+NavBar.contextType = AppContext
