@@ -1,0 +1,32 @@
+.material-icons.md-60{
+font-size:60px;
+}
+#navBarContainer{
+  display:flex;
+  justify-content: space-evenly;
+}
+#navBarText{
+  text-align: center;
+}
+
+#workOutPartsDropDown{
+  width: 200px;
+  height: 40px;
+
+}
+#homeWorkOutPartsDropDown{
+  padding-top: 2rem;
+  text-align: center;
+}
+#workOutGraphPlace{
+  padding-top: 1rem;
+  text-align: center;
+}
+#workOutGraph{
+  border:1px solid black;
+  width: 250px;
+}
+#homeWeightGraphPlace{
+  text-align: center;
+  padding-top: 1rem;
+}
