@@ -1,7 +1,7 @@
 import React from 'react';
 import { render } from 'react-dom';
-import WorkOut from './workout';
-import AppContext from './app-context';
+//import WorkOut from './workout';
+//import AppContext from './app-context';
 //import App from '../app';
 
 export default class NavBar extends React.Component{
@@ -11,41 +11,16 @@ export default class NavBar extends React.Component{
   return (
     <div>
       <div id = "navBarContainer">
-        <div id = "navBarWorkOut" onClick = {this.props.handleClick}>
-          <span class="material-icons md-60">
-            fitness_center
-          </span>
-          <div id = "navBarText">
-            Workout
-          </div>
-        </div>
-        <div id="navBarPlans" onClick={this.props.handleClick}>
-          <span class="material-icons md-60">
-            folder_special
-          </span>
-          <div id ="navBarText">
-            Plans
-          </div>
-        </div>
-        <div id="navBarJournal" onClick={this.props.handleClick}>
-          <span class="material-icons md-60">
-            text_snippet
-          </span>
-          <div id="navBarText">
-            Journal
-          </div>
-        </div>
-        <div id="navBarUser" onClick={this.props.handleClick}>
-          <span class="material-icons md-60">
-            account_circle
-          </span>
-          <div id="navBarText">
-            User
-          </div>
-        </div>
+
+
+        <a class = "tab active" href = "#workout"><span class="material-icons md-60">fitness_center</span>Workout</a>
+        <a class = "tab "href = "#routine"><span class="material-icons md-60">folder_special</span>Plans</a>
+        <a class = "tab "href = "#journal"><span class="material-icons md-60">text_snippet</span>Journal</a>
+        <a class = "tab "href = "#user"><span class="material-icons md-60">account_circle</span>User</a>
+
       </div>
     </div>
   );
   }
 }
-NavBar.contextType = AppContext
+//NavBar.contextType = AppContext
