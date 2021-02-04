@@ -2,7 +2,7 @@ import React from 'react';
 import Home from './pages/home';
 import NavBar from './pages/navbar';
 import WorkOut from './pages/workout';
-import AppContext from './pages/app-context';
+
 import AddWorkOut from './pages/addworkout';
 import { parseRoute } from './pages/index'
 
@@ -47,4 +47,3 @@ export default class App extends React.Component {
     )
   }
 }
-App.contextType = AppContext

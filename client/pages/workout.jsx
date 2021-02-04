@@ -1,5 +1,5 @@
 import React from 'react';
-//import AppContext from './app-context';
+
 //import App from '../app';
 export default class WorkOut extends React.Component {
   render(){
@@ -27,4 +27,3 @@ export default class WorkOut extends React.Component {
   );
   }
 }
-//WorkOut.contextType = AppContext

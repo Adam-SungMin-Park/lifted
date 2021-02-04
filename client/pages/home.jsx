@@ -1,5 +1,5 @@
 import React from 'react';
-import AppContext from './app-context';
+
 
 export default function Home(props) {
   return (
@@ -23,4 +23,3 @@ export default function Home(props) {
   </div>
   );
 }
-Home.contextType = AppContext

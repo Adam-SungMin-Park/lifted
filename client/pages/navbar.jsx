@@ -1,7 +1,6 @@
 import React from 'react';
 import { render } from 'react-dom';
 //import WorkOut from './workout';
-//import AppContext from './app-context';
 //import App from '../app';
 
 export default class NavBar extends React.Component{
@@ -23,4 +22,3 @@ export default class NavBar extends React.Component{
   );
   }
 }
-//NavBar.contextType = AppContext

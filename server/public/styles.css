@@ -63,14 +63,25 @@ font-size:60px;
 .rowWorkOutExerciseWeightRep{
   text-align:center;
 }
-#workOutExercisRep{
+#workOutExerciseRep{
   width:40px;
 }
 #workOutExerciseWeight{
   width:60px;
   margin-right:2rem;
 }
-#workOutExerciseDrop{
+#workOutExerciseDropDown{
   width: 200px;
   margin-right: 2rem;
+}
+.rowWorkOutVolume{
+  text-align: right;
+  padding-top: 2rem;
+}
+#exerciseAddButtonPlace{
+  text-align: right;
+  padding-top: 1rem;
+}
+.addOrRemove{
+  text-align: right;
 }
