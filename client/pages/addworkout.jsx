@@ -9,9 +9,10 @@ export default class AddWorkOut extends React.Component{
       exercise:[
        {
         exerciseName:"",
-        weight:100,
-        reps:10
+        weight:"",
+        reps:""
       },
+
       ]}
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -21,6 +22,7 @@ export default class AddWorkOut extends React.Component{
     this.handleRepsChange = this.handleRepsChange.bind(this)
     this.handleWeightChange = this.handleWeightChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleVolume = this.handleVolume.bind(this)
   }
 
   handleSubmit(){
@@ -39,11 +41,18 @@ export default class AddWorkOut extends React.Component{
     })
   }
 
+  handleVolume(){
+    console.log("volume calc")
+    let totalVolume =0
 
+    for(var i = 0 ; i < this.state.exercise.length ; i++){
+      totalVolume = Number(totalVolume + (this.state.exercise[i].weight * this.state.exercise[i].reps))
+    }
+
+    return totalVolume;
+  }
 
   handleWeightChange(e,index){
-    console.log(index)
-    console.log(e)
 
     let test = [...this.state.exercise];
     let test2 = {...this.state.exercise[index]};
@@ -52,23 +61,22 @@ export default class AddWorkOut extends React.Component{
     this.setState({
       exercise:test
     })
+
   }
 
 
 
   handleRepsChange(e,index){
-  console.log(this.state.exercise[index].reps)
 
     let test = [...this.state.exercise];
     let test2 = { ...this.state.exercise[index] };
     test2.reps = Number(e.target.value);
     test[index] = test2;
+
     this.setState({
       exercise: test
     })
-  }
-
-
+    }
 
   handleInputChange(property){
     return event=>{
@@ -94,10 +102,14 @@ export default class AddWorkOut extends React.Component{
       exercise: extraExercise
     })
     console.log(this.state);
+
+
     }
 
   render(props){
+    this.handleVolume()
     return (
+
       <div id="addWorkOutContainer">
         <div id="addWorkOutPageTitle">
           Add WorkOut
@@ -113,6 +125,7 @@ export default class AddWorkOut extends React.Component{
 
           <div className = "rowWorkOutPartsDate">
             <select value = {this.state.workOutPart} onChange={this.handleInputChange('workOutParts')} name="workOutWorkOutPartsDrop" id="workOutWorkOutPartsDropDown">
+              <option>Select WorkOut Part!</option>
               <option value="Chest">Chest</option>
               <option value="Shoulder">Shoulder</option>
               <option value="Back">Back</option>
@@ -128,6 +141,7 @@ export default class AddWorkOut extends React.Component{
           return(
             <div className="rowExerciseWeightRep">
             <select onChange={(e)=> this.handleExerciseNameChange(e,index)} name="exerciseName" value={this.state.exercise[index].exerciseName} id="workOutExerciseDropDown">
+                <option>Select Exercise</option>
                 <option value="Bench Press">Bench Press</option>
                 <option value="Squat">Squat</option>
                 <option value="Dead Lift">Dead Lift</option>
@@ -146,7 +160,7 @@ export default class AddWorkOut extends React.Component{
           </div>
 
           <div className = "rowWorkOutVolume">
-            <input id = "workOutVolume" type = "integer" placeholder="Total volume"></input>
+            <input value ={this.handleVolume()} id = "workOutVolume" type = "integer" placeholder="Total volume"></input>
           </div>
           <div className = "submitWorkOut">
             <a href = "#workout" onClick ={this.handleSubmit}>Save WorkOut</a>
