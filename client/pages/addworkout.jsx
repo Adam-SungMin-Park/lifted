@@ -17,20 +17,58 @@ export default class AddWorkOut extends React.Component{
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleRemoveClick = this.handleRemoveClick.bind(this);
     this.handleAddClick = this.handleAddClick.bind(this);
-    this.handleExerciseChange = this.handleExerciseChange.bind(this);
+    this.handleExerciseNameChange = this.handleExerciseNameChange.bind(this);
+    this.handleRepsChange = this.handleRepsChange.bind(this)
+    this.handleWeightChange = this.handleWeightChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleExerciseChange(e,index,property){
-    e.preventDefault()
-    const test = Object.assign({},this.state.exercise);
-    test[index].property = e.target.value;
-    this.state.exercise[index] = test[index];
+  handleSubmit(){
+    //event.returnValue = false;
+    console.log(this.state)
+  }
 
-    console.log(this.state.exercise[index])
+  handleExerciseNameChange(e,index){
+    console.log('fire')
+    let test = [...this.state.exercise];
+    let test2 = { ...this.state.exercise[index] };
+    test2.exerciseName = e.target.value;
+    test[index] = test2;
     this.setState({
-      exercise[index][property] : test
+      exercise: test
     })
   }
+
+
+
+  handleWeightChange(e,index){
+    console.log(index)
+    console.log(e)
+
+    let test = [...this.state.exercise];
+    let test2 = {...this.state.exercise[index]};
+    test2.weight = Number(e.target.value);
+    test[index] = test2;
+    this.setState({
+      exercise:test
+    })
+  }
+
+
+
+  handleRepsChange(e,index){
+  console.log(this.state.exercise[index].reps)
+
+    let test = [...this.state.exercise];
+    let test2 = { ...this.state.exercise[index] };
+    test2.reps = Number(e.target.value);
+    test[index] = test2;
+    this.setState({
+      exercise: test
+    })
+  }
+
+
 
   handleInputChange(property){
     return event=>{
@@ -89,13 +127,13 @@ export default class AddWorkOut extends React.Component{
         {this.state.exercise.map((exercise,index)=>{
           return(
             <div className="rowExerciseWeightRep">
-            <select onChange={(e)=>this.handleExerciseChange(e,index,'exerciseName')} name="exerciseName" value={this.state.exercise[index].exerciseName} id="workOutExerciseDropDown">
-              <option value="Bench Press">Bench Press</option>
-              <option value="Squat">Squat</option>
-              <option value="Dead Lift">Dead Lift</option>
+            <select onChange={(e)=> this.handleExerciseNameChange(e,index)} name="exerciseName" value={this.state.exercise[index].exerciseName} id="workOutExerciseDropDown">
+                <option value="Bench Press">Bench Press</option>
+                <option value="Squat">Squat</option>
+                <option value="Dead Lift">Dead Lift</option>
             </select>
-              <input onChange={(e)=>this.handleExerciseChange(e,index,'weight')} name="weight" value={this.state.exercise[index].weight} id="workOutExerciseWeight" type="integer" placeholder="135"></input>
-              <input onChange={(e)=>this.handleExerciseChange(e,index,'reps')} name="reps" value={this.state.exercise[index].reps} id="workOutExerciseRep" type="integer" placeholder='10'></input>
+              <input onChange={(e)=>this.handleWeightChange(e,index)} name="weight" value={this.state.exercise[index].weight} id="workOutExerciseWeight" type="integer" placeholder="135"></input>
+              <input onChange={(e)=>this.handleRepsChange(e,index)} name="reps" value={this.state.exercise[index].reps} id="workOutExerciseRep" type="integer" placeholder='10'></input>
             <div className = "addOrRemove">
                 {this.state.exercise.length !==1 && <button onClick ={this.handleRemoveClick} className = "removeButton">Remove</button>}
             </div>
@@ -111,7 +149,7 @@ export default class AddWorkOut extends React.Component{
             <input id = "workOutVolume" type = "integer" placeholder="Total volume"></input>
           </div>
           <div className = "submitWorkOut">
-            <button onClick ={this.handleSubmit}>Save WorkOut</button>
+            <a href = "#workout" onClick ={this.handleSubmit}>Save WorkOut</a>
           </div>
         </form>
       </div>

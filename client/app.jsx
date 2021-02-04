@@ -22,7 +22,7 @@ export default class App extends React.Component {
         route: parseRoute(window.location.hash)
       })
     })
-    console.log(this.state.route)
+
   }
 
   renderPage(){
