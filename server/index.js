@@ -12,21 +12,15 @@ app.use(jsonMiddleware);
 app.use(staticMiddleware);
 
 app.get('/api/exercises',(req,res)=>{
-  res.json(exerciseExample)
-})
-
-/*app.post('/api/workout',(req,res)=>{
   const sql = `
-  insert into "userWorkOut"("userId","workOutPart")
-  values = ($1,$2)
+    select "exerciseWeight", "exerciseReps" , "workOutId"
+    from "exercises"
+    group by "exercises"."exerciseWeight"
   `
-
-  const params = [req.body.userId , req.body.workOutPart]
-
-  db.query(sql,params)
+  db.query(sql)
   .then(res => console.log(res))
-  .cath
-})*/
+  .catch(err=>console.log(err))
+})
 
 app.post('/api/exercises',async (req,res)=>{
 
