@@ -30,3 +30,58 @@ font-size:60px;
   text-align: center;
   padding-top: 1rem;
 }
+#workOutAddButtonPlace{
+  text-align: right;
+}
+#workOutAdd{
+  width: 70px;
+  height: 40px;
+}
+.tab{
+  text-decoration:none;
+  text-align: center;
+}
+#workOutPageTitle{
+  text-align: center;
+  padding-top: 2rem;
+  font-size: 2rem;
+}
+#addWorkOutPageTitle{
+  text-align: center;
+  padding-top: 2rem;
+  padding-bottom:2rem;
+  font-size: 2rem;
+}
+.rowRoutineWeight{
+  text-align:center;
+  padding-bottom:1rem;
+}
+.rowWorkOutPartsDate{
+  text-align:center;
+  padding-bottom:1rem;
+}
+.rowWorkOutExerciseWeightRep{
+  text-align:center;
+}
+#workOutExerciseRep{
+  width:40px;
+}
+#workOutExerciseWeight{
+  width:60px;
+  margin-right:2rem;
+}
+#workOutExerciseDropDown{
+  width: 200px;
+  margin-right: 2rem;
+}
+.rowWorkOutVolume{
+  text-align: right;
+  padding-top: 2rem;
+}
+#exerciseAddButtonPlace{
+  text-align: right;
+  padding-top: 1rem;
+}
+.addOrRemove{
+  text-align: right;
+}

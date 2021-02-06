@@ -1,45 +1,51 @@
 import React from 'react';
 import Home from './pages/home';
-import Navbar from './pages/navbar';
+import NavBar from './pages/navbar';
 import WorkOut from './pages/workout';
-import AppContext from './pages/app-context';
+
+import AddWorkOut from './pages/addworkout';
+import { parseRoute } from './pages/index'
 
 
 export default class App extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      display: "main"
+      route: parseRoute(window.location.hash)
     };
-    this.handleClick = this.handleClick.bind(this)
+    this.updateHash = this.updateHash.bind(this)
   }
-  handleClick(props) {
-    console.log(this.state.display)
-    this.setState({
-      display: event.target.textContent
+  componentDidMount(){
+    window.addEventListener('hashchange',(event)=>{
+      this.setState({
+        route: parseRoute(window.location.hash)
+      })
     })
   }
-
-  render(props) {
-
-    if (this.state.display === "main"||this.state.display ==="home"){
-    return (
-      <div id = "container">
-        <div id = "appNavBar">
-        <Navbar handleClick = {this.handleClick}/>
-        </div>
-        <div id = "appHome">
-        <Home />
-        </div>
-      </div>
-    );
+  updateHash(hash){
+    this.setState({
+      route:hash
+    })
+  }
+  renderPage(){
+    const { route } = this.state;
+    if(route.path ==='user'){
+      return <Home/>
     }
-    if(this.state.display ==="fitness_center" || "WorkOut"){
-      return (
-        <WorkOut handleClick = {this.handleClick}/>
-      )
+    if(route.path === 'workout'){
+      return <WorkOut/>;
+    }
+    if(route.path === 'addworkout'){
+      return <AddWorkOut updateHash={this.updateHash} />;
     }
   }
 
+  render(){
+    return(
+      <>
+    <NavBar/>
+    { this.renderPage() }
+    </>
+    )
+  }
 }
-App.contextType = AppContext
