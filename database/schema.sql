@@ -45,12 +45,11 @@ CREATE TABLE "userCalories" (
 
 
 CREATE TABLE "userWorkOut" (
-	"userWorkoutId" serial NOT NULL,
-	"userId" integer NOT NULL,
-	"workoutPartId" integer NOT NULL,
-	"exerciseId" integer NOT NULL,
+	"workOutId" serial NOT NULL,
+	"userId" integer,
+	"workOutPart" TEXT NOT NULL,
 	"createdAt" DATE NOT NULL,
-	CONSTRAINT "userWorkOut_pk" PRIMARY KEY ("userWorkoutId")
+	CONSTRAINT "userWorkOut_pk" PRIMARY KEY ("workOutId")
 ) WITH (
   OIDS=FALSE
 );
@@ -59,12 +58,10 @@ CREATE TABLE "userWorkOut" (
 
 CREATE TABLE "exercises" (
 	"exercisesId" serial NOT NULL,
-	"userId" integer NOT NULL,
-	"userWorkoutId" integer NOT NULL,
 	"exerciseName" TEXT NOT NULL,
 	"exerciseWeight" integer NOT NULL,
 	"exerciseReps" integer NOT NULL,
-	"exerciseVolume" integer NOT NULL,
+	"workOutId" integer NOT NULL,
 	CONSTRAINT "exercises_pk" PRIMARY KEY ("exercisesId")
 ) WITH (
   OIDS=FALSE
@@ -75,9 +72,8 @@ CREATE TABLE "exercises" (
 CREATE TABLE "routines" (
 	"routineId" serial NOT NULL,
 	"userId" integer NOT NULL,
-	"workoutPartId" integer NOT NULL,
+	"workOutPart" integer NOT NULL,
 	"routineName" TEXT NOT NULL,
-	"exerciseId" integer NOT NULL,
 	CONSTRAINT "routines_pk" PRIMARY KEY ("routineId")
 ) WITH (
   OIDS=FALSE
@@ -95,10 +91,10 @@ CREATE TABLE "routineExercise" (
 
 
 
-CREATE TABLE "workoutParts" (
-	"workoutPartName" TEXT NOT NULL,
-	"workoutPartId" serial NOT NULL,
-	CONSTRAINT "workoutParts_pk" PRIMARY KEY ("workoutPartId")
+CREATE TABLE "workOutExercises" (
+	"exercisesId" integer NOT NULL,
+	"workOutId" integer NOT NULL,
+	CONSTRAINT "workOutExercises_pk" PRIMARY KEY ("exercisesId","workOutId")
 ) WITH (
   OIDS=FALSE
 );
@@ -110,16 +106,13 @@ ALTER TABLE "userWeight" ADD CONSTRAINT "userWeight_fk0" FOREIGN KEY ("userId") 
 
 ALTER TABLE "userCalories" ADD CONSTRAINT "userCalories_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");
 
-ALTER TABLE "userWorkOut" ADD CONSTRAINT "userWorkOut_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");
-ALTER TABLE "userWorkOut" ADD CONSTRAINT "userWorkOut_fk1" FOREIGN KEY ("workoutPartId") REFERENCES "workoutParts"("workoutPartId");
-ALTER TABLE "userWorkOut" ADD CONSTRAINT "userWorkOut_fk2" FOREIGN KEY ("exerciseId") REFERENCES "exercises"("exercisesId");
 
-ALTER TABLE "exercises" ADD CONSTRAINT "exercises_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");
-ALTER TABLE "exercises" ADD CONSTRAINT "exercises_fk1" FOREIGN KEY ("userWorkoutId") REFERENCES "userWorkOut"("userWorkoutId");
+ALTER TABLE "exercises" ADD CONSTRAINT "exercises_fk0" FOREIGN KEY ("workOutId") REFERENCES "userWorkOut"("workOutId");
 
 ALTER TABLE "routines" ADD CONSTRAINT "routines_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");
-ALTER TABLE "routines" ADD CONSTRAINT "routines_fk1" FOREIGN KEY ("workoutPartId") REFERENCES "workoutParts"("workoutPartId");
-ALTER TABLE "routines" ADD CONSTRAINT "routines_fk2" FOREIGN KEY ("exerciseId") REFERENCES "exercises"("exercisesId");
 
 ALTER TABLE "routineExercise" ADD CONSTRAINT "routineExercise_fk0" FOREIGN KEY ("routineId") REFERENCES "routines"("routineId");
 ALTER TABLE "routineExercise" ADD CONSTRAINT "routineExercise_fk1" FOREIGN KEY ("exerciseId") REFERENCES "exercises"("exercisesId");
+
+ALTER TABLE "workOutExercises" ADD CONSTRAINT "workOutExercises_fk0" FOREIGN KEY ("exercisesId") REFERENCES "exercises"("exercisesId");
+ALTER TABLE "workOutExercises" ADD CONSTRAINT "workOutExercises_fk1" FOREIGN KEY ("workOutId") REFERENCES "userWorkOut"("workOutId");

@@ -13,8 +13,7 @@ export default class App extends React.Component {
     this.state = {
       route: parseRoute(window.location.hash)
     };
-
-    //this.handleClick = this.handleClick.bind(this)
+    this.updateHash = this.updateHash.bind(this)
   }
   componentDidMount(){
     window.addEventListener('hashchange',(event)=>{
@@ -22,9 +21,12 @@ export default class App extends React.Component {
         route: parseRoute(window.location.hash)
       })
     })
-
   }
-
+  updateHash(hash){
+    this.setState({
+      route:hash
+    })
+  }
   renderPage(){
     const { route } = this.state;
     if(route.path ==='user'){
@@ -34,7 +36,7 @@ export default class App extends React.Component {
       return <WorkOut/>;
     }
     if(route.path === 'addworkout'){
-      return <AddWorkOut />;
+      return <AddWorkOut updateHash={this.updateHash} />;
     }
   }
 

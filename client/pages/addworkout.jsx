@@ -4,6 +4,7 @@ export default class AddWorkOut extends React.Component{
   constructor(props){
     super(props)
     this.state ={
+      userId: 1,
       workOutParts:"",
       workOutDate:"",
       exercise:[
@@ -12,7 +13,6 @@ export default class AddWorkOut extends React.Component{
         weight:"",
         reps:""
       },
-
       ]}
 
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -26,12 +26,20 @@ export default class AddWorkOut extends React.Component{
   }
 
   handleSubmit(){
-    //event.returnValue = false;
-    console.log(this.state)
+   console.log(this.state)
+    fetch('/api/exercises',{
+      method:'POST',
+      headers:{
+        'Content-Type':'application/json'
+      },
+      body: JSON.stringify(this.state)
+    }).then(res => res.json())
+    .then(res => console.log(res))
+    .catch(err => console.log(err))
+
   }
 
   handleExerciseNameChange(e,index){
-    console.log('fire')
     let test = [...this.state.exercise];
     let test2 = { ...this.state.exercise[index] };
     test2.exerciseName = e.target.value;
@@ -42,9 +50,7 @@ export default class AddWorkOut extends React.Component{
   }
 
   handleVolume(){
-    console.log("volume calc")
     let totalVolume =0
-
     for(var i = 0 ; i < this.state.exercise.length ; i++){
       totalVolume = Number(totalVolume + (this.state.exercise[i].weight * this.state.exercise[i].reps))
     }
@@ -61,10 +67,7 @@ export default class AddWorkOut extends React.Component{
     this.setState({
       exercise:test
     })
-
   }
-
-
 
   handleRepsChange(e,index){
 
@@ -96,17 +99,16 @@ export default class AddWorkOut extends React.Component{
   }
 
   handleAddClick(event){
+
     event.preventDefault()
     const extraExercise = this.state.exercise.concat(this.state.exercise[0])
     this.setState({
       exercise: extraExercise
     })
-    console.log(this.state);
-
-
     }
 
-  render(props){
+  render(){
+
     this.handleVolume()
     return (
 
@@ -139,18 +141,18 @@ export default class AddWorkOut extends React.Component{
 
         {this.state.exercise.map((exercise,index)=>{
           return(
-            <div className="rowExerciseWeightRep">
-            <select onChange={(e)=> this.handleExerciseNameChange(e,index)} name="exerciseName" value={this.state.exercise[index].exerciseName} id="workOutExerciseDropDown">
+            <div key = {index} className="rowExerciseWeightRep">
+              <select  onChange={(e)=> this.handleExerciseNameChange(e,index)} name="exerciseName" value={this.state.exercise[index].exerciseName} id="workOutExerciseDropDown">
                 <option>Select Exercise</option>
                 <option value="Bench Press">Bench Press</option>
                 <option value="Squat">Squat</option>
                 <option value="Dead Lift">Dead Lift</option>
-            </select>
-              <input onChange={(e)=>this.handleWeightChange(e,index)} name="weight" value={this.state.exercise[index].weight} id="workOutExerciseWeight" type="integer" placeholder="135"></input>
-              <input onChange={(e)=>this.handleRepsChange(e,index)} name="reps" value={this.state.exercise[index].reps} id="workOutExerciseRep" type="integer" placeholder='10'></input>
-            <div className = "addOrRemove">
+             </select>
+                <input onChange={(e)=>this.handleWeightChange(e,index)} name="weight" value={this.state.exercise[index].weight} id="workOutExerciseWeight" type="integer" placeholder="135"></input>
+                <input onChange={(e)=>this.handleRepsChange(e,index)} name="reps" value={this.state.exercise[index].reps} id="workOutExerciseRep" type="integer" placeholder='10'></input>
+              <div className = "addOrRemove">
                 {this.state.exercise.length !==1 && <button onClick ={this.handleRemoveClick} className = "removeButton">Remove</button>}
-            </div>
+              </div>
             </div>
           )
         })}
@@ -160,7 +162,7 @@ export default class AddWorkOut extends React.Component{
           </div>
 
           <div className = "rowWorkOutVolume">
-            <input value ={this.handleVolume()} id = "workOutVolume" type = "integer" placeholder="Total volume"></input>
+            <input value ={this.handleVolume()} id = "workOutVolume" type = "integer" placeholder="Total volume" readOnly></input>
           </div>
           <div className = "submitWorkOut">
             <a href = "#workout" onClick ={this.handleSubmit}>Save WorkOut</a>
