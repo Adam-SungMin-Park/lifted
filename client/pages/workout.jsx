@@ -1,34 +1,54 @@
 import React from 'react';
 import Chart from "chart.js";
+import LineGraph from './linegraph';
 
-//import App from '../app';
+import App from '../app';
 export default class WorkOut extends React.Component {
 
-  //chartRef = React.createRef();
+  constructor(props){
+    super(props)
+    this.state={
+      data:[],
+      label:[]
+    }
+   this.getData = this.getData.bind(this)
+  }
+
+  getData(){
+    fetch('/api/exercises').then(res => console.log(res.json()))
+      .then(
+        data =>
+          this.setState({
+            posts: data,
+            isLoading: false
+          })
+      )
+      .catch(error => this.setState({ error, isLoading: false }))
+  }
 
   componentDidMount(){
-
-    fetch('/api/exercises')
-     .then(res => res.json())
-      .then(res => console.log(res))
-      .catch(err => console.log(err))
-
-
-    /*const myChartRef = this.chartRef.current.getContext("2d");
-
-    new Chart(myChartRef, {
-      type:"line",
-      data:{
-        labels:[]
-      }
-    })
-*/
+    console.log(this.getData());
   }
 
 
 
 
+
+
+/*{
+  const dataArray = [];
+  const labelArray = [];
+  for (var i = 0; i < data.rows.length; i++) {
+    dataArray.push(data.rows[i]["total volume"]);
+    labelArray.push(data.rows[i].createdAt)
+  }
+  console.log("dataaaaa: " + dataArray)
+  console.log("labeleeataaaaa: " + labelArray)
+}*/
+
+
   render(){
+//console.log(this.state)
   return (
     <div id="workOutContainer">
       <div id = "workOutPageTitle">
@@ -42,7 +62,9 @@ export default class WorkOut extends React.Component {
         </select>
       </div>
       <div id="workOutGraphPlace">
-        <img id="workOutGraph" src="favicon.ico"></img>
+        <LineGraph
+        data = {this.state.data}
+        labels = {this.state.label} />
       </div>
       <div id = "workOutAddButtonPlace">
         <a href= "#addworkout" id = "workOutAdd" >

@@ -26,15 +26,15 @@ export default class AddWorkOut extends React.Component{
   }
 
   handleSubmit(){
-   console.log(this.state)
+
     fetch('/api/exercises',{
       method:'POST',
       headers:{
         'Content-Type':'application/json'
       },
       body: JSON.stringify(this.state)
-    }).then(res => res.json())
-    .then(res => console.log(res))
+    }).then(res => console.log(res))
+      .then(data => console.log(data))
     .catch(err => console.log(err))
 
   }
