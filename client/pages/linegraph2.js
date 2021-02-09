@@ -1,29 +1,31 @@
 import React, { Component } from 'react'
 import Chart from "chart.js";
-import WorkOut from "./workout"
+import Journal from './journal';
 
 
-export default class LineGraph extends React.Component {
-  constructor(props){
+export default class LineGraph2 extends React.Component {
+  constructor(props) {
     super(props)
-
-    //this.buildGraph = this.buildGraph.bind(this)
+    this.state = {
+      data: [],
+      label: [],
+    }
     this.chartRef = React.createRef();
   }
 
-  componentDidUpdate(){
+  componentDidMount() {
     console.log(this.chartRef)
 
     const myChartRef = this.chartRef.current.getContext("2d");
 
     var test = new Chart(myChartRef, {
-      type: "line",
+      type: "bar",
       data: {
-        labels: this.props.label,
+        labels: [1,2,3],
         datasets: [
           {
             label: "MY workout",
-            data: this.props.data,
+            data: [1,2,3],
           }
         ]
       },
@@ -33,21 +35,16 @@ export default class LineGraph extends React.Component {
   }
 
   render() {
-   if(this.props.data.length ===0){
-     return(
-       <h1>Oh no workout record yet!</h1>
-     )
-   }
+
     return (
-      <div className= "linegraph">
+      <div className="linegraph2">
         <canvas
           id="myChart"
           ref={this.chartRef}
-          data = {this.props.data}
-          label ={this.props}
+
         />
       </div>
     )
 
-}
+  }
 }

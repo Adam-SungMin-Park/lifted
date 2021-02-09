@@ -27,6 +27,20 @@ app.get('/api/exercises', (req,res)=>{
     .catch(err => console.log(err))
 })
 
+app.get('/api/weight',(req, res)=>{
+  const sql = `
+    select "userWeight","createdAt"
+    from "userWeight"
+  `
+  db.query(sql)
+  .then(result=> {
+    res.json(result.rows)
+    console.log(result.rows)
+  })
+  .catch(err => console.log(err))
+
+})
+
 /*
 app.post('/api/exercises',(req,res)=>{
   const sql = `
@@ -51,6 +65,21 @@ app.post('/api/exercises',(req,res)=>{
     const params2 = [workoutId, req.body.exercise[i].exerciseName, req.body.exercise[i].weight, req.body.exercise[i].reps]
   }
 })*/
+
+app.post('/api/weight',(req,res)=>{
+  const sql = `
+  insert into "userWeight" ("userId","userWeight","createdAt")
+  values ($1, $2, $3)
+  returning "createdAt"
+  `
+  const params = [req.body.userId, req.body.weight, req.body.date]
+
+  db.query(sql,params)
+  .then(res => console.log(res))
+  .catch(err => console.log(err))
+
+  res.status(205).json()
+})
 
 app.post('/api/exercises',async (req,res)=>{
 
