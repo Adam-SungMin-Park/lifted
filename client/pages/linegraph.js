@@ -2,37 +2,55 @@ import React, { Component } from 'react'
 import Chart from "chart.js";
 import WorkOut from "./workout"
 
-export default class LineGraph extends React.Component {
-  chartRef = React.createRef();
 
-  componentDidMount() {
+export default class LineGraph extends React.Component {
+  constructor(props){
+    super(props)
+    this.state = {
+      data:[],
+      label:[],
+    }
+    //this.buildGraph = this.buildGraph.bind(this)
+    this.chartRef = React.createRef();
+  }
+
+  componentDidUpdate(){
+    console.log(this.chartRef)
+
     const myChartRef = this.chartRef.current.getContext("2d");
 
-    new Chart(myChartRef, {
+    var test = new Chart(myChartRef, {
       type: "line",
       data: {
-        //Bring in data
-        labels: ["Jan", "Feb", "March"],
+        labels: this.props.label,
         datasets: [
           {
-            label: "Sales",
-            data: [86, 67, 91],
+            label: "MY workout",
+            data: this.props.data,
           }
         ]
       },
       options: {
-        //Customize chart options
       }
     });
   }
+
   render() {
+   if(this.props.data.length ===0){
+     return(
+       <h1>Oh no workout record yet!</h1>
+     )
+   }
     return (
       <div className= "linegraph">
         <canvas
           id="myChart"
           ref={this.chartRef}
+          data = {this.props.data}
+          label ={this.props}
         />
       </div>
     )
-  }
+
+}
 }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Chart from "chart.js";
 import LineGraph from './linegraph';
 
@@ -15,41 +15,24 @@ export default class WorkOut extends React.Component {
   }
 
   getData(){
-    fetch('/api/exercises').then(res => console.log(res.json()))
-      .then(
-        data =>
-          this.setState({
-            posts: data,
-            isLoading: false
-          })
-      )
+    fetch('/api/exercises').then(res => res.json())
+      .then(res => {
+        for (var i=0 ; i < res.length;i++){
+         this.setState({
+           data: this.state.data.concat(parseInt(res[i].total_volume)),
+           label : this.state.label.concat(res[i].createdAt.slice(0,10))
+         })}
+      })
       .catch(error => this.setState({ error, isLoading: false }))
   }
 
   componentDidMount(){
-    console.log(this.getData());
+    this.getData();
   }
-
-
-
-
-
-
-/*{
-  const dataArray = [];
-  const labelArray = [];
-  for (var i = 0; i < data.rows.length; i++) {
-    dataArray.push(data.rows[i]["total volume"]);
-    labelArray.push(data.rows[i].createdAt)
-  }
-  console.log("dataaaaa: " + dataArray)
-  console.log("labeleeataaaaa: " + labelArray)
-}*/
-
 
   render(){
-//console.log(this.state)
   return (
+
     <div id="workOutContainer">
       <div id = "workOutPageTitle">
         Workout Overview
@@ -63,8 +46,9 @@ export default class WorkOut extends React.Component {
       </div>
       <div id="workOutGraphPlace">
         <LineGraph
-        data = {this.state.data}
-        labels = {this.state.label} />
+          data= {this.state.data}
+          label = {this.state.label}
+        />
       </div>
       <div id = "workOutAddButtonPlace">
         <a href= "#addworkout" id = "workOutAdd" >

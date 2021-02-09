@@ -10,23 +10,19 @@ app.use(jsonMiddleware);
 
 app.use(staticMiddleware);
 
-app.get('/api/exercises',async (req,res)=>{
+app.get('/api/exercises', (req,res)=>{
 
   const sql = `
-    select sum("exercises"."exerciseWeight"*"exercises"."exerciseReps") as "total volume","exercises"."workOutId","userWorkOut"."createdAt","userWorkOut"."workOutPart"
+    select sum("exercises"."exerciseWeight"*"exercises"."exerciseReps") as "total_volume","exercises"."workOutId","userWorkOut"."createdAt","userWorkOut"."workOutPart"
     from "exercises"
     join "userWorkOut" using ("workOutId")
     group by "exercises"."workOutId", "userWorkOut"."createdAt" ,"userWorkOut"."workOutPart"
     order by "createdAt"
   `
 
-  let result = await db.query(sql)
-    .then(res => {
-      const dataArray = [];
-      for (var i = 0; i < res.rows.length; i++) {
-        dataArray.push(res.rows[i]['total volume'])
-      }
-      return res.status(203).send(dataArray)
+  db.query(sql)
+    .then(result => {
+      res.json(result.rows);
     })
     .catch(err => console.log(err))
 })
@@ -55,10 +51,6 @@ app.post('/api/exercises',(req,res)=>{
     const params2 = [workoutId, req.body.exercise[i].exerciseName, req.body.exercise[i].weight, req.body.exercise[i].reps]
   }
 })*/
-
-
-
-
 
 app.post('/api/exercises',async (req,res)=>{
 
