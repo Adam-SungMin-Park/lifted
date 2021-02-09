@@ -12,11 +12,11 @@ export default class LineGraph extends React.Component {
   }
 
   componentDidUpdate(){
-    console.log(this.chartRef)
 
-    const myChartRef = this.chartRef.current.getContext("2d");
 
-    var test = new Chart(myChartRef, {
+    //const myChartRef = this.chartRef.current.getContext("2d");
+    var ctx = document.getElementById('myChart');
+    var test = new Chart(ctx, {
       type: "line",
       data: {
         labels: this.props.label,

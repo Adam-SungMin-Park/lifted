@@ -3,6 +3,7 @@ import Home from './pages/home';
 import NavBar from './pages/navbar';
 import WorkOut from './pages/workout';
 import Journal from './pages/journal';
+import Food from './pages/food';
 
 import AddWorkOut from './pages/addworkout';
 import { parseRoute } from './pages/index'
@@ -41,6 +42,9 @@ export default class App extends React.Component {
     }
     if(route.path === 'journal'){
       return <Journal/>;
+    }
+    if(route.path === 'food'){
+      return <Food />;
     }
   }
 

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Chart from "chart.js";
-import Journal from './journal';
+import Food from './food';
 
 
 export default class LineGraph2 extends React.Component {
@@ -16,7 +16,7 @@ export default class LineGraph2 extends React.Component {
   componentDidUpdate() {
 
 
-    var ctx_2 = document.getElementById('myChart2').getContext("2d");
+    var ctx_3 = document.getElementById('myChart3').getContext("2d");
     var test = new Chart(ctx_2, {
       type: "bar",
       data: {
@@ -38,7 +38,7 @@ export default class LineGraph2 extends React.Component {
     return (
       <div className="linegraph2">
         <canvas
-          id="myChart2"
+          id="myChart3"
           ref={this.chartRef}
 
         />

@@ -100,9 +100,13 @@ font-size:60px;
   padding-bottom:1rem;
 }
 .addWeightButton{
-    text-align:center;
-    padding-bottom:1rem;
+  text-align:center;
+  padding-bottom:1rem;
 }
 #caloriesGraphPlace{
   text-align:center;
+}
+#addFoodButton{
+  text-align: right;
+  padding-top: 2rem;
 }

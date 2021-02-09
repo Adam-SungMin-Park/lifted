@@ -31,6 +31,7 @@ app.get('/api/weight',(req, res)=>{
   const sql = `
     select "userWeight","createdAt"
     from "userWeight"
+    order by "createdAt"
   `
   db.query(sql)
   .then(result=> {

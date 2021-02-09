@@ -20,16 +20,23 @@ export default class Journal extends React.Component{
     this.handleAddClick = this.handleAddClick.bind(this);
     this.handleChangeWeight = this.handleChangeWeight.bind(this);
     this.handleChangeDate = this.handleChangeDate.bind(this);
-    this.buildGraph = this.buildGraph.bind(this);
+    //this.buildGraph = this.buildGraph.bind(this);
 
   }
-  buildGraph(){
+
+  componentDidMount(){
     fetch('/api/weight')
     .then(res => res.json())
       .then(res => {
+        const dateArray = [];
+        const weightArray =[];
         for(var i =0 ; i < res.length;i++){
-        console.log(res[i].userWeight)
-
+          dateArray.push(res[i].createdAt.slice(0,10))
+          weightArray.push(res[i].userWeight)
+        this.setState({
+          weight: weightArray,
+          date: dateArray
+        })
         }
       })
       .catch(err => console.log(err))
@@ -60,10 +67,6 @@ export default class Journal extends React.Component{
       body: JSON.stringify(this.state)
     }).then(res => this.buildGraph())
       .catch(err => console.log(err))
-
-
-
-
   }
   handleRemoveClick(index) {
     event.preventDefault()
@@ -84,9 +87,6 @@ export default class Journal extends React.Component{
   }
 
   render(){
-    console.log(this.state)
-
-
     return(
       <div id="weightFoodContainer">
         <div id="weightFoodPageTitle">
@@ -108,6 +108,9 @@ export default class Journal extends React.Component{
             date = {this.state.date}
             weight = {this.state.weight}
           />
+          </div>
+          <div id = "addFoodButton">
+           <a href="#food"><button>Confess!</button></a>
           </div>
         </div>
     )}
