@@ -102,9 +102,7 @@ CREATE TABLE "workOutExercises" (
 
 
 
-ALTER TABLE "userWeight" ADD CONSTRAINT "userWeight_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");
 
-ALTER TABLE "userCalories" ADD CONSTRAINT "userCalories_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");
 
 
 ALTER TABLE "exercises" ADD CONSTRAINT "exercises_fk0" FOREIGN KEY ("workOutId") REFERENCES "userWorkOut"("workOutId");

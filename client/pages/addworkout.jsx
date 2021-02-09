@@ -136,7 +136,7 @@ export default class AddWorkOut extends React.Component{
               <option value="Push">Push</option>
               <option value="Pull">Pull</option>
             </select>
-            <input value = {this.state.workOutDate} onChange = {this.handleInputChange('workOutDate')} id ="workOutDateInPut" type="text" placeholder ="dd/mm/yy"></input>
+            <input value = {this.state.workOutDate} onChange = {this.handleInputChange('workOutDate')} id ="workOutDateInPut" type="date" placeholder ="dd/mm/yy"></input>
           </div>
 
         {this.state.exercise.map((exercise,index)=>{

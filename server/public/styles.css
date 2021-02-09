@@ -85,3 +85,28 @@ font-size:60px;
 .addOrRemove{
   text-align: right;
 }
+#weightFoodPageTitle{
+  text-align: center;
+  padding-top: 2rem;
+  font-size: 2rem;
+}
+.weightFoodWeight{
+  text-align: center;
+  padding-top: 2rem;
+}
+.weightFoodDate{
+  text-align:center;
+  padding-top: 1rem;
+  padding-bottom:1rem;
+}
+.addWeightButton{
+  text-align:center;
+  padding-bottom:1rem;
+}
+#caloriesGraphPlace{
+  text-align:center;
+}
+#addFoodButton{
+  text-align: right;
+  padding-top: 2rem;
+}

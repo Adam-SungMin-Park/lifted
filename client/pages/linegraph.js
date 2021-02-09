@@ -6,20 +6,17 @@ import WorkOut from "./workout"
 export default class LineGraph extends React.Component {
   constructor(props){
     super(props)
-    this.state = {
-      data:[],
-      label:[],
-    }
+
     //this.buildGraph = this.buildGraph.bind(this)
     this.chartRef = React.createRef();
   }
 
   componentDidUpdate(){
-    console.log(this.chartRef)
 
-    const myChartRef = this.chartRef.current.getContext("2d");
 
-    var test = new Chart(myChartRef, {
+    //const myChartRef = this.chartRef.current.getContext("2d");
+    var ctx = document.getElementById('myChart');
+    var test = new Chart(ctx, {
       type: "line",
       data: {
         labels: this.props.label,
