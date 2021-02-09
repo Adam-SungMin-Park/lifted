@@ -6,26 +6,50 @@ const jsonMiddleware = express.json();
 
 const app = express();
 
-
 app.use(jsonMiddleware);
 
 app.use(staticMiddleware);
 
-app.get('/api/exercises',(req,res)=>{
-  res.json(exerciseExample)
-})
+app.get('/api/exercises', (req,res)=>{
 
-/*app.post('/api/workout',(req,res)=>{
   const sql = `
-  insert into "userWorkOut"("userId","workOutPart")
-  values = ($1,$2)
+    select sum("exercises"."exerciseWeight"*"exercises"."exerciseReps") as "total_volume","exercises"."workOutId","userWorkOut"."createdAt","userWorkOut"."workOutPart"
+    from "exercises"
+    join "userWorkOut" using ("workOutId")
+    group by "exercises"."workOutId", "userWorkOut"."createdAt" ,"userWorkOut"."workOutPart"
+    order by "createdAt"
   `
 
-  const params = [req.body.userId , req.body.workOutPart]
+  db.query(sql)
+    .then(result => {
+      res.json(result.rows);
+    })
+    .catch(err => console.log(err))
+})
 
-  db.query(sql,params)
-  .then(res => console.log(res))
-  .cath
+/*
+app.post('/api/exercises',(req,res)=>{
+  const sql = `
+   insert into "userWorkOut" ("userId","workOutPart","createdAt")
+   values ($1,$2,$3)
+   returning "workOutId"
+  `
+  const params = [req.body.userId, req.body.workOutParts, req.body.workOutDate]
+
+  db.task()
+
+
+
+
+
+  for (var i = 0; i < req.body.exercise.length; i++) {
+    const sql2 = `
+    insert into "exercises" ("workOutId" , "exerciseName" , "exerciseWeight" , "exerciseReps")
+    values ($1, $2, $3, $4)
+    returning *
+  `
+    const params2 = [workoutId, req.body.exercise[i].exerciseName, req.body.exercise[i].weight, req.body.exercise[i].reps]
+  }
 })*/
 
 app.post('/api/exercises',async (req,res)=>{
@@ -40,10 +64,9 @@ app.post('/api/exercises',async (req,res)=>{
   let workoutId = await db.query(sql, params)
   .then(res => { return res.rows[0].workOutId })
   .catch(err => console.log(err))
-  //console.log("test: "+ workoutId);
 
-for (var i = 0 ; i < req.body.exercise.length; i++){
 
+  for (var i = 0 ; i < req.body.exercise.length; i++){
   const sql2 = `
     insert into "exercises" ("workOutId" , "exerciseName" , "exerciseWeight" , "exerciseReps")
     values ($1, $2, $3, $4)
@@ -51,10 +74,13 @@ for (var i = 0 ; i < req.body.exercise.length; i++){
   `
   const params2 = [workoutId, req.body.exercise[i].exerciseName, req.body.exercise[i].weight, req.body.exercise[i].reps ]
 
-  db.query(sql2,params2)
-  .then(res => console.log(res.rows[0]))
+ let testing =  db.query(sql2,params2)
+  .then(res => {return(res.rows[0])})
   .catch(err => console.log(err))
+
+
 }
+res.status(203).json()
 }
 )
 
