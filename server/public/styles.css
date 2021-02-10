@@ -110,3 +110,26 @@ font-size:60px;
   text-align: right;
   padding-top: 2rem;
 }
+.foodCalories{
+  text-align: center;
+  padding-top:1rem;
+  padding-bottom:1rem;
+  display:flex;
+  padding-left: 1rem;
+}
+.extraFoodButton{
+  text-align: right;
+  padding-top:1rem;
+}
+.caloriesInput{
+  padding-left: 3rem;
+}
+.signUpPlace{
+  text-align: right;
+  margin-top:1rem;
+}
+.singUp{
+  text-decoration: none;
+  border: 1px solid black;
+  border-radius: 6px;
+}

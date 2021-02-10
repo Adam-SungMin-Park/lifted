@@ -17,14 +17,18 @@ export default class LineGraph2 extends React.Component {
 
 
     var ctx_3 = document.getElementById('myChart3').getContext("2d");
-    var test = new Chart(ctx_2, {
-      type: "bar",
+    var test = new Chart(ctx_3, {
+      type: "line",
       data: {
-        labels: this.props.date,
+        labels: this.props.label,
         datasets: [
           {
             label: "MY workout",
-            data: this.props.weight,
+            data: this.props.data,
+          },{
+            label:"My weight",
+            data : this.props.data2,
+            type:"bar"
           }
         ]
       },
@@ -36,7 +40,7 @@ export default class LineGraph2 extends React.Component {
   render() {
 
     return (
-      <div className="linegraph2">
+      <div className="linegraph3">
         <canvas
           id="myChart3"
           ref={this.chartRef}

@@ -33,10 +33,9 @@ CREATE TABLE "userWeight" (
 
 CREATE TABLE "userCalories" (
 	"userCaloriesId" serial NOT NULL,
-	"userId" integer NOT NULL,
 	"userFoodName" TEXT NOT NULL,
 	"userFoodCalories" integer NOT NULL,
-	"createdAt" DATE NOT NULL,
+	"userMealId" integer NOT NULL,
 	CONSTRAINT "userCalories_pk" PRIMARY KEY ("userCaloriesId")
 ) WITH (
   OIDS=FALSE
@@ -81,20 +80,11 @@ CREATE TABLE "routines" (
 
 
 
-CREATE TABLE "routineExercise" (
-	"routineId" integer NOT NULL,
-	"exerciseId" integer NOT NULL,
-	CONSTRAINT "routineExercise_pk" PRIMARY KEY ("routineId","exerciseId")
-) WITH (
-  OIDS=FALSE
-);
-
-
-
-CREATE TABLE "workOutExercises" (
-	"exercisesId" integer NOT NULL,
-	"workOutId" integer NOT NULL,
-	CONSTRAINT "workOutExercises_pk" PRIMARY KEY ("exercisesId","workOutId")
+CREATE TABLE "userDailyMeal" (
+	"userMealId" serial NOT NULL,
+	"userId" integer NOT NULL,
+	"createdAt" DATE NOT NULL,
+	CONSTRAINT "userDailyMeal_pk" PRIMARY KEY ("userMealId")
 ) WITH (
   OIDS=FALSE
 );
@@ -103,14 +93,9 @@ CREATE TABLE "workOutExercises" (
 
 
 
+ALTER TABLE "userCalories" ADD CONSTRAINT "userCalories_fk0" FOREIGN KEY ("userMealId") REFERENCES "userDailyMeal"("userMealId");
 
 
 ALTER TABLE "exercises" ADD CONSTRAINT "exercises_fk0" FOREIGN KEY ("workOutId") REFERENCES "userWorkOut"("workOutId");
 
 ALTER TABLE "routines" ADD CONSTRAINT "routines_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");
-
-ALTER TABLE "routineExercise" ADD CONSTRAINT "routineExercise_fk0" FOREIGN KEY ("routineId") REFERENCES "routines"("routineId");
-ALTER TABLE "routineExercise" ADD CONSTRAINT "routineExercise_fk1" FOREIGN KEY ("exerciseId") REFERENCES "exercises"("exercisesId");
-
-ALTER TABLE "workOutExercises" ADD CONSTRAINT "workOutExercises_fk0" FOREIGN KEY ("exercisesId") REFERENCES "exercises"("exercisesId");
-ALTER TABLE "workOutExercises" ADD CONSTRAINT "workOutExercises_fk1" FOREIGN KEY ("workOutId") REFERENCES "userWorkOut"("workOutId");

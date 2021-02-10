@@ -4,7 +4,7 @@ import NavBar from './pages/navbar';
 import WorkOut from './pages/workout';
 import Journal from './pages/journal';
 import Food from './pages/food';
-
+import SignUp from './pages/signup';
 import AddWorkOut from './pages/addworkout';
 import { parseRoute } from './pages/index'
 
@@ -45,6 +45,9 @@ export default class App extends React.Component {
     }
     if(route.path === 'food'){
       return <Food />;
+    }
+    if(route.path === 'signup'){
+      return <SignUp />;
     }
   }
 
