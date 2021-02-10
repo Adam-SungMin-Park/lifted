@@ -151,7 +151,7 @@ export default class AddWorkOut extends React.Component{
                 <input onChange={(e)=>this.handleWeightChange(e,index)} name="weight" value={this.state.exercise[index].weight} id="workOutExerciseWeight" type="integer" placeholder="135"></input>
                 <input onChange={(e)=>this.handleRepsChange(e,index)} name="reps" value={this.state.exercise[index].reps} id="workOutExerciseRep" type="integer" placeholder='10'></input>
               <div className = "addOrRemove">
-                {this.state.exercise.length !==1 && <button onClick ={this.handleRemoveClick} className = "removeButton">Remove</button>}
+                {this.state.exercise.length !==1 && <button onClick ={()=>this.handleRemoveClick(index)} className = "removeButton">Remove</button>}
               </div>
             </div>
           )
