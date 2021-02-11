@@ -9,7 +9,6 @@ CREATE TABLE "users" (
 	"userId" serial NOT NULL,
 	"userEmail" TEXT NOT NULL UNIQUE,
 	"userPW" TEXT NOT NULL,
-	"userName" TEXT NOT NULL,
 	"userGoalWeight" integer,
 	"userGoalCalories" integer,
 	CONSTRAINT "users_pk" PRIMARY KEY ("userId")
@@ -92,10 +91,14 @@ CREATE TABLE "userDailyMeal" (
 
 
 
+ALTER TABLE "userWeight" ADD CONSTRAINT "userWeight_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");
 
 ALTER TABLE "userCalories" ADD CONSTRAINT "userCalories_fk0" FOREIGN KEY ("userMealId") REFERENCES "userDailyMeal"("userMealId");
 
+ALTER TABLE "userWorkOut" ADD CONSTRAINT "userWorkOut_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");
 
 ALTER TABLE "exercises" ADD CONSTRAINT "exercises_fk0" FOREIGN KEY ("workOutId") REFERENCES "userWorkOut"("workOutId");
 
 ALTER TABLE "routines" ADD CONSTRAINT "routines_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");
+
+ALTER TABLE "userDailyMeal" ADD CONSTRAINT "userDailyMeal_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");

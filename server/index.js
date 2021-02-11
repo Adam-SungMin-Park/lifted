@@ -2,9 +2,14 @@ require('dotenv/config');
 const db = require('./db');
 const express = require('express');
 const staticMiddleware = require('./static-middleware');
+const argon2  = require('argon2');
 const jsonMiddleware = express.json();
+const jwt = require('jsonwebtoken');
+
+
 
 const app = express();
+
 
 app.use(jsonMiddleware);
 
@@ -57,23 +62,89 @@ app.get('/api/foods',(req,res)=>{
   .catch(err=> console.log(err))
 })
 
+app.post('/api/signin',(req,res)=>{
+
+  const sql = `
+    select "userId","userPW"
+    from "users"
+    where "userEmail" = $1
+  `
+  const params =[req.body.email];
+
+  const test = db.query(sql,params)
+  .then(res => {
+     console.log(res.rows[0].userId)
+    return argon2.verify(res.rows[0].userPW, req.body.password)
+  })
+  .then(isMatching =>{
+    if(isMatching){
+      const payloads = {
+        userId:"",
+          email: req.body.email
+      }
+      db.query(sql,params)
+      .then(result => {
+        payloads.userId = result.rows[0].userId
+        console.log(payloads)
+        const token = jwt.sign(payloads, process.env.TOKEN_SECRET);
+        res.status(210).json(payloads)
+      })
+      .catch(err => console.log(err))
+
+    }
+    else{
+      console.log("nice try :) again.")
+      res.status(404).json("nice try :) again")
+    }})
+  .catch(err=>console.log(err))
+
+})
+
+
+
+
+
+
+
+app.post('/api/signup',(req,res)=>{
+
+    const sql =`
+      insert into "users" ("userEmail" , "userPW" )
+      values ($1 , $2)
+      returning "userId"
+    `
+
+    argon2.hash(req.body.password)
+    .then(hashedPassword => {
+      db.query (sql, [req.body.email,hashedPassword])})
+      .then(result => {res.status(201).json(res.rows)
+      })
+      .catch(err=>console.log(err))
+
+
+})
+
+
+
+
 
 app.post('/api/foods',async (req,res)=>{
 
   const sql =`
-    insert into "userDailyMeal" ("userId" , "createdAt")
-    values ($1 , $2)
+    insert into "userDailyMeal" ( "userId", "createdAt")
+    values ($1 , $2 )
     returning "userMealId"
   `
-  const params = [req.body.userId , req.body.createdAt]
+  const params = [ req.body.userId , req.body.createdAt]
 
   let mealId = await db.query(sql, params)
     .then(res => { return (res.rows[0].userMealId) })
     .catch(err => console.log(err))
 
   const caloriesParams = [mealId];
+
   let paramNum = 1;
-  console.log(req.body.foods.length)
+
   const caloriesValues = req.body.foods.map((food) => {
     caloriesParams.push(food.food, food.calories)
     console.log(caloriesParams)
@@ -114,7 +185,7 @@ app.post('/api/weight',(req,res)=>{
   values ($1, $2, $3)
   returning "createdAt"
   `
-  const params = [req.body.userId, req.body.weight, req.body.date]
+  const params = [ req.body.userId, req.body.weight, req.body.date]
 
   db.query(sql,params)
   .then(res => console.log(res))
@@ -126,11 +197,11 @@ app.post('/api/weight',(req,res)=>{
 app.post('/api/exercises',async (req,res)=>{
 
   const sql = `
-   insert into "userWorkOut" ("userId","workOutPart","createdAt")
-   values ($1,$2,$3)
+   insert into "userWorkOut" ("workOutPart","createdAt")
+   values ($1,$2)
    returning "workOutId"
   `
-  const params = [req.body.userId, req.body.workOutParts, req.body.workOutDate]
+  const params = [req.body.workOutParts, req.body.workOutDate]
 
   let workoutId = await db.query(sql, params)
   .then(res => { return res.rows[0].workOutId })

@@ -7,9 +7,9 @@ export default class Journal extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      userId:999,
       weight:[],
       date:[],
+      userId: this.props.userId,
       food:[{
         name:"",
         calories:""

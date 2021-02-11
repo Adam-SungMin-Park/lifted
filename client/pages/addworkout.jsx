@@ -1,10 +1,11 @@
 import React from 'react';
+import { LoginContext } from './signin'
 export default class AddWorkOut extends React.Component{
 
   constructor(props){
     super(props)
     this.state ={
-      userId: 1,
+      userId: this.props.userId,
       workOutParts:"",
       workOutDate:"",
       exercise:[
@@ -169,6 +170,7 @@ export default class AddWorkOut extends React.Component{
           </div>
         </form>
       </div>
+
     )
   }
 }

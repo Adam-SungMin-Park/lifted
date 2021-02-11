@@ -16,7 +16,7 @@ export default class NavBar extends React.Component{
         <a className = "tab "href = "#user"><span className="material-icons md-60">account_circle</span>User</a>
       </div>
       <div className = "signUpPlace">
-      <a className="signUp" href="#signup">SignUp/SignIn</a>
+      <a className="signUp" href="#signup">{this.props.userId}</a>
       </div>
     </div>
   );

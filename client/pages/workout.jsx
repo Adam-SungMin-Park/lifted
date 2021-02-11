@@ -9,7 +9,8 @@ export default class WorkOut extends React.Component {
     super(props)
     this.state={
       data:[],
-      label:[]
+      label:[],
+      userId:this.props.userId
     }
    this.getData = this.getData.bind(this)
   }

@@ -2,14 +2,11 @@ import React from 'react';
 import Chart from "chart.js";
 import LineGraph3 from './linegraph3';
 
-
-
-
 export default class Food extends React.Component {
   constructor(props){
     super(props);
     this.state = {
-      userId:999,
+      userId:this.props.userId,
       createdAt:"",
       foods:[
         {

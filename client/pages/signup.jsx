@@ -1,12 +1,5 @@
 import React, { Component } from 'react';
 
-
-
-
-
-
-
-
 export default class SignUp extends React.Component {
 
     constructor(props){
@@ -17,14 +10,13 @@ export default class SignUp extends React.Component {
         name:""
       }
       this.handleSubmit = this.handleSubmit.bind(this);
-      this.handleChangeName = this.handleChangeName.bind(this);
       this.handleChangePassword = this.handleChangePassword.bind(this);
       this.handleChangeEmail = this.handleChangeEmail.bind(this);
 
     }
 
     handleSubmit(){
-      fetch('/api/login',{
+      fetch('/api/signup',{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -35,11 +27,7 @@ export default class SignUp extends React.Component {
         .catch(err => console.log(err))
     }
 
-    handleChangeName(event){
-      this.setState({
-        name : event.target.value
-      })
-    }
+
 
   handleChangePassword(){
     this.setState({
@@ -58,19 +46,16 @@ export default class SignUp extends React.Component {
     console.log(this.state)
     return(
       <div className = "signUpPage">
-        <h1>Sign Up</h1>
-        <form onSubmit={this.handleSubmit} className = "signUpForm">
+        <h1>Sign Up/ <a href ="#signin">Sign in</a></h1>
+        <form className = "signUpForm">
           <div className = "emailInput">
-            <input onChange={this.handleChangeEmail} type = "email" placeholder = "youremail@idk.com"></input>
+            <input required onChange={this.handleChangeEmail} type = "email" placeholder = "youremail@idk.com"></input>
           </div>
           <div className="passwordInput">
-            <input onChange={this.handleChangePassword} type = "password" placeholder = "Password"></input>
-          </div>
-          <div className="nameInput">
-            <input onChange={this.handleChangeName} type = "text" placeholder ="name?"></input>
+            <input required onChange={this.handleChangePassword} type = "password" placeholder = "Password"></input>
           </div>
           <div className = "submitButton">
-            <button type = "submit">Continue!</button>
+            <a href = "#workout" onClick = {this.handleSubmit}>Continue!</a>
           </div>
         </form>
 
