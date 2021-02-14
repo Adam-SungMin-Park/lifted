@@ -2,16 +2,18 @@ import React from 'react';
 import { render } from 'react-dom';
 import LineGraph from './linegraph'
 import LineGraph2 from './linegraph2';
-
+import LineGraph3 from './linegraph3';
 
 export default class Home extends React.Component {
   constructor(props){
     super(props);
     this.state={
-      data:[],
+      volume:[],
       label:[],
-      weigth:[],
-      createdAt:[]
+      weight:[],
+      date:[],
+      calories:[],
+      caloriesDate:[]
     }
     this.getData = this.getData.bind(this)
   }
@@ -19,18 +21,39 @@ export default class Home extends React.Component {
   getData() {
     fetch('/api/exercises')
     .then(res => res.json())
+    .then(res => {
+      for (var i = 0; i < res.length; i++) {
+        this.setState({
+          volume: this.state.volume.concat(parseInt(res[i].total_volume)),
+          label: this.state.label.concat(res[i].createdAt.slice(0, 10))
+        })
+      }
+      })
+      .catch(error => this.setState({ error, isLoading: false }))
+
+      fetch('/api/weight')
+      .then(res => res.json())
       .then(res => {
-        for (var i = 0; i < res.length; i++) {
+        for (var i = 0 ; i < res.length ; i ++){
           this.setState({
-            data: this.state.data.concat(parseInt(res[i].total_volume)),
-            label: this.state.label.concat(res[i].createdAt.slice(0, 10))
+            weight : this.state.weight.concat(parseInt(res[i].userWeight)),
+            date : this.state.date.concat(res[i].createdAt.slice(0,10))
           })
         }
-      }).then(
+      })
 
-      )
-      .catch(error => this.setState({ error, isLoading: false }))
+      fetch('/api/foods')
+      .then(res=>res.json())
+      .then(res =>{
+        for(var i = 0 ; i < res.length ; i++){
+          this.setState({
+            calories:this.state.calories.concat(parseInt(res[i].sum)),
+            caloriesDate : this.state.caloriesDate.concat(res[i].createdAt.slice(0,10))
+          })
+        }
+      })
   }
+
 
   componentDidMount() {
     console.log(this.state)
@@ -39,19 +62,26 @@ export default class Home extends React.Component {
 
 
 render(){
+  console.log(this.state)
+  if(this.state.volume.length !== 0){
   return (
   <div id = "homeContainer">
-    <div id = "homeWorkOutPartsDropDown">
-      <select name ="workoutParts" id= "workOutPartsDropDown">
+      <div className = "homeWorkoutGraph">
+        <div className = "homeWorkOutTitle">
+          Work Out Volume
+        </div>
+      </div>
+    <div id = "homeWorkOutPartDropDown">
+      <select name ="workoutPart" id= "workOutPartDropDown">
         <option value="placeHolder1">placeholder1</option>
         <option value="placeHolder2">placeholder2</option>
         <option value="placeHolder3">placeholder3</option>
       </select>
     </div>
+
     <a href = "#workout" id = "workOutGraphPlace">
       <LineGraph
-
-      data = {this.state.data}
+      data = {this.state.volume}
       label = {this.state.label}
       />
     </a>
@@ -61,12 +91,38 @@ render(){
       </div>
       <a href = "#journal" id = "weightGraphPlace">
         <LineGraph2
-          data={this.state.weight}
-          label={this.state.createdAt}
-        />
+            data = {this.state.weight}
+            label={this.state.date}
+            />
       </a>
     </div>
+      <div id="homeFoodGraphPlace">
+        <div>
+          Food Consumption
+      </div>
+        <a href="#food" id="foodGraphPlace">
+          <LineGraph3
+            data={this.state.calories}
+            label={this.state.caloriesDate}
+          />
+        </a>
+      </div>
   </div>
   );
+  }
+  else{
+    return (
+      <div id="homeContainer">
+        <div id="homeWorkOutPartsDropDown">
+          <select name="workoutPart" id="workOutPartDropDown">
+            <option value="placeHolder1">placeholder1</option>
+            <option value="placeHolder2">placeholder2</option>
+            <option value="placeHolder3">placeholder3</option>
+          </select>
+        </div>
+      </div>
+    )
+  }
+
 }
 }

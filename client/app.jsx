@@ -15,14 +15,17 @@ export default class App extends React.Component {
     super(props)
     this.state = {
       route: parseRoute(window.location.hash),
-      userId:"",
+      userId: window.localStorage.getItem("token"),
       email:"",
-      password:""
+      password:"",
+      view:true
     };
     this.updateHash = this.updateHash.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChangePassword = this.handleChangePassword.bind(this);
     this.handleChangeEmail = this.handleChangeEmail.bind(this);
+    this.viewChange = this.viewChange.bind(this);
+    this.handleRegistration = this.handleRegistration.bind(this);
   }
   componentDidMount(){
     window.addEventListener('hashchange',(event)=>{
@@ -30,8 +33,26 @@ export default class App extends React.Component {
         route: parseRoute(window.location.hash)
       })
     })
+
+  }
+  handleRegistration(){
+    fetch('/api/signup', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.state)
+    }).then(res => console.log(res))
+      .then(data => console.log(data))
+      .catch(err => console.log(err))
+      alert('Ready to sign in!')
   }
 
+  viewChange () {
+    this.setState({
+      view:!this.state.view
+    })
+  }
   handleSubmit() {
     fetch('/api/signin', {
       method: 'POST',
@@ -44,6 +65,7 @@ export default class App extends React.Component {
         this.setState({
           userId: data.userId
         })
+        window.localStorage.setItem("token", data.userId)
         if (data === "nice try :) again") {
           alert(data)
         }
@@ -53,6 +75,7 @@ export default class App extends React.Component {
       }
       )
       .catch(err => console.log(err))
+
 
     console.log(this.state)
   }
@@ -97,26 +120,30 @@ export default class App extends React.Component {
     if (route.path === 'signin') {
       return <SignIn userId={this.state.userId} />;
     }
+    if (route.path === 'food'){
+      return<Food userId ={this.state.userId} />;
+    }
   }
 
   render(){
     console.log(this.state)
-
-    if(this.state.userId !==""){
+    if(this.state.userId !==undefined && this.state.userId !== null ){
+      console.log("logged in page")
       return (
         <>
           <NavBar userId={this.state.userId} />
 
-          { this.renderPage()}
+          {this.renderPage()}
         </>
       )
     }
-    else{
+    if(this.state.view === true) {
+
       return (
         <>
           <NavBar userId={this.state.userId} />
          <div className="signUpPage">
-        <h1><a href="#signup">Sign Up</a>/Sign in</h1>
+        <h1><a  href = "#signup" onClick = {this.viewChange} >Sign Up</a>/Sign in</h1>
         <form className="signUpForm">
           <div className="emailInput">
             <input onChange={this.handleChangeEmail} type="email" placeholder="youremail@idk.com"></input>
@@ -132,5 +159,27 @@ export default class App extends React.Component {
       </>
       )
     }
+    if(this.state.view ===false ){
+      return (
+        <>
+        <NavBar userId={this.state.userId} />
+
+        <div className="signUpPage">
+          <h1>Sign Up/ <a href="#signin" onClick={this.viewChange}>Sign in</a></h1>
+          <form className="signUpForm">
+            <div className="emailInput">
+              <input required onChange={this.handleChangeEmail} type="email" placeholder="youremail@idk.com"></input>
+            </div>
+            <div className="passwordInput">
+              <input required onChange={this.handleChangePassword} type="password" placeholder="Password"></input>
+            </div>
+            <div className="submitButton">
+              <a href="#workout" onClick={this.handleRegistration}>Continue!</a>
+            </div>
+          </form>
+        </div>
+        </>
+      )
+    }
+    }
   }
-}

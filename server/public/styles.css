@@ -82,7 +82,7 @@ font-size:60px;
   text-align: right;
   padding-top: 1rem;
 }
-.addOrRemove{
+.updateOrRemove{
   text-align: right;
 }
 #weightFoodPageTitle{
@@ -132,4 +132,20 @@ font-size:60px;
   text-decoration: none;
   border: 1px solid black;
   border-radius: 6px;
+}
+.homeWorkOutTitle{
+  text-align:center;
+   padding-top:1rem;
+
+}
+#homeFoodGraphPlace{
+  text-align:center;
+   padding-top:1rem;
+  padding-bottom:1rem;
+}
+#homeWorkOutPartDropDown{
+  text-align:center;
+  padding-top:1rem;
+  padding-bottom:1rem;
+
 }

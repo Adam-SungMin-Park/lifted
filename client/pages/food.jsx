@@ -1,24 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Chart from "chart.js";
 import LineGraph3 from './linegraph3';
 
 export default class Food extends React.Component {
+
   constructor(props){
     super(props);
     this.state = {
+      isNew:true,
       userId:this.props.userId,
       createdAt:"",
-      foods:[
-        {
-        food:"",
-        calories:""
-        },
-      ],
+      foods: [{
+        food: "",
+        calories: ""
+      }],
       data:[],
-      label:[],
-      data2:[],
-      label2:[]
-
+      label:[]
     }
     this.chartRef = React.createRef();
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,7 +24,9 @@ export default class Food extends React.Component {
     this.handleFoodName = this.handleFoodName.bind(this);
     this.handleCalories = this.handleCalories.bind(this);
     this.handleChangeDate = this.handleChangeDate.bind(this);
-  }
+    this.foodReload = this.foodReload.bind(this)
+    this.handleUpdateClick = this.handleUpdateClick.bind(this);
+   }
 
   componentDidMount(){
     fetch('/api/foods')
@@ -41,38 +40,93 @@ export default class Food extends React.Component {
         }
       })
       .catch(err => console.log(err))
+  }
 
-    fetch('/api/weight')
-      .then(res => res.json())
-      .then(res => {
-        const dateArray = [];
-        const weightArray = [];
-        for (var i = 0; i < res.length; i++) {
-          dateArray.push(res[i].createdAt.slice(0, 10).replaceAll("-", "/"))
-          weightArray.push(res[i].userWeight)
-          this.setState({
-            data2: weightArray,
-            label2: dateArray
-          })
-        }
-      })
+  handleSubmit() {
+    if(this.state.isNew === true){
+    fetch('/api/foods', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.state)
+    }).then(res => console.log(res))
+      .then(data => console.log(data))
       .catch(err => console.log(err))
-    console.log(this.state)
-
-
+    alert('food saved!')
+  }
+  else{
+    fetch('api/foods/update',{
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.state)
+    }).then(res => res.json)
+      .then(data =>console.log(data))
+      .catch(err => console.log(err))
+      alert('food UPDATED')
+  }
 }
 
+foodReload(){
+  fetch('/api/foodsReload', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(this.state)
+  })
+    .then(res => res.json())
+    .then(res => {
+      if(res.length !==0){
+        this.setState({
+          foods:[]
+        })
+        console.log(res.length)
+      for (var i = 0; i < res.length; i++) {
+        this.setState({
+          isNew:false,
+          foods:this.state.foods.concat(res[i])
+        })
+      }}
+      if(res.length === 0 ){
+        console.log("no data here")
+        this.setState({
+          isNew:true,
+          foods: [{
+            food: "",
+            calories: ""
+          },
+          ],
+        })
+      }
+    }
+  )
+  }
 
+  handleUpdateClick(index){
+    console.log(index)
+    fetch('/api/foods/update',{
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.state.foods[index])
+    })
+    .then(res =>console.log(res))
+    .then(data =>console.log(data))
+    .catch(err => console.log(err))
+    alert("updated :)")
+  }
 
   handleChangeDate(){
     this.setState({
       createdAt:event.target.value
     })
-
   }
 
   handleFoodName(e,index){
-
     let test = [...this.state.foods];
     let test2 = { ...this.state.foods[index] };
     test2.food = e.target.value
@@ -93,18 +147,6 @@ export default class Food extends React.Component {
     })
   }
 
-  handleSubmit(){
-    fetch('/api/foods', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(this.state)
-    }).then(res => console.log(res))
-    .then(data => console.log(data))
-      .catch(err => console.log(err))
-  }
-
   handleRemoveClick(index) {
     console.log(event)
     event.preventDefault()
@@ -114,21 +156,30 @@ export default class Food extends React.Component {
     this.setState({
       foods: list
     })
+    fetch('/api/foods/delete',{
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.state.foods[index])
+    })
+    alert('good for diet')
   }
 
   handleAddClick(){
     event.preventDefault()
-    const extraFood = this.state.foods.concat(this.state.foods[0])
+    const add =[{
+      food: "",
+      calories: ""
+    }]
+    const extraFood = this.state.foods.concat(add)
     this.setState({
       foods: extraFood
     })
-
-  console.log(this.state.foods)
   }
 
   render() {
     console.log(this.state)
-
     return (
       <div id="weightFoodContainer">
         <div id="weightFoodPageTitle">
@@ -139,28 +190,33 @@ export default class Food extends React.Component {
           <LineGraph3
           data = {this.state.data}
           label = {this.state.label}
-          data2 = {this.state.data2}
-          label2 = {this.state.label2}
           />
           </div>
         </div>
-        <form  id="foodForm">
+
+          <form onSubmit = {this.foodReload} id ="dateForm">
             <div className="foodFoodDate">
               <input required onChange={this.handleChangeDate} type="date"></input>
             </div>
+            <div className = "foodFoodDateButton">
+              <button type ="submit">GO to this Date!</button>
+            </div>
+          </form>
+        <form id="foodForm">
           {this.state.foods.map((foods, index) => {
             return(
               <div key={index} className = "foodCaloriesEntries">
                 <div className = "foodCalories">
                   <div className ="foodNameInput">
-                    <input required onChange={e => this.handleFoodName(e, index)} type="text" placeholder="food name" value = {this.state.foods[index].name}></input>
+                    <input required onChange={e => this.handleFoodName(e, index)} type="text"  value = {this.state.foods[index].food}></input>
                   </div>
                   <div className = "caloriesInput">
-                    <input required onChange={e => this.handleCalories(e, index)} type="integer" placeholder="calories in number" value={this.state.foods[index].calories}></input>
+                    <input required onChange={e => this.handleCalories(e, index)} type="integer"  value={this.state.foods[index].calories}></input>
                   </div>
                 </div>
-                <div className = "addOrRemove">
+                <div className = "updateOrRemove">
                   {this.state.foods.length !==1 && <button onClick ={()=>this.handleRemoveClick(index)} className = "removeButton">Remove</button>}
+                  {this.state.foods.length !== 1 && <button onClick={() => this.handleUpdateClick(index)} className="updateButton">Update!</button>}
                 </div>
               </div>
             )
@@ -169,15 +225,11 @@ export default class Food extends React.Component {
             <button onClick = {this.handleAddClick}>Add!</button>
           </div>
           <div className = "submitFood">
-            <a href = "#food" onClick ={this.handleSubmit}><button>Save Foods!</button></a>
+            <a href="#user"onClick ={this.handleSubmit}>Save Foods!</a>
           </div>
         </form>
       </div>
 
     )
   }
-
-
-
-
 }

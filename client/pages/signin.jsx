@@ -8,11 +8,19 @@ export default class SignIn extends React.Component {
     this.state= {
       email:"",
       password:"",
-      userId:""
+      userId:"",
+      view:true
     }
-    this.handleSubmit= this.handleSubmit.bind(this)
-    this.handleChangePassword = this.handleChangePassword.bind(this)
-    this.handleChangeEmail = this.handleChangeEmail.bind(this)
+    this.handleSubmit= this.handleSubmit.bind(this);
+    this.handleChangePassword = this.handleChangePassword.bind(this);
+    this.handleChangeEmail = this.handleChangeEmail.bind(this);
+    this.viewChange = this.viewChange.bind(this);
+  }
+
+  viewChange(){
+    this.setState({
+      view: !this.state.view
+    })
   }
 
   handleSubmit(){
@@ -56,12 +64,11 @@ export default class SignIn extends React.Component {
 
 
   render(){
-if(this.state.userId === ""){
 
-
+if(this.state.view === true){
     return(
       <div className="signUpPage">
-        <h1><a href="#signup">Sign Up</a>/Sign in</h1>
+        <h1><a href="#signup" onClick = {this.viewChange}>Sign Up</a>/Sign in</h1>
         <form className="signUpForm">
           <div className="emailInput">
             <input onChange={this.handleChangeEmail} type="email" placeholder="youremail@idk.com"></input>
@@ -76,11 +83,23 @@ if(this.state.userId === ""){
       </div>
     )
   }
-  else{
+  if(this.state.view === false){
     return(
 
       <div className="signUpPage">
-       <h1>Welcome Back, user number {this.state.userId}! </h1>
+        <h1>Sign Up/ <a href="#signin" onClick ={this.viewChange}>Sign in</a></h1>
+        <form className="signUpForm">
+          <div className="emailInput">
+            <input required onChange={this.handleChangeEmail} type="email" placeholder="youremail@idk.com"></input>
+          </div>
+          <div className="passwordInput">
+            <input required onChange={this.handleChangePassword} type="password" placeholder="Password"></input>
+          </div>
+          <div className="submitButton">
+            <a href="#workout" onClick={this.handleSubmit}>Continue!</a>
+          </div>
+        </form>
+
       </div>
     )
   }

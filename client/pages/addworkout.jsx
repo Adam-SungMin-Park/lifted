@@ -6,13 +6,14 @@ export default class AddWorkOut extends React.Component{
     super(props)
     this.state ={
       userId: this.props.userId,
-      workOutParts:"",
-      workOutDate:"",
+      workOutPart:"",
+      createdAt:"",
       exercise:[
        {
+        exercisesId:"",
         exerciseName:"",
-        weight:"",
-        reps:""
+        exerciseWeight:"",
+        exerciseReps:""
       },
       ]}
 
@@ -20,10 +21,14 @@ export default class AddWorkOut extends React.Component{
     this.handleRemoveClick = this.handleRemoveClick.bind(this);
     this.handleAddClick = this.handleAddClick.bind(this);
     this.handleExerciseNameChange = this.handleExerciseNameChange.bind(this);
-    this.handleRepsChange = this.handleRepsChange.bind(this)
-    this.handleWeightChange = this.handleWeightChange.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
-    this.handleVolume = this.handleVolume.bind(this)
+    this.handleRepsChange = this.handleRepsChange.bind(this);
+    this.handleWeightChange = this.handleWeightChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleVolume = this.handleVolume.bind(this);
+    this.handleChangeDate = this.handleChangeDate.bind(this);
+    this.handleSubmitDate = this.handleSubmitDate.bind(this);
+    this.handleUpdateClick = this.handleUpdateClick.bind(this);
+
   }
 
   handleSubmit(){
@@ -52,8 +57,11 @@ export default class AddWorkOut extends React.Component{
 
   handleVolume(){
     let totalVolume =0
+    if(this.state.exercise.length === 0 ){
+      return ""
+    }
     for(var i = 0 ; i < this.state.exercise.length ; i++){
-      totalVolume = Number(totalVolume + (this.state.exercise[i].weight * this.state.exercise[i].reps))
+      totalVolume = Number(totalVolume + (this.state.exercise[i].exerciseWeight * this.state.exercise[i].exerciseReps))
     }
 
     return totalVolume;
@@ -63,7 +71,7 @@ export default class AddWorkOut extends React.Component{
 
     let test = [...this.state.exercise];
     let test2 = {...this.state.exercise[index]};
-    test2.weight = Number(e.target.value);
+    test2.exerciseWeight = Number(e.target.value);
     test[index] = test2;
     this.setState({
       exercise:test
@@ -74,7 +82,7 @@ export default class AddWorkOut extends React.Component{
 
     let test = [...this.state.exercise];
     let test2 = { ...this.state.exercise[index] };
-    test2.reps = Number(e.target.value);
+    test2.exerciseReps = Number(e.target.value);
     test[index] = test2;
 
     this.setState({
@@ -97,6 +105,14 @@ export default class AddWorkOut extends React.Component{
     this.setState({
       exercise:list
     })
+    fetch('/api/exercise/delete',{
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.state.exercise[index])
+    })
+    alert('No such thing as overtraining')
   }
 
   handleAddClick(event){
@@ -108,8 +124,69 @@ export default class AddWorkOut extends React.Component{
     })
     }
 
-  render(){
+  handleChangeDate(){
+    this.setState({
+      createdAt:event.target.value,
+      exercise: [{
+        exerciseName: "",
+        exerciseWeight: "",
+        exerciseReps: ""
+      }]
+    })
 
+  }
+  handleUpdateClick(){
+    fetch('/api/exercise/update', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.state)
+    })
+      .then(res => console.log(res))
+      .then(data => console.log(data))
+      .catch(err => console.log(err))
+    alert("updated :)")
+  }
+
+  handleSubmitDate(){
+    fetch('/api/workout/reload',{
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.state)
+    })
+    .then(res => res.json())
+      .then(res => {
+        if (res.length > 0) {
+          console.log(res)
+          console.log("EXERCISE EXIST")
+          const dataArray = []
+          for(var i = 0 ;i < res.length ; i++){
+            dataArray.push(res[i])
+          }
+          this.setState({
+
+            workOutPart:res[0].workOutPart,
+            exercise: dataArray
+          })
+        } else {
+          console.log("must be a date without a workout...")
+            this.setState({
+              exercise :[{
+                exerciseName: "",
+                exerciseWeight: "",
+                exerciseReps: ""
+              }]
+            })
+        }
+      })
+
+  }
+
+  render(){
+    console.log(this.state)
     this.handleVolume()
     return (
 
@@ -117,17 +194,16 @@ export default class AddWorkOut extends React.Component{
         <div id="addWorkOutPageTitle">
           Add WorkOut
         </div>
-        <form id = "workOutForm">
-          <div className = "rowRoutineWeight">
-            <select name="workOutRoutineDrop" id="workOutRoutineDropDown">
-              <option value="placeHolder1">routine placeholder1</option>
-              <option value="placeHolder2">routine placeholder2</option>
-              <option value="placeHolder3">routine placeholder3</option>
-            </select>
+        <div className="weightFoodDate">
+          <input onChange={e => this.handleChangeDate(e)} required type="date"></input>
+          <div className="foodFoodDateButton">
+            <button onClick={e => this.handleSubmitDate(e)}>GO to this Date!</button>
           </div>
+          </div>
+        <form id = "workOutForm">
 
           <div className = "rowWorkOutPartsDate">
-            <select value = {this.state.workOutPart} onChange={this.handleInputChange('workOutParts')} name="workOutWorkOutPartsDrop" id="workOutWorkOutPartsDropDown">
+            <select required value = {this.state.workOutPart} onChange={this.handleInputChange('workOutPart')} name="workOutWorkOutPartDrop" id="workOutWorkOutPartDropDown">
               <option>Select WorkOut Part!</option>
               <option value="Chest">Chest</option>
               <option value="Shoulder">Shoulder</option>
@@ -137,22 +213,24 @@ export default class AddWorkOut extends React.Component{
               <option value="Push">Push</option>
               <option value="Pull">Pull</option>
             </select>
-            <input value = {this.state.workOutDate} onChange = {this.handleInputChange('workOutDate')} id ="workOutDateInPut" type="date" placeholder ="dd/mm/yy"></input>
           </div>
 
         {this.state.exercise.map((exercise,index)=>{
           return(
             <div key = {index} className="rowExerciseWeightRep">
-              <select  onChange={(e)=> this.handleExerciseNameChange(e,index)} name="exerciseName" value={this.state.exercise[index].exerciseName} id="workOutExerciseDropDown">
+              <div>{index+1}. </div>
+              <select  required onChange={(e)=> this.handleExerciseNameChange(e,index)} name="exerciseName" value={this.state.exercise[index].exerciseName} id="workOutExerciseDropDown">
                 <option>Select Exercise</option>
                 <option value="Bench Press">Bench Press</option>
                 <option value="Squat">Squat</option>
                 <option value="Dead Lift">Dead Lift</option>
              </select>
-                <input onChange={(e)=>this.handleWeightChange(e,index)} name="weight" value={this.state.exercise[index].weight} id="workOutExerciseWeight" type="integer" placeholder="135"></input>
-                <input onChange={(e)=>this.handleRepsChange(e,index)} name="reps" value={this.state.exercise[index].reps} id="workOutExerciseRep" type="integer" placeholder='10'></input>
+              <input required onChange={(e)=>this.handleWeightChange(e,index)} name="exerciseWeight" value={this.state.exercise[index].exerciseWeight} id="workOutExerciseWeight" type="integer" ></input>
+              <input required onChange={(e)=>this.handleRepsChange(e,index)} name="exerciseReps" value={this.state.exercise[index].exerciseReps} id="workOutExerciseRep" type="integer" ></input>
               <div className = "addOrRemove">
                 {this.state.exercise.length !==1 && <button onClick ={()=>this.handleRemoveClick(index)} className = "removeButton">Remove</button>}
+                {this.state.exercise.length !== 1 && <button onClick={() => this.handleUpdateClick(index)} className="updateButton">Update!</button>}
+
               </div>
             </div>
           )
@@ -166,7 +244,7 @@ export default class AddWorkOut extends React.Component{
             <input value ={this.handleVolume()} id = "workOutVolume" type = "integer" placeholder="Total volume" readOnly></input>
           </div>
           <div className = "submitWorkOut">
-            <a href = "#workout" onClick ={this.handleSubmit}>Save WorkOut</a>
+            <a href = "#user" onClick ={this.handleSubmit}>Save WorkOut</a>
           </div>
         </form>
       </div>

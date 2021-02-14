@@ -18,17 +18,13 @@ export default class LineGraph2 extends React.Component {
 
     var ctx_3 = document.getElementById('myChart3').getContext("2d");
     var test = new Chart(ctx_3, {
-      type: "line",
+      type: "bar",
       data: {
         labels: this.props.label,
         datasets: [
           {
-            label: "MY workout",
+            label: "Daily Calories intake",
             data: this.props.data,
-          },{
-            label:"My weight",
-            data : this.props.data2,
-            type:"bar"
           }
         ]
       },

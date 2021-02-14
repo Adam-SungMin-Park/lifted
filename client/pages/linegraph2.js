@@ -20,11 +20,11 @@ export default class LineGraph2 extends React.Component {
     var test = new Chart(ctx_2, {
       type: "bar",
       data: {
-        labels: this.props.date,
+        labels: this.props.label,
         datasets: [
           {
             label: "MY workout",
-            data: this.props.weight,
+            data: this.props.data,
           }
         ]
       },

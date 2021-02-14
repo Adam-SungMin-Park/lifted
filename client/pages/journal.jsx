@@ -7,8 +7,10 @@ export default class Journal extends React.Component{
   constructor(props){
     super(props)
     this.state = {
+      render:false,
       weight:[],
       date:[],
+      data:[],
       userId: this.props.userId,
       food:[{
         name:"",
@@ -20,6 +22,8 @@ export default class Journal extends React.Component{
     this.handleAddClick = this.handleAddClick.bind(this);
     this.handleChangeWeight = this.handleChangeWeight.bind(this);
     this.handleChangeDate = this.handleChangeDate.bind(this);
+    this.handleSubmitDate = this.handleSubmitDate.bind(this);
+
     //this.buildGraph = this.buildGraph.bind(this);
 
   }
@@ -27,34 +31,62 @@ export default class Journal extends React.Component{
   componentDidMount(){
     fetch('/api/weight')
     .then(res => res.json())
-      .then(res => {
-        const dateArray = [];
-        const weightArray =[];
-        for(var i =0 ; i < res.length;i++){
-          dateArray.push(res[i].createdAt.slice(0,10))
-          weightArray.push(res[i].userWeight)
-        this.setState({
-          weight: weightArray,
-          date: dateArray
-        })
-        }
-      })
-      .catch(err => console.log(err))
-      console.log(this.state)
-
+      .then(res => {console.log(res)
+        for (var i = 0; i < res.length; i++) {
+          this.setState({
+            weight: this.state.weight.concat(res[i].userWeight),
+            date: this.state.date.concat(res[i].createdAt.slice(0, 10))
+          })
+      }
+    })
+      .catch(err => console.log("line 42 : " +err))
   };
 
   handleChangeWeight(){
+    this.setState({
+      weight:event.target.value
+    })
+  }
 
+  handleSubmitWeight(){
     this.setState({
       weight: Number(event.target.value)
     })
   }
-  handleChangeDate() {
-
+  handleChangeDate(e) {
+    e.preventDefault()
     this.setState({
       date: event.target.value
     })
+  }
+  handleSubmitDate(e) {
+
+    fetch('/api/weight/reload', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.state)
+    })
+      .then(res => res.json())
+      .then(res=>{
+        if (res.length === 1) {
+          console.log(res)
+          console.log("weight : "+res.weight )
+          this.setState({
+            weight: res[0].weight,
+            weightId: res[0].weightId,
+            date: res[0].date
+          })
+        } else {
+          console.log("must be a date without a weight...")
+          this.setState({
+            weight:""
+          })
+        }
+      })
+
+
   }
 
   handleSubmit() {
@@ -65,8 +97,14 @@ export default class Journal extends React.Component{
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(this.state)
-    }).then(res => this.buildGraph())
+    }).then(res => res.json())
       .catch(err => console.log(err))
+      alert("weight saved!")
+      this.setState({
+        render : !this.state.render
+      })
+      this.componentDidMount()
+
   }
   handleRemoveClick(index) {
     event.preventDefault()
@@ -87,26 +125,31 @@ export default class Journal extends React.Component{
   }
 
   render(){
+    console.log(this.state)
     return(
       <div id="weightFoodContainer">
         <div id="weightFoodPageTitle">
-          Weight/Food
+          Weight Room
         </div>
-        <form onSubmit = {this.handleSubmit} id="weightForm">
-          <div className="weightFoodWeight">
-          <input required onChange ={this.handleChangeWeight} type = "integer" placeholder = "weight in kg,lbs or Kelvin"></input>
+        <div className="weightFoodDate">
+          <input onChange={e =>this.handleChangeDate(e)} required type="date"></input>
+          <div className="foodFoodDateButton">
+            <button onClick={e=> this.handleSubmitDate(e)}>GO to this Date!</button>
           </div>
-          <div className ="weightFoodDate">
-            <input required onChange={this.handleChangeDate} type="date" placeholder="dd/mm/yy"></input>
+        </div>
+
+          <div className="weightFoodWeight">
+            <input onChange ={this.handleChangeWeight}  type = "integer" placeholder = "weight in kg,lbs or Kelvin"></input>
           </div>
           <div className = "addWeightButton">
-            <button type = "submit" >Save Weight!</button>
+            <a href="#user" onClick={this.handleSubmit}><button type = "submit" >Save Weight!</button></a>
           </div>
-        </form>
+
+
           <div id="caloriesGraphPlace">
           <LineGraph2
-            date = {this.state.date}
-            weight = {this.state.weight}
+            label = {this.state.date}
+            data = {this.state.weight}
           />
           </div>
           <div id = "addFoodButton">

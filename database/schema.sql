@@ -22,7 +22,7 @@ CREATE TABLE "userWeight" (
 	"userWeightId" serial NOT NULL,
 	"userId" integer NOT NULL,
 	"createdAt" DATE NOT NULL,
-	"userWeight" integer,
+	"userWeight" DECIMAL,
 	CONSTRAINT "userWeight_pk" PRIMARY KEY ("userWeightId")
 ) WITH (
   OIDS=FALSE
@@ -35,6 +35,7 @@ CREATE TABLE "userCalories" (
 	"userFoodName" TEXT NOT NULL,
 	"userFoodCalories" integer NOT NULL,
 	"userMealId" integer NOT NULL,
+	"createdAt" DATE NOT NULL,
 	CONSTRAINT "userCalories_pk" PRIMARY KEY ("userCaloriesId")
 ) WITH (
   OIDS=FALSE
@@ -60,19 +61,9 @@ CREATE TABLE "exercises" (
 	"exerciseWeight" integer NOT NULL,
 	"exerciseReps" integer NOT NULL,
 	"workOutId" integer NOT NULL,
+	"createdAt" DATE NOT NULL,
+	"workOutPart" TEXT NOT NULL,
 	CONSTRAINT "exercises_pk" PRIMARY KEY ("exercisesId")
-) WITH (
-  OIDS=FALSE
-);
-
-
-
-CREATE TABLE "routines" (
-	"routineId" serial NOT NULL,
-	"userId" integer NOT NULL,
-	"workOutPart" integer NOT NULL,
-	"routineName" TEXT NOT NULL,
-	CONSTRAINT "routines_pk" PRIMARY KEY ("routineId")
 ) WITH (
   OIDS=FALSE
 );
@@ -98,7 +89,5 @@ ALTER TABLE "userCalories" ADD CONSTRAINT "userCalories_fk0" FOREIGN KEY ("userM
 ALTER TABLE "userWorkOut" ADD CONSTRAINT "userWorkOut_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");
 
 ALTER TABLE "exercises" ADD CONSTRAINT "exercises_fk0" FOREIGN KEY ("workOutId") REFERENCES "userWorkOut"("workOutId");
-
-ALTER TABLE "routines" ADD CONSTRAINT "routines_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");
 
 ALTER TABLE "userDailyMeal" ADD CONSTRAINT "userDailyMeal_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");

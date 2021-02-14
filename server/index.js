@@ -5,9 +5,6 @@ const staticMiddleware = require('./static-middleware');
 const argon2  = require('argon2');
 const jsonMiddleware = express.json();
 const jwt = require('jsonwebtoken');
-
-
-
 const app = express();
 
 
@@ -49,11 +46,10 @@ app.get('/api/weight',(req, res)=>{
 
 app.get('/api/foods',(req,res)=>{
   const sql = `
-    select "userDailyMeal"."createdAt", sum("userCalories"."userFoodCalories")
-    from "userDailyMeal"
-    join "userCalories" using ("userMealId")
-    group by "userDailyMeal"."createdAt"
-    order by "userDailyMeal"."createdAt"
+   select "createdAt", sum("userFoodCalories")
+   from "userCalories"
+   group by "createdAt"
+   order by "createdAt"
   `
   db.query(sql)
   .then(result =>{
@@ -61,6 +57,7 @@ app.get('/api/foods',(req,res)=>{
   })
   .catch(err=> console.log(err))
 })
+
 
 app.post('/api/signin',(req,res)=>{
 
@@ -101,9 +98,117 @@ app.post('/api/signin',(req,res)=>{
 })
 
 
+app.delete('/api/exercise/delete',(req,res)=>{
+  const sql =`
+    delete from "exercises"
+    where "exercisesId" =$1
+  `
+  const params =[req.body.exercisesId]
+
+  db.query(sql,params)
+  .then(result => res.status(240).json(result.rows))
+    .catch(err => console.log(err))
+})
 
 
+app.delete('/api/foods/delete',(req,res)=>{
+  const sql =`
+    delete from "userCalories"
+    where "userCaloriesId" = $1
+`
+  const params = [req.body.calId]
 
+  db.query(sql,params)
+  .then(result => res.status(210).json(result.rows))
+  .catch(err => console.log(err))
+
+})
+
+app.put('/api/exercise/update',(req,res)=>{
+  const sql = `
+    update "exercises"
+    set "exerciseName" =$1,
+        "exerciseWeight" = $2,
+        "exerciseReps" = $3
+    where "exercisesId" = $4
+  `
+  const params = [req.body.exercise[0].exerciseName, req.body.exercise[0].exerciseWeight, req.body.exercise[0].exerciseReps , req.body.exercise[0].exercisesId ]
+
+  db.query(sql,params)
+  .then(result => res.status(215).json(result.rows))
+  .catch(err => console.log("line 151 : "+err))
+})
+
+
+app.put('/api/foods/update',(req,res)=>{
+  const sql= `
+    update "userCalories"
+    set "userFoodName" = $1 ,
+        "userFoodCalories" = $2
+    where "userCaloriesId" = $3
+  `
+  console.log(req.body)
+  const params = [req.body.food , req.body.calories , req.body.calId]
+  console.log(params)
+  db.query(sql, params)
+  .then(result=> res.status(211).json(result.rows))
+  .catch(err =>console.log("updating err : "+ err))
+})
+
+app.post('/api/weight/reload',(req,res)=>{
+  const sql = `
+    select "userWeight" as "weight" , "userWeightId" as "weightId", "createdAt" as "date"
+    from "userWeight"
+    where "createdAt" =$1
+  `
+  const params = [ req.body.date]
+
+  db.query(sql,params)
+  .then(result => res.status(210).json(result.rows))
+  .catch(err=> console.log("err reloading weight: "+err))
+
+})
+
+app.post('/api/workOutPart',(req,res)=>{
+  const sql = `
+    select sum("exerciseWeight"*"exerciseReps") as "total_volume","createdAt"
+    from "exercises"
+    where "workOutPart" = $1
+    group by "createdAt"
+    order by "createdAt"
+  `
+  const params = [req.body.workOutPart]
+
+  db.query(sql ,params)
+  .then(result=> res.status(219).json(result.rows))
+  .catch(err => console.log("line 185 : "+err))
+
+})
+
+app.post('/api/workout/reload', (req,res)=>{
+  const sql =`
+    select "exerciseName", "exerciseWeight" , "exerciseReps" , "workOutPart" , "exercisesId"
+    from "exercises"
+    where "createdAt" =$1
+  `
+  const params = [req.body.createdAt];
+  db.query(sql,params)
+  .then(result => res.status(213).json(result.rows))
+})
+
+app.post('/api/foodsReload',(req,res)=>{
+  console.log(req.body.createdAt)
+  const sql = `
+   select "userFoodName" as "food" ,"userFoodCalories" as "calories" , "userCaloriesId" as "calId"
+   from "userCalories"
+   where "createdAt" = $1
+  `
+  const params = [req.body.createdAt]
+
+  db.query(sql, params)
+  .then(result => res.status(203).json(result.rows))
+  .catch(err=>console.log("HERE IS THE ERRROR" +err))
+})
 
 
 app.post('/api/signup',(req,res)=>{
@@ -127,7 +232,6 @@ app.post('/api/signup',(req,res)=>{
 
 
 
-
 app.post('/api/foods',async (req,res)=>{
 
   const sql =`
@@ -135,23 +239,23 @@ app.post('/api/foods',async (req,res)=>{
     values ($1 , $2 )
     returning "userMealId"
   `
-  const params = [ req.body.userId , req.body.createdAt]
+  const params = [ req.body.userId ,req.body.createdAt]
 
   let mealId = await db.query(sql, params)
     .then(res => { return (res.rows[0].userMealId) })
     .catch(err => console.log(err))
 
-  const caloriesParams = [mealId];
+  const caloriesParams = [mealId, req.body.createdAt];
 
-  let paramNum = 1;
+  let paramNum = 2;
 
   const caloriesValues = req.body.foods.map((food) => {
     caloriesParams.push(food.food, food.calories)
     console.log(caloriesParams)
-    return `($1, $${++paramNum},$${++paramNum})`
+    return `($1, $2, $${++paramNum},$${++paramNum})`
   })
   const caloriesSql = `
- insert into "userCalories" (  "userMealId", "userFoodName" , "userFoodCalories")
+ insert into "userCalories" ("userMealId" , "createdAt" , "userFoodName" , "userFoodCalories")
     values ${caloriesValues.join(', ')}
     returning *
 `;
@@ -159,23 +263,6 @@ app.post('/api/foods',async (req,res)=>{
   db.query(caloriesSql, caloriesParams)
     .then(res => console.log(res.rows))
     .catch(err => console.log(err))
-
-
-
-
-
-  /*for(var i = 0 ; i < req.body.foods.length ; i++){
-  const sql2 =`
-    insert into "userCalories" (  "userFoodName" , "userFoodCalories" , "userMealId")
-    values ($1, $2, $3)
-    returning *
-  `
-  const params2 = [req.body.foods[i].food , req.body.foods[i].calories , mealId]
-
-   let testing = db.query(sql2, params2)
-    .then(res => {return(res.rows[0])})
-    .catch(err=> console.log(err))
-  }*/
   res.status(207).json()
 })
 
@@ -189,7 +276,7 @@ app.post('/api/weight',(req,res)=>{
 
   db.query(sql,params)
   .then(res => console.log(res))
-  .catch(err => console.log(err))
+  .catch(err => console.log("line 312 : "+err))
 
   res.status(205).json()
 })
@@ -197,11 +284,11 @@ app.post('/api/weight',(req,res)=>{
 app.post('/api/exercises',async (req,res)=>{
 
   const sql = `
-   insert into "userWorkOut" ("workOutPart","createdAt")
-   values ($1,$2)
+   insert into "userWorkOut" ("userId","workOutPart","createdAt")
+   values ($1,$2,$3)
    returning "workOutId"
   `
-  const params = [req.body.workOutParts, req.body.workOutDate]
+  const params = [req.body.userId, req.body.workOutPart, req.body.createdAt]
 
   let workoutId = await db.query(sql, params)
   .then(res => { return res.rows[0].workOutId })
@@ -210,15 +297,15 @@ app.post('/api/exercises',async (req,res)=>{
 
   for (var i = 0 ; i < req.body.exercise.length; i++){
   const sql2 = `
-    insert into "exercises" ("workOutId" , "exerciseName" , "exerciseWeight" , "exerciseReps")
-    values ($1, $2, $3, $4)
+    insert into "exercises" ("workOutId" , "exerciseName" , "exerciseWeight" , "exerciseReps", "createdAt", "workOutPart")
+    values ($1, $2, $3, $4, $5, $6)
     returning *
   `
-  const params2 = [workoutId, req.body.exercise[i].exerciseName, req.body.exercise[i].weight, req.body.exercise[i].reps ]
+    const params2 = [workoutId, req.body.exercise[i].exerciseName, req.body.exercise[i].exerciseWeight, req.body.exercise[i].exerciseReps, req.body.createdAt ,req.body.workOutPart ]
 
  let testing =  db.query(sql2,params2)
   .then(res => {return(res.rows[0])})
-  .catch(err => console.log(err))
+  .catch(err => console.log("line 311: "+ err))
 }
 res.status(203).json()
 }
