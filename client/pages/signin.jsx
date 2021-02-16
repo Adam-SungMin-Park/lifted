@@ -21,6 +21,7 @@ export default class SignIn extends React.Component {
     this.setState({
       view: !this.state.view
     })
+    window.location.reload()
   }
 
   handleSubmit(){
@@ -41,12 +42,15 @@ export default class SignIn extends React.Component {
         }
         else{
           alert("welcome back")
+          window.location.reload();
+
           }
         }
       )
       .catch(err => console.log(err))
 
     console.log(this.state)
+
   }
 
 
@@ -65,11 +69,20 @@ export default class SignIn extends React.Component {
 
   render(){
 
-if(this.state.view === true){
+    if(this.state.view  === true ){
+      console.log(this.state)
+      return(
+        <div className = "welcomePage">
+          <h1>Welcome Back!</h1>
+        </div>
+      )
+    }
+
+if(this.state.view === true && this.userId ===""){
     return(
-      <div className="signUpPage">
+      <div className="signInPage">
         <h1><a href="#signup" onClick = {this.viewChange}>Sign Up</a>/Sign in</h1>
-        <form className="signUpForm">
+        <form className="signInForm">
           <div className="emailInput">
             <input onChange={this.handleChangeEmail} type="email" placeholder="youremail@idk.com"></input>
           </div>
@@ -77,7 +90,7 @@ if(this.state.view === true){
             <input onChange={this.handleChangePassword} type="password" placeholder="Password"></input>
           </div>
           <div className="submitButton">
-            <a href="#signin" onClick={this.handleSubmit}><button type="submit">LogIn!</button></a>
+            <a href="#user" onClick={this.handleSubmit}>LogIn!</a>
           </div>
         </form>
       </div>
@@ -96,7 +109,7 @@ if(this.state.view === true){
             <input required onChange={this.handleChangePassword} type="password" placeholder="Password"></input>
           </div>
           <div className="submitButton">
-            <a href="#workout" onClick={this.handleSubmit}>Continue!</a>
+            <a href="#user" onClick={this.handleSubmit}>Continue!</a>
           </div>
         </form>
 

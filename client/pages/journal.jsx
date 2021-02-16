@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Chart from "chart.js";
-import LineGraph2 from './linegraph2';
+import LineGraph4 from './linegraph4';
 
 import App from '../app';
 export default class Journal extends React.Component{
@@ -139,7 +139,7 @@ export default class Journal extends React.Component{
         </div>
 
           <div className="weightFoodWeight">
-            <input onChange ={this.handleChangeWeight}  type = "integer" placeholder = "weight in kg,lbs or Kelvin"></input>
+            <input onChange ={this.handleChangeWeight}  type = "integer" placeholder = "weight in kg or lbs" ></input>
           </div>
           <div className = "addWeightButton">
             <a href="#user" onClick={this.handleSubmit}><button type = "submit" >Save Weight!</button></a>
@@ -147,7 +147,7 @@ export default class Journal extends React.Component{
 
 
           <div id="caloriesGraphPlace">
-          <LineGraph2
+          <LineGraph4
             label = {this.state.date}
             data = {this.state.weight}
           />

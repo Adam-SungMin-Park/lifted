@@ -1,29 +1,48 @@
 import React, { Component } from 'react'
 import Chart from "chart.js";
-import WorkOut from "./workout"
+import Food from './food';
 
 
-export default class LineGraph extends React.Component {
-  constructor(props){
+export default class LineGraph5 extends React.Component {
+  constructor(props) {
     super(props)
+    this.state = {
+      data: [],
+      label: [],
+    }
     this.chartRef = React.createRef();
   }
 
-  componentDidUpdate(){
+  componentDidUpdate() {
+    let calLength = this.props.data.length;
+    let averageCal = 0;
+    let averageCalArray = [];
+    let totalCal = 0;
 
 
-    var ctx = document.getElementById('myChart');
-    var test = new Chart(ctx, {
-      type: "line",
+    const color = [];
+    const color2 = [];
+    for (var i = 0; i < this.props.data.length; i++) {
+      color.push('rgb(40,127,62)')
+
+    }
+
+
+
+
+
+
+    var ctx_5 = document.getElementById('myChart5').getContext("2d");
+    var test = new Chart(ctx_5, {
+      type: "bar",
       data: {
         labels: this.props.label,
         datasets: [
           {
-            label: "Workout Volume",
+            label: "Daily Calories intake",
             data: this.props.data,
-            backgroundColor:[
-              'rgb(40,127,62)'
-            ]
+            backgroundColor: color,
+            order: 1
           }
         ]
       },
@@ -46,26 +65,20 @@ export default class LineGraph extends React.Component {
           }]
         }
       }
-
     });
   }
 
   render() {
-   if(this.props.data.length ===0){
-     return(
-       <h1>Oh no workout record yet!</h1>
-     )
-   }
+
     return (
-      <div className= "linegraph">
+      <div className="linegraph5">
         <canvas
-          id="myChart"
+          id="myChart5"
           ref={this.chartRef}
-          data = {this.props.data}
-          label ={this.props}
+
         />
       </div>
     )
 
-}
+  }
 }

@@ -1,3 +1,12 @@
+
+*{
+  font-family: 'Montserrat', sans-serif;
+  color:rgb(40,127,62);
+  background-color:white;
+  text-decoration: none;
+  border-radius:5px;
+
+}
 .material-icons.md-60{
 font-size:60px;
 }
@@ -32,6 +41,7 @@ font-size:60px;
 }
 #workOutAddButtonPlace{
   text-align: right;
+  margin-top: 3rem;
 }
 #workOutAdd{
   width: 70px;
@@ -102,6 +112,7 @@ font-size:60px;
 .addWeightButton{
   text-align:center;
   padding-bottom:1rem;
+  padding-top:1rem;
 }
 #caloriesGraphPlace{
   text-align:center;
@@ -147,5 +158,21 @@ font-size:60px;
   text-align:center;
   padding-top:1rem;
   padding-bottom:1rem;
-
+}
+.foodFoodDateButton{
+  padding-top:1rem;
+}
+.addWorkOut{
+  border:1px rgb(40,127,62); solid;
+  padding:1rem;
+  box-shadow: 1rem;
+  background-color:rgb(40,127,62);
+  color:white;
+}
+#workOutAdd{
+  border:1px rgb(40,127,62); solid;
+  padding:1rem;
+  box-shadow: 1rem;
+  background-color:rgb(40,127,62);
+  color:white;
 }

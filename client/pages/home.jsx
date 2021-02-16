@@ -8,6 +8,7 @@ export default class Home extends React.Component {
   constructor(props){
     super(props);
     this.state={
+      userId:"",
       volume:[],
       label:[],
       weight:[],
@@ -16,7 +17,15 @@ export default class Home extends React.Component {
       caloriesDate:[]
     }
     this.getData = this.getData.bind(this)
+    this.handleSignOut = this.handleSignOut.bind(this);
   }
+  handleSignOut(){
+    this.setState({
+      userId:""
+    })
+  }
+
+
 
   getData() {
     fetch('/api/exercises')
@@ -62,23 +71,18 @@ export default class Home extends React.Component {
 
 
 render(){
-  console.log(this.state)
+
   if(this.state.volume.length !== 0){
   return (
   <div id = "homeContainer">
+      <div className="signUpPlace">
+        <a className="signUp" href="#signup" onClick={this.handleSignOut}>Hello User {this.props.userId} ! (Sign Out)</a>
+      </div>
       <div className = "homeWorkoutGraph">
         <div className = "homeWorkOutTitle">
           Work Out Volume
         </div>
       </div>
-    <div id = "homeWorkOutPartDropDown">
-      <select name ="workoutPart" id= "workOutPartDropDown">
-        <option value="placeHolder1">placeholder1</option>
-        <option value="placeHolder2">placeholder2</option>
-        <option value="placeHolder3">placeholder3</option>
-      </select>
-    </div>
-
     <a href = "#workout" id = "workOutGraphPlace">
       <LineGraph
       data = {this.state.volume}
@@ -113,6 +117,9 @@ render(){
   else{
     return (
       <div id="homeContainer">
+        <div className="signUpPlace">
+          <a className="signUp" href="#signin" >Sign Up or In</a>
+        </div>
         <div id="homeWorkOutPartsDropDown">
           <select name="workoutPart" id="workOutPartDropDown">
             <option value="placeHolder1">placeholder1</option>

@@ -12,10 +12,17 @@ app.use(jsonMiddleware);
 
 app.use(staticMiddleware);
 
+
+/*
+get request for the workout volume graphs.
+*/
 app.get('/api/exercises', (req,res)=>{
 
   const sql = `
-    select sum("exercises"."exerciseWeight"*"exercises"."exerciseReps") as "total_volume","exercises"."workOutId","userWorkOut"."createdAt","userWorkOut"."workOutPart"
+    select sum("exercises"."exerciseWeight"*"exercises"."exerciseReps") as "total_volume",
+    "exercises"."workOutId",
+    "userWorkOut"."createdAt",
+    "userWorkOut"."workOutPart"
     from "exercises"
     join "userWorkOut" using ("workOutId")
     group by "exercises"."workOutId", "userWorkOut"."createdAt" ,"userWorkOut"."workOutPart"
@@ -29,6 +36,132 @@ app.get('/api/exercises', (req,res)=>{
     .catch(err => console.log(err))
 })
 
+
+/*
+query for the specific workout part
+*/
+
+app.post('/api/workOutPart', (req, res) => {
+  const sql = `
+    select sum("exerciseWeight"*"exerciseReps") as "total_volume","createdAt"
+    from "exercises"
+    where "workOutPart" = $1
+    group by "createdAt"
+    order by "createdAt"
+  `
+  const params = [req.body.workOutPart]
+
+  db.query(sql, params)
+    .then(result => res.status(219).json(result.rows))
+    .catch(err => console.log("line 185 : " + err))
+})
+
+/*
+bringing back the previous workout
+*/
+
+app.post('/api/workout/reload', (req, res) => {
+  const sql = `
+    select "exerciseName", "exerciseWeight" , "exerciseReps" , "workOutPart" , "exercisesId"
+    from "exercises"
+    where "createdAt" =$1
+  `
+  const params = [req.body.createdAt];
+  db.query(sql, params)
+    .then(result => res.status(213).json(result.rows))
+})
+
+
+/*
+delete request when user clicks on the "Remove Button"
+*/
+
+app.delete('/api/exercise/delete', (req, res) => {
+  const sql = `
+    delete from "exercises"
+    where "exercisesId" =$1
+  `
+  const params = [req.body.exercisesId]
+
+  db.query(sql, params)
+    .then(result => res.status(240).json(result.rows))
+    .catch(err => console.log(err))
+})
+
+/*
+update request when user fixes the workout and click "Update"
+*/
+
+app.put('/api/exercise/update', (req, res) => {
+  console.log("Update Happening : "+req.body.exercise[0].exerciseName )
+  const sql = `
+    update "exercises"
+    set "exerciseName" =$1,
+        "exerciseWeight" = $2,
+        "exerciseReps" = $3
+    where "exercisesId" = $4
+  `
+  const params = [req.body.exercise[0].exerciseName, req.body.exercise[0].exerciseWeight, req.body.exercise[0].exerciseReps, req.body.exercise[0].exercisesId]
+
+  db.query(sql, params)
+    .then(result => res.status(215).json(result.rows))
+    .catch(err => console.log("line 151 : " + err))
+})
+
+/*
+posting new workout. Made Async. so i can use the return "WorkOut Id" from the first query.
+*/
+app.post('/api/exercises', async (req, res) => {
+
+  const sql = `
+   insert into "userWorkOut" ("userId","workOutPart","createdAt")
+   values ($1,$2,$3)
+   returning "workOutId"
+  `
+  const params = [req.body.userId, req.body.workOutPart, req.body.createdAt]
+
+  let workoutId = await db.query(sql, params)
+    .then(res => { return res.rows[0].workOutId })
+    .catch(err => console.log(err))
+
+
+  for (var i = 0; i < req.body.exercise.length; i++) {
+    const sql2 = `
+    insert into "exercises" ("workOutId" , "exerciseName" , "exerciseWeight" , "exerciseReps", "createdAt", "workOutPart")
+    values ($1, $2, $3, $4, $5, $6)
+    returning *
+  `
+    const params2 = [workoutId, req.body.exercise[i].exerciseName, req.body.exercise[i].exerciseWeight, req.body.exercise[i].exerciseReps, req.body.createdAt, req.body.workOutPart]
+
+    let testing = db.query(sql2, params2)
+      .then(res => { return (res.rows[0]) })
+      .catch(err => console.log("line 311: " + err))
+  }
+  res.status(203).json()
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 app.get('/api/weight',(req, res)=>{
   const sql = `
     select "userWeight","createdAt"
@@ -38,7 +171,7 @@ app.get('/api/weight',(req, res)=>{
   db.query(sql)
   .then(result=> {
     res.json(result.rows)
-    console.log(result.rows)
+
   })
   .catch(err => console.log(err))
 
@@ -70,8 +203,13 @@ app.post('/api/signin',(req,res)=>{
 
   const test = db.query(sql,params)
   .then(res => {
-     console.log(res.rows[0].userId)
+    if(res !==undefined){
+
     return argon2.verify(res.rows[0].userPW, req.body.password)
+    }
+    if(res === undefined ){
+      console.log("login failed")
+    }
   })
   .then(isMatching =>{
     if(isMatching){
@@ -86,29 +224,17 @@ app.post('/api/signin',(req,res)=>{
         const token = jwt.sign(payloads, process.env.TOKEN_SECRET);
         res.status(210).json(payloads)
       })
-      .catch(err => console.log(err))
+      .catch(err => console.log("login Failed"))
 
     }
     else{
       console.log("nice try :) again.")
       res.status(404).json("nice try :) again")
     }})
-  .catch(err=>console.log(err))
+  .catch(err=>console.log("login failed"))
 
 })
 
-
-app.delete('/api/exercise/delete',(req,res)=>{
-  const sql =`
-    delete from "exercises"
-    where "exercisesId" =$1
-  `
-  const params =[req.body.exercisesId]
-
-  db.query(sql,params)
-  .then(result => res.status(240).json(result.rows))
-    .catch(err => console.log(err))
-})
 
 
 app.delete('/api/foods/delete',(req,res)=>{
@@ -124,20 +250,6 @@ app.delete('/api/foods/delete',(req,res)=>{
 
 })
 
-app.put('/api/exercise/update',(req,res)=>{
-  const sql = `
-    update "exercises"
-    set "exerciseName" =$1,
-        "exerciseWeight" = $2,
-        "exerciseReps" = $3
-    where "exercisesId" = $4
-  `
-  const params = [req.body.exercise[0].exerciseName, req.body.exercise[0].exerciseWeight, req.body.exercise[0].exerciseReps , req.body.exercise[0].exercisesId ]
-
-  db.query(sql,params)
-  .then(result => res.status(215).json(result.rows))
-  .catch(err => console.log("line 151 : "+err))
-})
 
 
 app.put('/api/foods/update',(req,res)=>{
@@ -147,9 +259,10 @@ app.put('/api/foods/update',(req,res)=>{
         "userFoodCalories" = $2
     where "userCaloriesId" = $3
   `
-  console.log(req.body)
+
   const params = [req.body.food , req.body.calories , req.body.calId]
-  console.log(params)
+
+
   db.query(sql, params)
   .then(result=> res.status(211).json(result.rows))
   .catch(err =>console.log("updating err : "+ err))
@@ -169,35 +282,9 @@ app.post('/api/weight/reload',(req,res)=>{
 
 })
 
-app.post('/api/workOutPart',(req,res)=>{
-  const sql = `
-    select sum("exerciseWeight"*"exerciseReps") as "total_volume","createdAt"
-    from "exercises"
-    where "workOutPart" = $1
-    group by "createdAt"
-    order by "createdAt"
-  `
-  const params = [req.body.workOutPart]
-
-  db.query(sql ,params)
-  .then(result=> res.status(219).json(result.rows))
-  .catch(err => console.log("line 185 : "+err))
-
-})
-
-app.post('/api/workout/reload', (req,res)=>{
-  const sql =`
-    select "exerciseName", "exerciseWeight" , "exerciseReps" , "workOutPart" , "exercisesId"
-    from "exercises"
-    where "createdAt" =$1
-  `
-  const params = [req.body.createdAt];
-  db.query(sql,params)
-  .then(result => res.status(213).json(result.rows))
-})
 
 app.post('/api/foodsReload',(req,res)=>{
-  console.log(req.body.createdAt)
+
   const sql = `
    select "userFoodName" as "food" ,"userFoodCalories" as "calories" , "userCaloriesId" as "calId"
    from "userCalories"
@@ -251,7 +338,7 @@ app.post('/api/foods',async (req,res)=>{
 
   const caloriesValues = req.body.foods.map((food) => {
     caloriesParams.push(food.food, food.calories)
-    console.log(caloriesParams)
+
     return `($1, $2, $${++paramNum},$${++paramNum})`
   })
   const caloriesSql = `
@@ -281,35 +368,6 @@ app.post('/api/weight',(req,res)=>{
   res.status(205).json()
 })
 
-app.post('/api/exercises',async (req,res)=>{
-
-  const sql = `
-   insert into "userWorkOut" ("userId","workOutPart","createdAt")
-   values ($1,$2,$3)
-   returning "workOutId"
-  `
-  const params = [req.body.userId, req.body.workOutPart, req.body.createdAt]
-
-  let workoutId = await db.query(sql, params)
-  .then(res => { return res.rows[0].workOutId })
-  .catch(err => console.log(err))
-
-
-  for (var i = 0 ; i < req.body.exercise.length; i++){
-  const sql2 = `
-    insert into "exercises" ("workOutId" , "exerciseName" , "exerciseWeight" , "exerciseReps", "createdAt", "workOutPart")
-    values ($1, $2, $3, $4, $5, $6)
-    returning *
-  `
-    const params2 = [workoutId, req.body.exercise[i].exerciseName, req.body.exercise[i].exerciseWeight, req.body.exercise[i].exerciseReps, req.body.createdAt ,req.body.workOutPart ]
-
- let testing =  db.query(sql2,params2)
-  .then(res => {return(res.rows[0])})
-  .catch(err => console.log("line 311: "+ err))
-}
-res.status(203).json()
-}
-)
 
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console

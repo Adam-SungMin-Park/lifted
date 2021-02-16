@@ -18,36 +18,52 @@ export default class WorkOut extends React.Component {
     this.handlePartSubmit = this.handlePartSubmit.bind(this);
   }
 
-
-  handlePartSubmit(){
-    fetch('/api/workOutPart', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(this.state)
-    })
-      .then(res => res.json())
-      .then(res => {
-        const dataArray = [];
-        const labelArray = [];
-      for(var i = 0 ; i < res.length ; i++){
-        dataArray.push(res[i].total_volume)
-        labelArray.push(res[i].createdAt.slice(0,10))
-      }
-        this.setState({
-          data: dataArray,
-          label: labelArray
-        })
-      })
-      .catch(err => console.log(err))
-
-  }
-  handleWorkOutPart(){
+  handleWorkOutPart() {
     this.setState({
       workOutPart: event.target.value
     })
   }
+
+
+  handlePartSubmit(){
+    if(this.state.workOutPart !=="Select WorkOut Part!"){
+      fetch('/api/workOutPart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(this.state)
+      })
+        .then(res => res.json())
+        .then(res => {
+          const dataArray = [];
+          const labelArray = [];
+          if(res.length !==0){
+        for(var i = 0 ; i < res.length ; i++){
+          dataArray.push(res[i].total_volume)
+          labelArray.push(res[i].createdAt.slice(0,10))
+        }
+          this.setState({
+            data: dataArray,
+            label: labelArray
+          })
+        }
+        else{
+          this.setState({
+            data:this.state.data,
+            label : this.state.label
+          })
+        }
+        })
+        .catch(err => console.log(err))
+    }
+    if (this.state.workOutPart === "Select WorkOut Part!") {
+      this.getData()
+    }
+  }
+
+
+
 
   getData(){
     fetch('/api/exercises').then(res => res.json())

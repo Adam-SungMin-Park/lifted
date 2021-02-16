@@ -75,7 +75,7 @@ export default class App extends React.Component {
       }
       )
       .catch(err => console.log(err))
-
+    window.location.reload();
 
     console.log(this.state)
   }
@@ -96,8 +96,10 @@ export default class App extends React.Component {
     this.setState({
       route:hash
     })
+    this.location.reload()
   }
   renderPage(){
+
     const { route } = this.state;
     if(route.path ==='user'){
       return <Home userId={this.state.userId}/>
@@ -120,15 +122,13 @@ export default class App extends React.Component {
     if (route.path === 'signin') {
       return <SignIn userId={this.state.userId} />;
     }
-    if (route.path === 'food'){
-      return<Food userId ={this.state.userId} />;
-    }
+
   }
 
   render(){
-    console.log(this.state)
-    if(this.state.userId !==undefined && this.state.userId !== null ){
-      console.log("logged in page")
+
+    if( this.state.userId !== null ){
+
       return (
         <>
           <NavBar userId={this.state.userId} />
@@ -137,7 +137,7 @@ export default class App extends React.Component {
         </>
       )
     }
-    if(this.state.view === true) {
+    if(this.state.view === false) {
 
       return (
         <>
@@ -159,13 +159,13 @@ export default class App extends React.Component {
       </>
       )
     }
-    if(this.state.view ===false ){
+    if(this.state.view ===true ){
       return (
         <>
         <NavBar userId={this.state.userId} />
 
         <div className="signUpPage">
-          <h1>Sign Up/ <a href="#signin" onClick={this.viewChange}>Sign in</a></h1>
+          <h1>Sign Up/ <a href="#signin"  onClick={this.viewChange}>Sign in</a></h1>
           <form className="signUpForm">
             <div className="emailInput">
               <input required onChange={this.handleChangeEmail} type="email" placeholder="youremail@idk.com"></input>
@@ -174,7 +174,7 @@ export default class App extends React.Component {
               <input required onChange={this.handleChangePassword} type="password" placeholder="Password"></input>
             </div>
             <div className="submitButton">
-              <a href="#workout" onClick={this.handleRegistration}>Continue!</a>
+              <a href="#user" onClick={this.handleRegistration}>Continue!</a>
             </div>
           </form>
         </div>

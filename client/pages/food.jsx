@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Chart from "chart.js";
-import LineGraph3 from './linegraph3';
+import LineGraph5 from './linegraph5';
 
 export default class Food extends React.Component {
 
@@ -187,7 +187,7 @@ foodReload(){
         </div>
         <div id="caloriesGraphPlace">
           <div className="linegraph3">
-          <LineGraph3
+          <LineGraph5
           data = {this.state.data}
           label = {this.state.label}
           />
@@ -208,10 +208,10 @@ foodReload(){
               <div key={index} className = "foodCaloriesEntries">
                 <div className = "foodCalories">
                   <div className ="foodNameInput">
-                    <input required onChange={e => this.handleFoodName(e, index)} type="text"  value = {this.state.foods[index].food}></input>
+                    <input required onChange={e => this.handleFoodName(e, index)} type="text" placeholder= "food" value = {this.state.foods[index].food}></input>
                   </div>
                   <div className = "caloriesInput">
-                    <input required onChange={e => this.handleCalories(e, index)} type="integer"  value={this.state.foods[index].calories}></input>
+                    <input required onChange={e => this.handleCalories(e, index)} type="integer" placeholder ="calories"  value={this.state.foods[index].calories}></input>
                   </div>
                 </div>
                 <div className = "updateOrRemove">
