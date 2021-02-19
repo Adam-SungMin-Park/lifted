@@ -20,8 +20,8 @@ CREATE TABLE "users" (
 
 CREATE TABLE "userWeight" (
 	"userWeightId" serial NOT NULL,
-	"userId" integer NOT NULL,
-	"createdAt" DATE NOT NULL,
+	"userId" integer ,
+	"createdAt" DATE NOT NULL UNIQUE,
 	"userWeight" DECIMAL,
 	CONSTRAINT "userWeight_pk" PRIMARY KEY ("userWeightId")
 ) WITH (
@@ -72,7 +72,7 @@ CREATE TABLE "exercises" (
 
 CREATE TABLE "userDailyMeal" (
 	"userMealId" serial NOT NULL,
-	"userId" integer NOT NULL,
+	"userId" integer,
 	"createdAt" DATE NOT NULL,
 	CONSTRAINT "userDailyMeal_pk" PRIMARY KEY ("userMealId")
 ) WITH (
@@ -82,12 +82,10 @@ CREATE TABLE "userDailyMeal" (
 
 
 
-ALTER TABLE "userWeight" ADD CONSTRAINT "userWeight_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");
+
 
 ALTER TABLE "userCalories" ADD CONSTRAINT "userCalories_fk0" FOREIGN KEY ("userMealId") REFERENCES "userDailyMeal"("userMealId");
 
-ALTER TABLE "userWorkOut" ADD CONSTRAINT "userWorkOut_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");
+
 
 ALTER TABLE "exercises" ADD CONSTRAINT "exercises_fk0" FOREIGN KEY ("workOutId") REFERENCES "userWorkOut"("workOutId");
-
-ALTER TABLE "userDailyMeal" ADD CONSTRAINT "userDailyMeal_fk0" FOREIGN KEY ("userId") REFERENCES "users"("userId");

@@ -19,7 +19,7 @@ export default class LineGraph4 extends React.Component {
     let averageWeightArray = [];
     let totalWeight = 0;
     for (var i = 0; i < this.props.data.length; i++) {
-      console.log("checking line 20 : " + this.props.data[i])
+
       totalWeight = totalWeight + this.props.data[i]
     }
     averageWeight = totalWeight / weightLength
@@ -28,7 +28,7 @@ export default class LineGraph4 extends React.Component {
     for (var i = 0; i < this.props.data.length; i++) {
       averageWeightArray.push(averageWeight)
     }
-    console.log(averageWeightArray)
+
     const color = [];
     const color2 = [];
     for (var i = 0; i < this.props.data.length; i++) {

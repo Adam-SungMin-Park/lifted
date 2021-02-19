@@ -17,15 +17,8 @@ export default class Home extends React.Component {
       caloriesDate:[]
     }
     this.getData = this.getData.bind(this)
-    this.handleSignOut = this.handleSignOut.bind(this);
-  }
-  handleSignOut(){
-    this.setState({
-      userId:""
-    })
-  }
 
-
+  }
 
   getData() {
     fetch('/api/exercises')
@@ -65,7 +58,7 @@ export default class Home extends React.Component {
 
 
   componentDidMount() {
-    console.log(this.state)
+
     this.getData();
   }
 
@@ -75,9 +68,7 @@ render(){
   if(this.state.volume.length !== 0){
   return (
   <div id = "homeContainer">
-      <div className="signUpPlace">
-        <a className="signUp" href="#signup" onClick={this.handleSignOut}>Hello User {this.props.userId} ! (Sign Out)</a>
-      </div>
+
       <div className = "homeWorkoutGraph">
         <div className = "homeWorkOutTitle">
           Work Out Volume

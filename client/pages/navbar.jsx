@@ -36,7 +36,7 @@ export default class NavBar extends React.Component{
       view:"no"
     })
     window.location.reload();
-    alert("signed out")
+
 
   }
 
@@ -49,7 +49,7 @@ export default class NavBar extends React.Component{
       <div id = "navBarContainer">
         <a className = "tab" href = "#workout"><span className="material-icons md-60">fitness_center</span>Workout</a>
         <a className="tab " href="#food"><span className="material-icons md-60">restaurant_menu</span>Food</a>
-        <a className = "tab "href = "#journal"><span className="material-icons md-60">text_snippet</span>Journal</a>
+        <a className = "tab "href = "#journal"><span className="material-icons md-60">text_snippet</span>Weight</a>
         <a className = "tab "  href = "#user"><span className="material-icons md-60">account_circle</span>User</a>
       </div>
     </div>

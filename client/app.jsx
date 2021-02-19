@@ -7,6 +7,7 @@ import Food from './pages/food';
 import SignUp from './pages/signup';
 import SignIn from './pages/signin';
 import AddWorkOut from './pages/addworkout';
+import LandingPage from './pages/landingpage';
 import { parseRoute } from './pages/index'
 
 
@@ -45,7 +46,7 @@ export default class App extends React.Component {
     }).then(res => console.log(res))
       .then(data => console.log(data))
       .catch(err => console.log(err))
-      alert('Ready to sign in!')
+
   }
 
   viewChange () {
@@ -65,15 +66,7 @@ export default class App extends React.Component {
         this.setState({
           userId: data.userId
         })
-        window.localStorage.setItem("token", data.userId)
-        if (data === "nice try :) again") {
-          alert(data)
-        }
-        else {
-          alert("welcome back")
-        }
-      }
-      )
+      })
       .catch(err => console.log(err))
     window.location.reload();
 
@@ -122,12 +115,15 @@ export default class App extends React.Component {
     if (route.path === 'signin') {
       return <SignIn userId={this.state.userId} />;
     }
+    if (route.path === '') {
+        return <LandingPage />;
+    }
 
   }
 
   render(){
-
-    if( this.state.userId !== null ){
+    const { route } = this.state;
+    if( route.path !== '' ){
 
       return (
         <>
@@ -137,25 +133,11 @@ export default class App extends React.Component {
         </>
       )
     }
-    if(this.state.view === false) {
+    if( route.path === '') {
 
       return (
         <>
-          <NavBar userId={this.state.userId} />
-         <div className="signUpPage">
-        <h1><a  href = "#signup" onClick = {this.viewChange} >Sign Up</a>/Sign in</h1>
-        <form className="signUpForm">
-          <div className="emailInput">
-            <input onChange={this.handleChangeEmail} type="email" placeholder="youremail@idk.com"></input>
-          </div>
-          <div className="passwordInput">
-            <input onChange={this.handleChangePassword} type="password" placeholder="Password"></input>
-          </div>
-          <div className="submitButton">
-            <a href="#signin" onClick={this.handleSubmit}><button type="submit">LogIn!</button></a>
-          </div>
-        </form>
-      </div>
+        {this.renderPage()}
       </>
       )
     }

@@ -125,36 +125,27 @@ app.post('/api/exercises', async (req, res) => {
     .catch(err => console.log(err))
 
 
-  for (var i = 0; i < req.body.exercise.length; i++) {
-    const sql2 = `
-    insert into "exercises" ("workOutId" , "exerciseName" , "exerciseWeight" , "exerciseReps", "createdAt", "workOutPart")
-    values ($1, $2, $3, $4, $5, $6)
-    returning *
-  `
-    const params2 = [workoutId, req.body.exercise[i].exerciseName, req.body.exercise[i].exerciseWeight, req.body.exercise[i].exerciseReps, req.body.createdAt, req.body.workOutPart]
 
-    let testing = db.query(sql2, params2)
-      .then(res => { return (res.rows[0]) })
-      .catch(err => console.log("line 311: " + err))
-  }
-  res.status(203).json()
+  const params2 = [workoutId, req.body.createdAt, req.body.workOutPart]
+  let paramsNum = 3;
+  let values = req.body.newExercise.map((exercise)=>{
+      params2.push(exercise.exerciseName, exercise.exerciseWeight, exercise.exerciseReps)
+      return `($1 , $2 , $3 , $${++paramsNum} , $${++paramsNum}, $${++paramsNum})`
+      })
+
+
+
+      const sql2 = `
+      insert into "exercises" ("workOutId" , "createdAt", "workOutPart", "exerciseName" , "exerciseWeight" , "exerciseReps")
+      values ${values.join(', ')}
+      returning *
+    `
+      let testing = db.query(sql2, params2)
+        .then(res => { return (res.rows[0]) })
+        .catch(err => console.log("line 145: " + err))
+
+    res.status(203).json()
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -268,6 +259,24 @@ app.put('/api/foods/update',(req,res)=>{
   .catch(err =>console.log("updating err : "+ err))
 })
 
+
+app.put('/api/weight/update',(req,res)=>{
+  const sql =`
+    update "userWeight"
+    set "userWeight" = $1
+    where "userWeightId" = $2
+  `
+
+  const params = [req.body.weight , req.body.weightId]
+
+  db.query(sql,params)
+  .then(result =>res.status(219).json(result.rows))
+  .catch(err => console.log(err))
+})
+
+
+
+
 app.post('/api/weight/reload',(req,res)=>{
   const sql = `
     select "userWeight" as "weight" , "userWeightId" as "weightId", "createdAt" as "date"
@@ -336,7 +345,7 @@ app.post('/api/foods',async (req,res)=>{
 
   let paramNum = 2;
 
-  const caloriesValues = req.body.foods.map((food) => {
+  const caloriesValues = req.body.newFoods.map((food) => {
     caloriesParams.push(food.food, food.calories)
 
     return `($1, $2, $${++paramNum},$${++paramNum})`

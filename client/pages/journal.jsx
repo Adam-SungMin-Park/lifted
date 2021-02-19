@@ -8,9 +8,11 @@ export default class Journal extends React.Component{
     super(props)
     this.state = {
       render:false,
-      weight:[],
       date:[],
-      data:[],
+      weightData:[],
+      dateData:[],
+      weight:[],
+      weightId:"",
       userId: this.props.userId,
       food:[{
         name:"",
@@ -23,6 +25,7 @@ export default class Journal extends React.Component{
     this.handleChangeWeight = this.handleChangeWeight.bind(this);
     this.handleChangeDate = this.handleChangeDate.bind(this);
     this.handleSubmitDate = this.handleSubmitDate.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
 
     //this.buildGraph = this.buildGraph.bind(this);
 
@@ -31,11 +34,11 @@ export default class Journal extends React.Component{
   componentDidMount(){
     fetch('/api/weight')
     .then(res => res.json())
-      .then(res => {console.log(res)
+      .then(res => {
         for (var i = 0; i < res.length; i++) {
           this.setState({
-            weight: this.state.weight.concat(res[i].userWeight),
-            date: this.state.date.concat(res[i].createdAt.slice(0, 10))
+            weightData: this.state.weightData.concat(res[i].userWeight),
+            dateData: this.state.dateData.concat(res[i].createdAt.slice(0, 10))
           })
       }
     })
@@ -71,15 +74,12 @@ export default class Journal extends React.Component{
       .then(res => res.json())
       .then(res=>{
         if (res.length === 1) {
-          console.log(res)
-          console.log("weight : "+res.weight )
           this.setState({
             weight: res[0].weight,
             weightId: res[0].weightId,
             date: res[0].date
           })
         } else {
-          console.log("must be a date without a weight...")
           this.setState({
             weight:""
           })
@@ -87,6 +87,15 @@ export default class Journal extends React.Component{
       })
 
 
+  }
+  handleUpdate(){
+    fetch('/api/weight/update', {
+      method:'PUT',
+      headers: {
+        'Content-Type' : 'application/json'
+      },
+      body:JSON.stringify(this.state)
+    })
   }
 
   handleSubmit() {
@@ -99,7 +108,6 @@ export default class Journal extends React.Component{
       body: JSON.stringify(this.state)
     }).then(res => res.json())
       .catch(err => console.log(err))
-      alert("weight saved!")
       this.setState({
         render : !this.state.render
       })
@@ -126,6 +134,43 @@ export default class Journal extends React.Component{
 
   render(){
     console.log(this.state)
+    for(var i = 0 ; i < this.state.dateData.length ; i++){
+      if (this.state.date !== "" && this.state.date.slice(0, 10) === this.state.dateData[i]){
+        console.log("exist")
+        return (
+          <div id="weightFoodContainer">
+            <div id="weightFoodPageTitle">
+              Weight Room
+        </div>
+            <div className="weightFoodDate">
+              <input onChange={e => this.handleChangeDate(e)} required type="date"></input>
+              <div className="foodFoodDateButton">
+                <button onClick={e => this.handleSubmitDate(e)}>GO to this Date!</button>
+              </div>
+            </div>
+
+            <div className="weightFoodWeight">
+              <input onChange={this.handleChangeWeight} type="integer" placeholder="weight in lbs" value={this.state.weight} ></input>
+            </div>
+            <div className="addWeightButton">
+              <a href="#user" onClick={this.handleUpdate}><button type="submit" >Update Weight!</button></a>
+            </div>
+
+
+            <div id="caloriesGraphPlace">
+              <LineGraph4
+                label={this.state.dateData}
+                data={this.state.weightData}
+              />
+            </div>
+            <div id="addFoodButton">
+              <a href="#food"><button>Confess!</button></a>
+            </div>
+          </div>
+        )
+      }
+    }
+    if (this.state.date !== "" && this.state.date.slice(0, 10) !== this.state.dateData[i]){
     return(
       <div id="weightFoodContainer">
         <div id="weightFoodPageTitle">
@@ -139,7 +184,7 @@ export default class Journal extends React.Component{
         </div>
 
           <div className="weightFoodWeight">
-            <input onChange ={this.handleChangeWeight}  type = "integer" placeholder = "weight in kg or lbs" ></input>
+            <input onChange ={this.handleChangeWeight}  type = "integer" placeholder = "weight in lbs" value ={this.state.weight} ></input>
           </div>
           <div className = "addWeightButton">
             <a href="#user" onClick={this.handleSubmit}><button type = "submit" >Save Weight!</button></a>
@@ -148,8 +193,8 @@ export default class Journal extends React.Component{
 
           <div id="caloriesGraphPlace">
           <LineGraph4
-            label = {this.state.date}
-            data = {this.state.weight}
+            label = {this.state.dateData}
+            data = {this.state.weightData}
           />
           </div>
           <div id = "addFoodButton">
@@ -157,4 +202,6 @@ export default class Journal extends React.Component{
           </div>
         </div>
     )}
+
+  }
 }

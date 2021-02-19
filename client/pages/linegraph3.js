@@ -19,7 +19,7 @@ export default class LineGraph2 extends React.Component {
     let averageCalArray = [];
     let totalCal = 0;
     for (var i = 0; i < this.props.data.length; i++) {
-      console.log("checking line 22 : " + this.props.data[i])
+
       totalCal = totalCal + this.props.data[i]
     }
     let test2 = totalCal / calLength

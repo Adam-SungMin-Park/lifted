@@ -163,7 +163,7 @@ font-size:60px;
   padding-top:1rem;
 }
 .addWorkOut{
-  border:1px rgb(40,127,62); solid;
+  border:1px rgb(40,127,62) solid;
   padding:1rem;
   box-shadow: 1rem;
   background-color:rgb(40,127,62);
@@ -175,4 +175,31 @@ font-size:60px;
   box-shadow: 1rem;
   background-color:rgb(40,127,62);
   color:white;
+}
+.container{
+  text-align:center;
+  padding-top:2rem;
+}
+.demoButton{
+  margin-top:1rem;
+  border:1px solid rgb(40,127,62);
+  color:white;
+  background-color:rgb(40,127,62);
+  padding:1rem;
+}
+.demoButtonPlace{
+  padding-top:2rem;
+}
+#newExerciseName{
+      width: 200px;
+    margin-right: 2rem;
+
+}
+#newExerciseWeight{
+  width: 60px;
+    margin-right: 2rem;
+
+}
+#newExerciseReps{
+    width: 40px;
 }

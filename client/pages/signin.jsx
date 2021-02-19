@@ -38,10 +38,10 @@ export default class SignIn extends React.Component {
           userId: data.userId
         })
         if(data==="nice try :) again"){
-        alert(data)
+
         }
         else{
-          alert("welcome back")
+
           window.location.reload();
 
           }

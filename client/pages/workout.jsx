@@ -83,7 +83,7 @@ export default class WorkOut extends React.Component {
   }
 
   render(){
-    console.log(this.state)
+
   return (
 
     <div id="workOutContainer">
