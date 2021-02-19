@@ -2,81 +2,81 @@ import React from 'react';
 import { render } from 'react-dom';
 import LineGraph from './linegraph'
 import LineGraph2 from './linegraph2';
-
+import LineGraph3 from './linegraph3';
 
 export default class Home extends React.Component {
   constructor(props){
     super(props);
     this.state={
-      data:[],
+      userId:"",
+      volume:[],
       label:[],
-      weigth:[],
-      createdAt:[]
+      weight:[],
+      date:[],
+      calories:[],
+      caloriesDate:[]
     }
     this.getData = this.getData.bind(this)
-    //this.getData2 = this.getData2.bind(this)
 
   }
- /*getData2(){
-    fetch('/api/weight')
-      .then(res => res.json())
-      .then(res => {
-        const dateArray = [];
-        const weightArray = [];
-        for (var i = 0; i < res.length; i++) {
-          dateArray.push(res[i].createdAt.slice(0, 10))
-          weightArray.push(res[i].userWeight)
-          this.setState({
-            weight: weightArray,
-            createdAt: dateArray
-          })
-        }
-      })
-      .catch(err => console.log(err))
-    console.log(this.state)
-
-  }*/
 
   getData() {
     fetch('/api/exercises')
     .then(res => res.json())
-      .then(res => {
-        for (var i = 0; i < res.length; i++) {
-          this.setState({
-            data: this.state.data.concat(parseInt(res[i].total_volume)),
-            label: this.state.label.concat(res[i].createdAt.slice(0, 10))
-          })
-        }
-      }).then(
-
-      )
+    .then(res => {
+      for (var i = 0; i < res.length; i++) {
+        this.setState({
+          volume: this.state.volume.concat(parseInt(res[i].total_volume)),
+          label: this.state.label.concat(res[i].createdAt.slice(0, 10))
+        })
+      }
+      })
       .catch(error => this.setState({ error, isLoading: false }))
 
-      //this.getData2()
+      fetch('/api/weight')
+      .then(res => res.json())
+      .then(res => {
+        for (var i = 0 ; i < res.length ; i ++){
+          this.setState({
+            weight : this.state.weight.concat(parseInt(res[i].userWeight)),
+            date : this.state.date.concat(res[i].createdAt.slice(0,10))
+          })
+        }
+      })
 
+      fetch('/api/foods')
+      .then(res=>res.json())
+      .then(res =>{
+        for(var i = 0 ; i < res.length ; i++){
+          this.setState({
+            calories:this.state.calories.concat(parseInt(res[i].sum)),
+            caloriesDate : this.state.caloriesDate.concat(res[i].createdAt.slice(0,10))
+          })
+        }
+      })
   }
 
+
   componentDidMount() {
-    console.log(this.state)
+
     this.getData();
-    //this.getData2();
   }
 
 
 render(){
+
+  if(this.state.volume.length !== 0){
   return (
   <div id = "homeContainer">
-    <div id = "homeWorkOutPartsDropDown">
-      <select name ="workoutParts" id= "workOutPartsDropDown">
-        <option value="placeHolder1">placeholder1</option>
-        <option value="placeHolder2">placeholder2</option>
-        <option value="placeHolder3">placeholder3</option>
-      </select>
-    </div>
+
+      <div className = "homeWorkoutGraph">
+        <div className = "homeWorkOutTitle">
+          Work Out Volume
+        </div>
+      </div>
     <a href = "#workout" id = "workOutGraphPlace">
       <LineGraph
-
-      data = {this.state.data}
+      data = {this.state.volume}
       label = {this.state.label}
       />
     </a>
@@ -86,12 +86,41 @@ render(){
       </div>
       <a href = "#journal" id = "weightGraphPlace">
         <LineGraph2
-          data={this.state.weight}
-          label={this.state.createdAt}
-        />
+            data = {this.state.weight}
+            label={this.state.date}
+            />
       </a>
     </div>
+      <div id="homeFoodGraphPlace">
+        <div>
+          Food Consumption
+      </div>
+        <a href="#food" id="foodGraphPlace">
+          <LineGraph3
+            data={this.state.calories}
+            label={this.state.caloriesDate}
+          />
+        </a>
+      </div>
   </div>
   );
+  }
+  else{
+    return (
+      <div id="homeContainer">
+        <div className="signUpPlace">
+          <a className="signUp" href="#signin" >Sign Up or In</a>
+        </div>
+        <div id="homeWorkOutPartsDropDown">
+          <select name="workoutPart" id="workOutPartDropDown">
+            <option value="placeHolder1">placeholder1</option>
+            <option value="placeHolder2">placeholder2</option>
+            <option value="placeHolder3">placeholder3</option>
+          </select>
+        </div>
+      </div>
+    )
+  }
+
 }
 }

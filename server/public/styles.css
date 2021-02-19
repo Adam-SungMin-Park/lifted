@@ -1,3 +1,12 @@
+
+*{
+  font-family: 'Montserrat', sans-serif;
+  color:rgb(40,127,62);
+  background-color:white;
+  text-decoration: none;
+  border-radius:5px;
+
+}
 .material-icons.md-60{
 font-size:60px;
 }
@@ -32,6 +41,7 @@ font-size:60px;
 }
 #workOutAddButtonPlace{
   text-align: right;
+  margin-top: 3rem;
 }
 #workOutAdd{
   width: 70px;
@@ -82,7 +92,7 @@ font-size:60px;
   text-align: right;
   padding-top: 1rem;
 }
-.addOrRemove{
+.updateOrRemove{
   text-align: right;
 }
 #weightFoodPageTitle{
@@ -102,6 +112,7 @@ font-size:60px;
 .addWeightButton{
   text-align:center;
   padding-bottom:1rem;
+  padding-top:1rem;
 }
 #caloriesGraphPlace{
   text-align:center;
@@ -132,4 +143,69 @@ font-size:60px;
   text-decoration: none;
   border: 1px solid black;
   border-radius: 6px;
+}
+.homeWorkOutTitle{
+  text-align:center;
+   padding-top:1rem;
+
+}
+#homeFoodGraphPlace{
+  text-align:center;
+   padding-top:1rem;
+  padding-bottom:1rem;
+}
+#homeWorkOutPartDropDown{
+  text-align:center;
+  padding-top:1rem;
+  padding-bottom:1rem;
+}
+.foodFoodDateButton{
+  padding-top:1rem;
+}
+.addWorkOut{
+  border:1px rgb(40,127,62) solid;
+  padding:1rem;
+  box-shadow: 1rem;
+  background-color:rgb(40,127,62);
+  color:white;
+}
+#workOutAdd{
+  border:1px rgb(40,127,62); solid;
+  padding:1rem;
+  box-shadow: 1rem;
+  background-color:rgb(40,127,62);
+  color:white;
+}
+.container{
+  text-align:center;
+  padding-top:2rem;
+}
+.demoButton{
+  margin-top:1rem;
+  border:1px solid rgb(40,127,62);
+  color:white;
+  background-color:rgb(40,127,62);
+  padding:1rem;
+}
+.demoButtonPlace{
+  padding-top:2rem;
+}
+#newExerciseName{
+      width: 200px;
+    margin-right: 2rem;
+
+}
+#newExerciseWeight{
+  width: 60px;
+    margin-right: 2rem;
+
+}
+#newExerciseReps{
+    width: 40px;
+}
+.saveFoodsButton{
+  border: 1px solid;
+  background-color:rgb(40,127,62);
+  color:white;
+  padding:1rem;
 }

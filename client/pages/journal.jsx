@@ -1,15 +1,19 @@
 import React, { Component } from 'react';
 import Chart from "chart.js";
-import LineGraph2 from './linegraph2';
+import LineGraph4 from './linegraph4';
 
 import App from '../app';
 export default class Journal extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      userId:999,
-      weight:[],
+      render:false,
       date:[],
+      weightData:[],
+      dateData:[],
+      weight:[],
+      weightId:"",
+      userId: this.props.userId,
       food:[{
         name:"",
         calories:""
@@ -20,6 +24,9 @@ export default class Journal extends React.Component{
     this.handleAddClick = this.handleAddClick.bind(this);
     this.handleChangeWeight = this.handleChangeWeight.bind(this);
     this.handleChangeDate = this.handleChangeDate.bind(this);
+    this.handleSubmitDate = this.handleSubmitDate.bind(this);
+    this.handleUpdate = this.handleUpdate.bind(this);
+
     //this.buildGraph = this.buildGraph.bind(this);
 
   }
@@ -28,32 +35,66 @@ export default class Journal extends React.Component{
     fetch('/api/weight')
     .then(res => res.json())
       .then(res => {
-        const dateArray = [];
-        const weightArray =[];
-        for(var i =0 ; i < res.length;i++){
-          dateArray.push(res[i].createdAt.slice(0,10))
-          weightArray.push(res[i].userWeight)
-        this.setState({
-          weight: weightArray,
-          date: dateArray
-        })
-        }
-      })
+        for (var i = 0; i < res.length; i++) {
+          this.setState({
+            weightData: this.state.weightData.concat(res[i].userWeight),
+            dateData: this.state.dateData.concat(res[i].createdAt.slice(0, 10))
+          })
+      }
+    })
       .catch(err => console.log(err))
-      console.log(this.state)
-
   };
 
   handleChangeWeight(){
+    this.setState({
+      weight:event.target.value
+    })
+  }
 
+  handleSubmitWeight(){
     this.setState({
       weight: Number(event.target.value)
     })
   }
-  handleChangeDate() {
-
+  handleChangeDate(e) {
+    e.preventDefault()
     this.setState({
       date: event.target.value
+    })
+  }
+  handleSubmitDate(e) {
+
+    fetch('/api/weight/reload', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(this.state)
+    })
+      .then(res => res.json())
+      .then(res=>{
+        if (res.length === 1) {
+          this.setState({
+            weight: res[0].weight,
+            weightId: res[0].weightId,
+            date: res[0].date
+          })
+        } else {
+          this.setState({
+            weight:""
+          })
+        }
+      })
+
+
+  }
+  handleUpdate(){
+    fetch('/api/weight/update', {
+      method:'PUT',
+      headers: {
+        'Content-Type' : 'application/json'
+      },
+      body:JSON.stringify(this.state)
     })
   }
 
@@ -65,8 +106,13 @@ export default class Journal extends React.Component{
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(this.state)
-    }).then(res => this.buildGraph())
+    }).then(res => res.json())
       .catch(err => console.log(err))
+      this.setState({
+        render : !this.state.render
+      })
+      this.componentDidMount()
+
   }
   handleRemoveClick(index) {
     event.preventDefault()
@@ -87,26 +133,67 @@ export default class Journal extends React.Component{
   }
 
   render(){
+
+    for(var i = 0 ; i < this.state.dateData.length ; i++){
+      if (this.state.date !== "" && this.state.date.slice(0, 10) === this.state.dateData[i]){
+        return (
+          <div id="weightFoodContainer">
+            <div id="weightFoodPageTitle">
+              Weight Room
+        </div>
+            <div className="weightFoodDate">
+              <input onChange={e => this.handleChangeDate(e)} required type="date"></input>
+              <div className="foodFoodDateButton">
+                <button onClick={e => this.handleSubmitDate(e)}>GO to this Date!</button>
+              </div>
+            </div>
+
+            <div className="weightFoodWeight">
+              <input onChange={this.handleChangeWeight} type="integer" placeholder="weight in lbs" value={this.state.weight} ></input>
+            </div>
+            <div className="addWeightButton">
+              <a href="#user" onClick={this.handleUpdate}><button type="submit" >Update Weight!</button></a>
+            </div>
+
+
+            <div id="caloriesGraphPlace">
+              <LineGraph4
+                label={this.state.dateData}
+                data={this.state.weightData}
+              />
+            </div>
+            <div id="addFoodButton">
+              <a href="#food"><button>Confess!</button></a>
+            </div>
+          </div>
+        )
+      }
+    }
+    if (this.state.date !== "" && this.state.date.slice(0, 10) !== this.state.dateData[i]){
     return(
       <div id="weightFoodContainer">
         <div id="weightFoodPageTitle">
-          Weight/Food
+          Weight Room
         </div>
-        <form onSubmit = {this.handleSubmit} id="weightForm">
-          <div className="weightFoodWeight">
-          <input required onChange ={this.handleChangeWeight} type = "integer" placeholder = "weight in kg,lbs or Kelvin"></input>
+        <div className="weightFoodDate">
+          <input onChange={e =>this.handleChangeDate(e)} required type="date"></input>
+          <div className="foodFoodDateButton">
+            <button onClick={e=> this.handleSubmitDate(e)}>GO to this Date!</button>
           </div>
-          <div className ="weightFoodDate">
-            <input required onChange={this.handleChangeDate} type="date" placeholder="dd/mm/yy"></input>
+        </div>
+
+          <div className="weightFoodWeight">
+            <input onChange ={this.handleChangeWeight}  type = "integer" placeholder = "weight in lbs" value ={this.state.weight} ></input>
           </div>
           <div className = "addWeightButton">
-            <button type = "submit" >Save Weight!</button>
+            <a href="#user" onClick={this.handleSubmit}><button type = "submit" >Save Weight!</button></a>
           </div>
-        </form>
+
+
           <div id="caloriesGraphPlace">
-          <LineGraph2
-            date = {this.state.date}
-            weight = {this.state.weight}
+          <LineGraph4
+            label = {this.state.dateData}
+            data = {this.state.weightData}
           />
           </div>
           <div id = "addFoodButton">
@@ -114,4 +201,6 @@ export default class Journal extends React.Component{
           </div>
         </div>
     )}
+
+  }
 }

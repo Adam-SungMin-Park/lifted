@@ -9,10 +9,61 @@ export default class WorkOut extends React.Component {
     super(props)
     this.state={
       data:[],
-      label:[]
+      label:[],
+      userId:this.props.userId,
+      workOutPart:""
     }
-   this.getData = this.getData.bind(this)
+   this.getData = this.getData.bind(this);
+   this.handleWorkOutPart = this.handleWorkOutPart.bind(this);
+    this.handlePartSubmit = this.handlePartSubmit.bind(this);
   }
+
+  handleWorkOutPart() {
+    this.setState({
+      workOutPart: event.target.value
+    })
+  }
+
+
+  handlePartSubmit(){
+    if(this.state.workOutPart !=="Select WorkOut Part!"){
+      fetch('/api/workOutPart', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(this.state)
+      })
+        .then(res => res.json())
+        .then(res => {
+          const dataArray = [];
+          const labelArray = [];
+          if(res.length !==0){
+        for(var i = 0 ; i < res.length ; i++){
+          dataArray.push(res[i].total_volume)
+          labelArray.push(res[i].createdAt.slice(0,10))
+        }
+          this.setState({
+            data: dataArray,
+            label: labelArray
+          })
+        }
+        else{
+          this.setState({
+            data:this.state.data,
+            label : this.state.label
+          })
+        }
+        })
+        .catch(err => console.log(err))
+    }
+    if (this.state.workOutPart === "Select WorkOut Part!") {
+      this.getData()
+    }
+  }
+
+
+
 
   getData(){
     fetch('/api/exercises').then(res => res.json())
@@ -28,9 +79,11 @@ export default class WorkOut extends React.Component {
 
   componentDidMount(){
     this.getData();
+
   }
 
   render(){
+
   return (
 
     <div id="workOutContainer">
@@ -38,11 +91,19 @@ export default class WorkOut extends React.Component {
         Workout Overview
       </div>
       <div id="homeWorkOutPartsDropDown">
-        <select name="workoutParts" id="workOutPartsDropDown">
-          <option value="placeHolder1">placeholder1</option>
-          <option value="placeHolder2">placeholder2</option>
-          <option value="placeHolder3">placeholder3</option>
+        <select onChange ={this.handleWorkOutPart}name="workoutParts" id="workOutPartsDropDown">
+          <option>Select WorkOut Part!</option>
+          <option value="Chest">Chest</option>
+          <option value="Shoulder">Shoulder</option>
+          <option value="Back">Back</option>
+          <option value="Legs">Legs</option>
+          <option value="Full Body">Full Body</option>
+          <option value="Push">Push</option>
+          <option value="Pull">Pull</option>
         </select>
+        <div className="foodFoodDateButton">
+          <button onClick={this.handlePartSubmit} type="submit">This Work Out Part!</button>
+        </div>
       </div>
       <div id="workOutGraphPlace">
         <LineGraph
