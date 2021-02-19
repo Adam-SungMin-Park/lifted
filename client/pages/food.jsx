@@ -55,8 +55,8 @@ export default class Food extends React.Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(this.state)
-    }).then(res => console.log(res))
-      .then(data => console.log(data))
+    }).then(res => (res))
+      .then(data => (data))
       .catch(err => console.log(err))
 
 }
@@ -84,7 +84,7 @@ foodReload(event){
     }
 
       if(res.length === 0 ){
-        console.log("no data here")
+
         this.setState({
           foods: [{
             food: "",
@@ -98,7 +98,7 @@ foodReload(event){
   }
 
   handleUpdateClick(index){
-    console.log(index)
+
     fetch('/api/foods/update',{
       method: 'PUT',
       headers: {
@@ -106,10 +106,10 @@ foodReload(event){
       },
       body: JSON.stringify(this.state.foods[index])
     })
-    .then(res =>console.log(res))
-    .then(data =>console.log(data))
+    .then(res =>(res))
+    .then(data =>(data))
     .catch(err => console.log(err))
-    alert("updated :)")
+
   }
 
   handleChangeDate(){
@@ -159,10 +159,10 @@ foodReload(event){
   }
 
   handleRemoveClick(index) {
-    console.log(event)
+
     event.preventDefault()
     const list = [...this.state.foods]
-    console.log(list)
+
     list.splice(index, 1);
     this.setState({
       foods: list
@@ -190,7 +190,7 @@ foodReload(event){
   }
 
   render() {
-    console.log(this.state)
+
     if(this.state.createdAt === ""){
       return (
         <div id="weightFoodContainer">
@@ -262,7 +262,7 @@ foodReload(event){
               <button onClick={this.handleAddClick}>Add!</button>
             </div>
             <div className="submitFood">
-              <a href="#user" onClick={this.handleSubmit}>Save Foods!</a>
+              <a className ="saveFoodsButton" href="#user" onClick={this.handleSubmit}>Save Foods!</a>
             </div>
           </form>
         </div>

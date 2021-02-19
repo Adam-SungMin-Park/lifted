@@ -27,6 +27,7 @@ app.get('/api/exercises', (req,res)=>{
     join "userWorkOut" using ("workOutId")
     group by "exercises"."workOutId", "userWorkOut"."createdAt" ,"userWorkOut"."workOutPart"
     order by "createdAt"
+    limit 10
   `
 
   db.query(sql)
@@ -48,6 +49,7 @@ app.post('/api/workOutPart', (req, res) => {
     where "workOutPart" = $1
     group by "createdAt"
     order by "createdAt"
+    limit 5
   `
   const params = [req.body.workOutPart]
 
@@ -158,6 +160,7 @@ app.get('/api/weight',(req, res)=>{
     select "userWeight","createdAt"
     from "userWeight"
     order by "createdAt"
+    limit 10
   `
   db.query(sql)
   .then(result=> {
@@ -298,6 +301,7 @@ app.post('/api/foodsReload',(req,res)=>{
    select "userFoodName" as "food" ,"userFoodCalories" as "calories" , "userCaloriesId" as "calId"
    from "userCalories"
    where "createdAt" = $1
+   limit 10
   `
   const params = [req.body.createdAt]
 

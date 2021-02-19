@@ -42,7 +42,7 @@ export default class Journal extends React.Component{
           })
       }
     })
-      .catch(err => console.log("line 42 : " +err))
+      .catch(err => console.log(err))
   };
 
   handleChangeWeight(){
@@ -133,10 +133,9 @@ export default class Journal extends React.Component{
   }
 
   render(){
-    console.log(this.state)
+
     for(var i = 0 ; i < this.state.dateData.length ; i++){
       if (this.state.date !== "" && this.state.date.slice(0, 10) === this.state.dateData[i]){
-        console.log("exist")
         return (
           <div id="weightFoodContainer">
             <div id="weightFoodPageTitle">

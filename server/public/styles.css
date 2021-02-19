@@ -203,3 +203,9 @@ font-size:60px;
 #newExerciseReps{
     width: 40px;
 }
+.saveFoodsButton{
+  border: 1px solid;
+  background-color:rgb(40,127,62);
+  color:white;
+  padding:1rem;
+}

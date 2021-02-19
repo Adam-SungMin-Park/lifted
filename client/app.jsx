@@ -43,8 +43,8 @@ export default class App extends React.Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(this.state)
-    }).then(res => console.log(res))
-      .then(data => console.log(data))
+    }).then(res => (res))
+      .then(data => (data))
       .catch(err => console.log(err))
 
   }
@@ -69,8 +69,6 @@ export default class App extends React.Component {
       })
       .catch(err => console.log(err))
     window.location.reload();
-
-    console.log(this.state)
   }
 
 

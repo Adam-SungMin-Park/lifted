@@ -61,8 +61,6 @@ export default class AddWorkOut extends React.Component{
       .then(res => res.json())
       .then(res => {
         if (res.length > 0) {
-          console.log(res)
-          alert("EXERCISE EXISTS")
           const dataArray = []
           for (var i = 0; i < res.length; i++) {
             dataArray.push(res[i])
@@ -72,7 +70,7 @@ export default class AddWorkOut extends React.Component{
             exercise: dataArray
           })
         } else {
-          alert("must be a date without a workout...")
+
           this.setState({
             exercise: [{
               exerciseName: "",
@@ -201,12 +199,10 @@ export default class AddWorkOut extends React.Component{
       },
       body: JSON.stringify(this.state.exercise[index])
     })
-
   }
 
 
   handleUpdateClick() {
-
     fetch('/api/exercise/update', {
       method: 'PUT',
       headers: {
@@ -214,10 +210,9 @@ export default class AddWorkOut extends React.Component{
       },
       body: JSON.stringify(this.state)
     })
-      .then(res => console.log(res))
-      .then(data => console.log(data))
+      .then(res =>(res))
+      .then(data => (data))
       .catch(err => console.log(err))
-    alert("updated :)")
   }
 
   handleVolume() {
@@ -242,15 +237,13 @@ export default class AddWorkOut extends React.Component{
         'Content-Type':'application/json'
       },
       body: JSON.stringify(this.state)
-    }).then(res => console.log(res))
-      .then(data => console.log(data))
+    }).then(res =>(res))
+      .then(data => (data))
     .catch(err => console.log(err))
   }
 
   render(){
-    console.log(this.state)
     this.handleVolume()
-
     if(this.state.createdAt === "" && this.state.exercise[0]===""){
       return(
         <div id="addWorkOutContainer">
