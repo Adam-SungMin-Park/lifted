@@ -3,7 +3,7 @@ import Chart from "chart.js";
 import Food from './food';
 
 
-export default class LineGraph2 extends React.Component {
+export default class LineGraph3 extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -31,14 +31,9 @@ export default class LineGraph2 extends React.Component {
       color.push('rgb(40,127,62)')
       color2.push('rgb(255,0,0)')
     }
-
     for (var i = 0; i < this.props.data.length; i++) {
       averageCalArray.push(averageCal)
     }
-
-
-
-
     var ctx_3 = document.getElementById('myChart3').getContext("2d");
     var test = new Chart(ctx_3, {
       type: "bar",
@@ -46,7 +41,7 @@ export default class LineGraph2 extends React.Component {
         labels: this.props.label,
         datasets: [
           {
-            label: "Daily Calories intake",
+            label: "Daily Calories intake (Kcal)",
             data: this.props.data,
             backgroundColor: color,
             order:1
@@ -67,6 +62,8 @@ export default class LineGraph2 extends React.Component {
         ]
       },
       options: {
+        events: ['click'],
+        responsive: true,
         legend: {
           labels: {
             fontColor: 'rgb(40,127,62)'
@@ -89,13 +86,11 @@ export default class LineGraph2 extends React.Component {
   }
 
   render() {
-
     return (
       <div className="linegraph3">
         <canvas
           id="myChart3"
           ref={this.chartRef}
-
         />
       </div>
     )

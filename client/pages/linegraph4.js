@@ -43,13 +43,15 @@ export default class LineGraph4 extends React.Component {
         labels: this.props.label,
         datasets: [
           {
-            label: "Weight",
+            label: "Weight (lbs)",
             data: this.props.data,
             backgroundColor: color
           },
         ]
       },
       options: {
+        events: ['click'],
+        responsive: true,
         legend: {
           labels: {
             fontColor: 'rgb(40,127,62)'

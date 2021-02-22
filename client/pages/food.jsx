@@ -331,7 +331,7 @@ foodReload(event){
                 <button onClick={this.handleAddClick}>Add!</button>
               </div>
               <div className="submitFood">
-                <a href="#user" onClick={this.handleSubmit}>Save Foods!</a>
+                <a className="saveFoodsButton" href="#user" onClick={this.handleSubmit}>Save Foods!</a>
               </div>
             </div>
             )

@@ -304,7 +304,9 @@ export default class AddWorkOut extends React.Component{
         {this.state.exercise.map((exercise,index)=>{
           return(
             <div key = {index} className="rowExerciseWeightRep">
-              <div>{index+1}. </div>
+
+                <div className = "rowNumber">{index+1}. </div>
+
               <input  required onChange={(e)=> this.handleExerciseNameChange(e,index)} name="exerciseName" value={this.state.exercise[index].exerciseName} id="workOutExerciseDropDown"></input>
               <input required onChange={(e)=>this.handleWeightChange(e,index)} name="exerciseWeight" value={this.state.exercise[index].exerciseWeight} placeholder="weight" id="workOutExerciseWeight" type="integer" ></input>
               <input required onChange={(e)=>this.handleRepsChange(e,index)} name="exerciseReps" value={this.state.exercise[index].exerciseReps} placeholder ="reps" id="workOutExerciseRep" type="integer" ></input>
@@ -319,7 +321,7 @@ export default class AddWorkOut extends React.Component{
         {this.state.newExercise.map((exercise,index)=>{
           return (
             <div key={index} className="rowExerciseWeightRep">
-              <div>{`New Exercise ${index + 1}`}. </div>
+              <div className ="rowNumber">{`New Exercise ${index + 1}`}. </div>
               <input required onChange={(e) => this.handleExerciseNameChange(e, index)} name="exerciseName" value={this.state.newExercise[index].exerciseName} id="newExerciseName"></input>
               <input required onChange={(e) => this.handleWeightChange(e, index)} name="exerciseWeight" value={this.state.newExercise[index].exerciseWeight} placeholder="lbs" id="newExerciseWeight" type="integer" ></input>
               <input required onChange={(e) => this.handleRepsChange(e, index)} name="exerciseReps" value={this.state.newExercise[index].exerciseReps} placeholder="reps" id="newExerciseReps" type="integer" ></input>
@@ -375,7 +377,7 @@ export default class AddWorkOut extends React.Component{
           {this.state.newExercise.map((exercise, index) => {
             return (
               <div key={index} className="rowExerciseWeightRep">
-                <div>{`New Exercise ${index + 1}`}. </div>
+                <div className = "rowNumber">{`New Exercise ${index + 1}`}. </div>
                 <input required onChange={(e) => this.handleExerciseNameChange(e, index)} name="exerciseName" value={this.state.newExercise[index].exerciseName} id="newExerciseName"></input>
                 <input required onChange={(e) => this.handleWeightChange(e, index)} name="exerciseWeight" value={this.state.newExercise[index].exerciseWeight} placeholder="weight" id="newExerciseWeight" type="integer" ></input>
                 <input required onChange={(e) => this.handleRepsChange(e, index)} name="exerciseReps" value={this.state.newExercise[index].exerciseReps} placeholder="reps" id="newExerciseReps" type="integer" ></input>
