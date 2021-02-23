@@ -43,7 +43,7 @@ export default class LineGraph2 extends React.Component {
         labels: this.props.label,
         datasets: [
           {
-            label: "Weight",
+            label: "Weight (lbs)",
             data: this.props.data,
             backgroundColor: color,
             order:1
@@ -64,6 +64,8 @@ export default class LineGraph2 extends React.Component {
         ]
       },
       options:{
+        events: ['click'],
+        responsive: true,
         legend:{
           labels:{
             fontColor: 'rgb(40,127,62)'
@@ -86,16 +88,13 @@ export default class LineGraph2 extends React.Component {
   }
 
   render() {
-
     return (
       <div className="linegraph2">
         <canvas
           id="myChart2"
           ref={this.chartRef}
-
         />
       </div>
     )
-
   }
 }

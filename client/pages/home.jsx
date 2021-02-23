@@ -65,7 +65,7 @@ export default class Home extends React.Component {
 
 render(){
 
-  if(this.state.volume.length !== 0){
+
   return (
   <div id = "homeContainer">
 
@@ -74,11 +74,14 @@ render(){
           Work Out Volume
         </div>
       </div>
+
     <a href = "#workout" id = "workOutGraphPlace">
+    <div className = "homeWorkOutGraph">
       <LineGraph
       data = {this.state.volume}
       label = {this.state.label}
       />
+    </div>
     </a>
     <div id = "homeWeightGraphPlace">
       <div>
@@ -105,22 +108,4 @@ render(){
   </div>
   );
   }
-  else{
-    return (
-      <div id="homeContainer">
-        <div className="signUpPlace">
-          <a className="signUp" href="#signin" >Sign Up or In</a>
-        </div>
-        <div id="homeWorkOutPartsDropDown">
-          <select name="workoutPart" id="workOutPartDropDown">
-            <option value="placeHolder1">placeholder1</option>
-            <option value="placeHolder2">placeholder2</option>
-            <option value="placeHolder3">placeholder3</option>
-          </select>
-        </div>
-      </div>
-    )
-  }
-
-}
 }

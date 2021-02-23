@@ -124,41 +124,18 @@ export default class App extends React.Component {
     if( route.path !== '' ){
 
       return (
-        <>
+        <div id = "container">
           <NavBar userId={this.state.userId} />
 
           {this.renderPage()}
-        </>
+        </div>
       )
     }
     if( route.path === '') {
-
       return (
-        <>
+        <div id="container">
         {this.renderPage()}
-      </>
-      )
-    }
-    if(this.state.view ===true ){
-      return (
-        <>
-        <NavBar userId={this.state.userId} />
-
-        <div className="signUpPage">
-          <h1>Sign Up/ <a href="#signin"  onClick={this.viewChange}>Sign in</a></h1>
-          <form className="signUpForm">
-            <div className="emailInput">
-              <input required onChange={this.handleChangeEmail} type="email" placeholder="youremail@idk.com"></input>
-            </div>
-            <div className="passwordInput">
-              <input required onChange={this.handleChangePassword} type="password" placeholder="Password"></input>
-            </div>
-            <div className="submitButton">
-              <a href="#user" onClick={this.handleRegistration}>Continue!</a>
-            </div>
-          </form>
         </div>
-        </>
       )
     }
     }

@@ -21,7 +21,6 @@ font-size:60px;
 #workOutPartsDropDown{
   width: 200px;
   height: 40px;
-
 }
 #homeWorkOutPartsDropDown{
   padding-top: 2rem;
@@ -191,21 +190,74 @@ font-size:60px;
   padding-top:2rem;
 }
 #newExerciseName{
-      width: 200px;
-    margin-right: 2rem;
+  width: 200px;
+  margin-right: 2rem;
 
 }
 #newExerciseWeight{
   width: 60px;
-    margin-right: 2rem;
+  margin-right: 2rem;
 
 }
 #newExerciseReps{
-    width: 40px;
+  width: 40px;
 }
 .saveFoodsButton{
   border: 1px solid;
   background-color:rgb(40,127,62);
   color:white;
   padding:1rem;
+}
+.linegraph{
+  width:80%;
+
+  margin:0 auto;
+}
+.linegraph2{
+width:80%;
+
+  margin:0 auto;
+}
+.linegraph3{
+width:80%;
+
+  margin:0 auto;
+}
+.linegraph4{
+width:80%;
+
+  margin:0 auto;
+}
+.linegraph5{
+width:80%;
+
+  margin:0 auto;
+}
+#dateForm{
+  text-align: center;
+    padding-top: 3rem;
+}
+.submitWorkOut{
+  padding-top: 3rem;
+}
+.rowWorkOutVolume{
+  text-align:center;
+}
+#workOutForm{
+  text-align:center;
+}
+#exerciseAddButtonPlace{
+  text-align:center;
+}
+.addOrRemove{
+  position: relative;
+  left: 10rem;
+  padding-top: 1rem;
+  margin-right: 4rem;
+}
+.removeButton{
+  margin-right:2rem;
+}
+.rowNumber{
+  padding-bottom: 1rem;
 }

@@ -18,19 +18,11 @@ export default class LineGraph5 extends React.Component {
     let averageCal = 0;
     let averageCalArray = [];
     let totalCal = 0;
-
-
     const color = [];
     const color2 = [];
     for (var i = 0; i < this.props.data.length; i++) {
       color.push('rgb(40,127,62)')
-
     }
-
-
-
-
-
 
     var ctx_5 = document.getElementById('myChart5').getContext("2d");
     var test = new Chart(ctx_5, {
@@ -39,7 +31,7 @@ export default class LineGraph5 extends React.Component {
         labels: this.props.label,
         datasets: [
           {
-            label: "Daily Calories intake",
+            label: "Daily Calories intake (Kcal)",
             data: this.props.data,
             backgroundColor: color,
             order: 1
@@ -47,6 +39,8 @@ export default class LineGraph5 extends React.Component {
         ]
       },
       options: {
+        events: ['click'],
+        responsive: true,
         legend: {
           labels: {
             fontColor: 'rgb(40,127,62)'

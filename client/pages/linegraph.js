@@ -14,12 +14,13 @@ export default class LineGraph extends React.Component {
 
     var ctx = document.getElementById('myChart');
     var test = new Chart(ctx, {
+
       type: "line",
       data: {
         labels: this.props.label,
         datasets: [
           {
-            label: "Workout Volume",
+            label: "Workout Volume (lbs)",
             data: this.props.data,
             backgroundColor:[
               'rgb(40,127,62)'
@@ -28,6 +29,8 @@ export default class LineGraph extends React.Component {
         ]
       },
       options: {
+        events: ['click'],
+        responsive: true,
         legend: {
           labels: {
             fontColor: 'rgb(40,127,62)'
