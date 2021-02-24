@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Chart from "chart.js";
-import LineGraph4 from './linegraph4';
+import LineGraph2 from './linegraph2';
 
 import App from '../app';
 export default class Journal extends React.Component{
@@ -152,19 +152,17 @@ export default class Journal extends React.Component{
               <input onChange={this.handleChangeWeight} type="integer" placeholder="weight in lbs" value={this.state.weight} ></input>
             </div>
             <div className="addWeightButton">
-              <a href="#user" onClick={this.handleUpdate}><button type="submit" >Update Weight!</button></a>
+              <a href="#workout" onClick={this.handleUpdate}><button type="submit" >Update Weight!</button></a>
             </div>
 
 
             <div id="caloriesGraphPlace">
-              <LineGraph4
+              <LineGraph2
                 label={this.state.dateData}
                 data={this.state.weightData}
               />
             </div>
-            <div id="addFoodButton">
-              <a href="#food"><button>Confess!</button></a>
-            </div>
+
           </div>
         )
       }
@@ -186,19 +184,17 @@ export default class Journal extends React.Component{
             <input onChange ={this.handleChangeWeight}  type = "integer" placeholder = "weight in lbs" value ={this.state.weight} ></input>
           </div>
           <div className = "addWeightButton">
-            <a href="#user" onClick={this.handleSubmit}><button type = "submit" >Save Weight!</button></a>
+            <a href="#workout" onClick={this.handleSubmit}><button type = "submit" >Save Weight!</button></a>
           </div>
 
 
           <div id="caloriesGraphPlace">
-          <LineGraph4
+          <LineGraph2
             label = {this.state.dateData}
             data = {this.state.weightData}
           />
           </div>
-          <div id = "addFoodButton">
-           <a href="#food"><button>Confess!</button></a>
-          </div>
+
         </div>
     )}
 

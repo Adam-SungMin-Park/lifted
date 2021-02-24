@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Chart from "chart.js";
-import LineGraph5 from './linegraph5';
+import LineGraph3 from './linegraph3';
 
 export default class Food extends React.Component {
 
@@ -199,7 +199,7 @@ foodReload(event){
         </div>
           <div id="caloriesGraphPlace">
             <div className="linegraph3">
-              <LineGraph5
+              <LineGraph3
                 data={this.state.data}
                 label={this.state.label}
               />
@@ -224,7 +224,7 @@ foodReload(event){
         </div>
           <div id="caloriesGraphPlace">
             <div className="linegraph3">
-              <LineGraph5
+              <LineGraph3
                 data={this.state.data}
                 label={this.state.label}
               />
@@ -262,7 +262,7 @@ foodReload(event){
               <button onClick={this.handleAddClick}>Add!</button>
             </div>
             <div className="submitFood">
-              <a className ="saveFoodsButton" href="#user" onClick={this.handleSubmit}>Save Foods!</a>
+              <a className ="saveFoodsButton" href="#workout" onClick={this.handleSubmit}>Save Foods!</a>
             </div>
           </form>
         </div>
@@ -276,7 +276,7 @@ foodReload(event){
         </div>
         <div id="caloriesGraphPlace">
           <div className="linegraph3">
-          <LineGraph5
+          <LineGraph3
           data = {this.state.data}
           label = {this.state.label}
           />
@@ -331,7 +331,7 @@ foodReload(event){
                 <button onClick={this.handleAddClick}>Add!</button>
               </div>
               <div className="submitFood">
-                <a className="saveFoodsButton" href="#user" onClick={this.handleSubmit}>Save Foods!</a>
+                <a className="saveFoodsButton" href="#workout" onClick={this.handleSubmit}>Save Foods!</a>
               </div>
             </div>
             )

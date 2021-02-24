@@ -10,7 +10,7 @@ export default class LineGraph extends React.Component {
   }
 
   componentDidUpdate(){
-
+    console.log(this.props.data)
 
     var ctx = document.getElementById('myChart');
     var test = new Chart(ctx, {
