@@ -88,6 +88,11 @@ export default class LineGraph2 extends React.Component {
   }
 
   render() {
+    if (this.props.data.length === 0) {
+      return (
+        <h1>No weight record found!</h1>
+      )
+    }
     return (
       <div className="linegraph2">
         <canvas
