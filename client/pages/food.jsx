@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Chart from "chart.js";
-import LineGraph5 from './linegraph5';
+import LineGraph3 from './linegraph3';
 
 export default class Food extends React.Component {
 
@@ -199,7 +199,7 @@ foodReload(event){
         </div>
           <div id="caloriesGraphPlace">
             <div className="linegraph3">
-              <LineGraph5
+              <LineGraph3
                 data={this.state.data}
                 label={this.state.label}
               />
@@ -224,7 +224,7 @@ foodReload(event){
         </div>
           <div id="caloriesGraphPlace">
             <div className="linegraph3">
-              <LineGraph5
+              <LineGraph3
                 data={this.state.data}
                 label={this.state.label}
               />
@@ -276,7 +276,7 @@ foodReload(event){
         </div>
         <div id="caloriesGraphPlace">
           <div className="linegraph3">
-          <LineGraph5
+          <LineGraph3
           data = {this.state.data}
           label = {this.state.label}
           />

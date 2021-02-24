@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Chart from "chart.js";
-import LineGraph4 from './linegraph4';
+import LineGraph2 from './linegraph2';
 
 import App from '../app';
 export default class Journal extends React.Component{
@@ -157,7 +157,7 @@ export default class Journal extends React.Component{
 
 
             <div id="caloriesGraphPlace">
-              <LineGraph4
+              <LineGraph2
                 label={this.state.dateData}
                 data={this.state.weightData}
               />
@@ -189,7 +189,7 @@ export default class Journal extends React.Component{
 
 
           <div id="caloriesGraphPlace">
-          <LineGraph4
+          <LineGraph2
             label = {this.state.dateData}
             data = {this.state.weightData}
           />

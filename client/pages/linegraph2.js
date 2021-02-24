@@ -17,7 +17,7 @@ export default class LineGraph2 extends React.Component {
     let totalWeight=0;
     for(var i =0 ; i < this.props.data.length ; i++){
 
-      totalWeight = totalWeight + this.props.data[i]
+      totalWeight = totalWeight + parseInt(this.props.data[i])
     }
     let test2  = totalWeight / weightLength
     averageWeight = test2.toPrecision(4);
@@ -25,6 +25,7 @@ export default class LineGraph2 extends React.Component {
     for(var i = 0 ; i < this.props.data.length; i++){
       averageWeightArray.push(averageWeight)
     }
+    console.log(averageWeight)
 
     const color = [];
     const color2 =[];
@@ -46,7 +47,7 @@ export default class LineGraph2 extends React.Component {
             order:1
           },
           {
-            label : "Average : "+averageWeightArray[0],
+            label : "Average : "+averageWeight,
             data: averageWeightArray,
             type:'line',
             backgroundColor: "#FF0000",
