@@ -397,7 +397,7 @@ export default class AddWorkOut extends React.Component{
             <input value={this.handleVolume()} id="workOutVolume" type="integer" placeholder="Total volume" readOnly></input>
           </div>
           <div className="submitWorkOut">
-            <a className="addWorkOut" href="#user" onClick={this.handleSubmit}>Save WorkOut</a>
+            <a className="addWorkOut" href="#workout" onClick={this.handleSubmit}>Save WorkOut</a>
           </div>
         </form>
       </div>

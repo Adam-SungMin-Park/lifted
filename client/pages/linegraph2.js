@@ -6,21 +6,18 @@ import Journal from './journal';
 export default class LineGraph2 extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      data: [],
-      label: [],
-    }
     this.chartRef = React.createRef();
   }
 
   componentDidUpdate() {
+    console.log(this.props)
     let weightLength =this.props.data.length;
     let averageWeight =0;
     let averageWeightArray=[];
     let totalWeight=0;
     for(var i =0 ; i < this.props.data.length ; i++){
 
-      totalWeight = totalWeight + this.props.data[i]
+      totalWeight = totalWeight + parseInt(this.props.data[i])
     }
     let test2  = totalWeight / weightLength
     averageWeight = test2.toPrecision(4);
@@ -28,6 +25,7 @@ export default class LineGraph2 extends React.Component {
     for(var i = 0 ; i < this.props.data.length; i++){
       averageWeightArray.push(averageWeight)
     }
+    console.log(averageWeight)
 
     const color = [];
     const color2 =[];
@@ -36,7 +34,7 @@ export default class LineGraph2 extends React.Component {
       color2.push('rgb(255,0,0)')
     }
 
-    var ctx_2 = document.getElementById('myChart2').getContext("2d");
+    var ctx_2 = document.getElementById('myChart2')
     var test = new Chart(ctx_2, {
       type: "bar",
       data: {
@@ -49,7 +47,7 @@ export default class LineGraph2 extends React.Component {
             order:1
           },
           {
-            label : "Average : "+averageWeightArray[0],
+            label : "Average : "+averageWeight,
             data: averageWeightArray,
             type:'line',
             backgroundColor: "#FF0000",
@@ -93,6 +91,7 @@ export default class LineGraph2 extends React.Component {
         <h1>No weight record found!</h1>
       )
     }
+    else{
     return (
       <div className="linegraph2">
         <canvas
@@ -102,4 +101,5 @@ export default class LineGraph2 extends React.Component {
       </div>
     )
   }
+}
 }
