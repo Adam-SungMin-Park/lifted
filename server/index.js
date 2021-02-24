@@ -18,9 +18,7 @@ app.use(jsonMiddleware);
 app.use(staticMiddleware);
 
 
-/*
-get request for the workout volume graphs.
-*/
+
 app.get('/api/exercises', (req,res)=>{
 
   const sql = `
@@ -43,9 +41,7 @@ app.get('/api/exercises', (req,res)=>{
 })
 
 
-/*
-query for the specific workout part
-*/
+
 
 app.post('/api/workOutPart', (req, res) => {
   const sql = `
@@ -63,9 +59,7 @@ app.post('/api/workOutPart', (req, res) => {
     .catch(err => console.log("line 185 : " + err))
 })
 
-/*
-bringing back the previous workout
-*/
+
 
 app.post('/api/workout/reload', (req, res) => {
   const sql = `
@@ -79,9 +73,7 @@ app.post('/api/workout/reload', (req, res) => {
 })
 
 
-/*
-delete request when user clicks on the "Remove Button"
-*/
+
 
 app.delete('/api/exercise/delete', (req, res) => {
   const sql = `
@@ -95,9 +87,6 @@ app.delete('/api/exercise/delete', (req, res) => {
     .catch(err => console.log(err))
 })
 
-/*
-update request when user fixes the workout and click "Update"
-*/
 
 app.put('/api/exercise/update', (req, res) => {
   console.log("Update Happening : "+req.body.exercise[0].exerciseName )
@@ -115,9 +104,7 @@ app.put('/api/exercise/update', (req, res) => {
     .catch(err => console.log("line 151 : " + err))
 })
 
-/*
-posting new workout. Made Async. so i can use the return "WorkOut Id" from the first query.
-*/
+
 app.post('/api/exercises', async (req, res) => {
 
   const sql = `
@@ -153,11 +140,6 @@ app.post('/api/exercises', async (req, res) => {
 
     res.status(203).json()
 })
-
-
-
-
-
 
 
 app.get('/api/weight',(req, res)=>{
