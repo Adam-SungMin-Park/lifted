@@ -86,6 +86,11 @@ export default class LineGraph3 extends React.Component {
   }
 
   render() {
+    if (this.props.data.length === 0) {
+      return (
+        <h1>No calories record found!</h1>
+      )
+    }
     return (
       <div className="linegraph3">
         <canvas
