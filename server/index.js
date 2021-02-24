@@ -1,12 +1,17 @@
 require('dotenv/config');
-const db = require('./db');
+//const db = require('./db');
 const express = require('express');
 const staticMiddleware = require('./static-middleware');
 const argon2  = require('argon2');
 const jsonMiddleware = express.json();
 const jwt = require('jsonwebtoken');
 const app = express();
-
+const db = new pg.Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
 
 app.use(jsonMiddleware);
 
