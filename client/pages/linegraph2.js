@@ -6,14 +6,11 @@ import Journal from './journal';
 export default class LineGraph2 extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      data: [],
-      label: [],
-    }
     this.chartRef = React.createRef();
   }
 
   componentDidUpdate() {
+    console.log(this.props)
     let weightLength =this.props.data.length;
     let averageWeight =0;
     let averageWeightArray=[];
@@ -36,7 +33,7 @@ export default class LineGraph2 extends React.Component {
       color2.push('rgb(255,0,0)')
     }
 
-    var ctx_2 = document.getElementById('myChart2').getContext("2d");
+    var ctx_2 = document.getElementById('myChart2')
     var test = new Chart(ctx_2, {
       type: "bar",
       data: {
@@ -93,6 +90,7 @@ export default class LineGraph2 extends React.Component {
         <h1>No weight record found!</h1>
       )
     }
+    else{
     return (
       <div className="linegraph2">
         <canvas
@@ -102,4 +100,5 @@ export default class LineGraph2 extends React.Component {
       </div>
     )
   }
+}
 }

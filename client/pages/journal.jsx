@@ -152,7 +152,7 @@ export default class Journal extends React.Component{
               <input onChange={this.handleChangeWeight} type="integer" placeholder="weight in lbs" value={this.state.weight} ></input>
             </div>
             <div className="addWeightButton">
-              <a href="#user" onClick={this.handleUpdate}><button type="submit" >Update Weight!</button></a>
+              <a href="#workout" onClick={this.handleUpdate}><button type="submit" >Update Weight!</button></a>
             </div>
 
 
@@ -162,9 +162,7 @@ export default class Journal extends React.Component{
                 data={this.state.weightData}
               />
             </div>
-            <div id="addFoodButton">
-              <a href="#food"><button>Confess!</button></a>
-            </div>
+
           </div>
         )
       }
@@ -186,7 +184,7 @@ export default class Journal extends React.Component{
             <input onChange ={this.handleChangeWeight}  type = "integer" placeholder = "weight in lbs" value ={this.state.weight} ></input>
           </div>
           <div className = "addWeightButton">
-            <a href="#user" onClick={this.handleSubmit}><button type = "submit" >Save Weight!</button></a>
+            <a href="#workout" onClick={this.handleSubmit}><button type = "submit" >Save Weight!</button></a>
           </div>
 
 
@@ -196,9 +194,7 @@ export default class Journal extends React.Component{
             data = {this.state.weightData}
           />
           </div>
-          <div id = "addFoodButton">
-           <a href="#food"><button>Confess!</button></a>
-          </div>
+
         </div>
     )}
 

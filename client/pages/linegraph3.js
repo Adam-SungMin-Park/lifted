@@ -6,14 +6,11 @@ import Food from './food';
 export default class LineGraph3 extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      data: [],
-      label: [],
-    }
     this.chartRef = React.createRef();
   }
 
   componentDidUpdate() {
+    console.log(this.props)
     let calLength = this.props.data.length;
     let averageCal = 0;
     let averageCalArray = [];
@@ -34,7 +31,7 @@ export default class LineGraph3 extends React.Component {
     for (var i = 0; i < this.props.data.length; i++) {
       averageCalArray.push(averageCal)
     }
-    var ctx_3 = document.getElementById('myChart3').getContext("2d");
+    var ctx_3 = document.getElementById('myChart3')
     var test = new Chart(ctx_3, {
       type: "bar",
       data: {

@@ -92,9 +92,7 @@ export default class App extends React.Component {
   renderPage(){
 
     const { route } = this.state;
-    if(route.path ==='user'){
-      return <Home userId={this.state.userId}/>
-    }
+
     if(route.path === 'workout'){
       return <WorkOut userId = {this.state.userId}/>;
     }

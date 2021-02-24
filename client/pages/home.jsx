@@ -17,14 +17,17 @@ export default class Home extends React.Component {
       caloriesDate:[]
     }
     this.getData = this.getData.bind(this)
-
   }
 
+
   getData() {
+
     fetch('/api/exercises')
     .then(res => res.json())
-    .then(res => {
-      for (var i = 0; i < res.length; i++) {
+    .then(res => { let volumeArray = []; let labelArray=[];
+     for (var i = 0; i < res.length; i++) {
+       volumeArray.push(parseInt(res[i].total_volume));
+       labelArray.push(res[i].createdAt.slice(0, 10))
         this.setState({
           volume: this.state.volume.concat(parseInt(res[i].total_volume)),
           label: this.state.label.concat(res[i].createdAt.slice(0, 10))
@@ -33,42 +36,49 @@ export default class Home extends React.Component {
       })
       .catch(error => this.setState({ error, isLoading: false }))
 
-      fetch('/api/weight')
+
+    fetch('/api/weight')
       .then(res => res.json())
       .then(res => {
-        for (var i = 0 ; i < res.length ; i ++){
+        for (var i = 0; i < res.length; i++) {
           this.setState({
-            weight : this.state.weight.concat(parseInt(res[i].userWeight)),
-            date : this.state.date.concat(res[i].createdAt.slice(0,10))
+            weight: this.state.weight.concat(parseInt(res[i].userWeight)),
+            date: this.state.date.concat(res[i].createdAt.slice(0, 10))
           })
+          console.log(this.state)
         }
       })
+      .catch(error => this.setState({ error, isLoading: false }))
 
-      fetch('/api/foods')
-      .then(res=>res.json())
-      .then(res =>{
-        for(var i = 0 ; i < res.length ; i++){
+    fetch('/api/foods')
+      .then(res => res.json())
+      .then(res => {
+        let caloriesArray = [];
+        let dateArray = [];
+        for (var i = 0; i < res.length; i++) {
+          caloriesArray.push(parseInt(res[i].sum))
+          dateArray.push(res[i].createdAt.slice(0, 10))
           this.setState({
-            calories:this.state.calories.concat(parseInt(res[i].sum)),
-            caloriesDate : this.state.caloriesDate.concat(res[i].createdAt.slice(0,10))
+            calories: this.state.calories.concat(parseInt(res[i].sum)),
+            caloriesDate: this.state.caloriesDate.concat(res[i].createdAt.slice(0, 10))
           })
         }
+
+        console.log(this.state.calories)
       })
+      .catch(error => this.setState({ error, isLoading: false }))
   }
 
 
   componentDidMount() {
-
     this.getData();
   }
 
 
 render(){
-
-
+  console.log(this.state.weight)
   return (
   <div id = "homeContainer">
-
       <div className = "homeWorkoutGraph">
         <div className = "homeWorkOutTitle">
           Work Out Volume
@@ -76,33 +86,40 @@ render(){
       </div>
 
     <a href = "#workout" id = "workOutGraphPlace">
-    <div className = "homeWorkOutGraph">
-      <LineGraph
-      data = {this.state.volume}
-      label = {this.state.label}
-      />
-    </div>
+      <div className = "homeWorkOutGraph">
+        <LineGraph
+        data = {this.state.volume}
+        label = {this.state.label}
+        />
+      </div>
     </a>
+
     <div id = "homeWeightGraphPlace">
       <div>
         Weight
       </div>
+
       <a href = "#journal" id = "weightGraphPlace">
-        <LineGraph2
-            data = {this.state.weight}
-            label={this.state.date}
-            />
+        <div className ="homeWeightGraph">
+          <LineGraph2
+            data={this.state.volume}
+            label={this.state.label}
+          />
+        </div>
       </a>
     </div>
+
       <div id="homeFoodGraphPlace">
         <div>
           Food Consumption
-      </div>
+        </div>
         <a href="#food" id="foodGraphPlace">
+          <div className="homeCalGraph">
           <LineGraph3
-            data={this.state.calories}
-            label={this.state.caloriesDate}
+            data={this.state.volume}
+            label={this.state.label}
           />
+          </div>
         </a>
       </div>
   </div>
