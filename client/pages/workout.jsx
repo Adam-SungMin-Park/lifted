@@ -55,7 +55,7 @@ export default class WorkOut extends React.Component {
           })
         }
         })
-        .catch(err => console.log(err))
+        .catch(err => {return (err)})
     }
     if (this.state.workOutPart === "Select WorkOut Part!") {
       this.getData()

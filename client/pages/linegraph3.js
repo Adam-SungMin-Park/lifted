@@ -10,7 +10,6 @@ export default class LineGraph3 extends React.Component {
   }
 
   componentDidUpdate() {
-    console.log(this.props)
     let calLength = this.props.data.length;
     let averageCal = 0;
     let averageCalArray = [];
@@ -21,7 +20,6 @@ export default class LineGraph3 extends React.Component {
 
     }
     let test2 = totalCal / calLength
-    console.log(test2)
 
     averageCal = test2.toPrecision(4);
 

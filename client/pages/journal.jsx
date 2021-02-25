@@ -7,7 +7,6 @@ export default class Journal extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      render:false,
       date:[],
       weightData:[],
       dateData:[],
@@ -106,12 +105,10 @@ export default class Journal extends React.Component{
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(this.state)
-    }).then(res => res.json())
-      .catch(err => console.log(err))
-      this.setState({
-        render : !this.state.render
-      })
-      this.componentDidMount()
+    }).then(res => {return (res.json())})
+      .catch(err => {return((err))})
+
+      //this.componentDidMount()
 
   }
   handleRemoveClick(index) {
@@ -133,7 +130,7 @@ export default class Journal extends React.Component{
   }
 
   render(){
-console.log
+
     for(var i = 0 ; i < this.state.dateData.length ; i++){
       if (this.state.date !== "" && this.state.date.slice(0, 10) === this.state.dateData[i]){
         return (

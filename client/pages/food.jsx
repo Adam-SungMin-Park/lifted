@@ -190,7 +190,6 @@ foodReload(event){
   }
 
   render() {
-    console.log(this.state)
 
     if(this.state.createdAt === "" && this.state.foods.length > 1 ){
       return (

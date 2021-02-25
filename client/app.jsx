@@ -45,7 +45,7 @@ export default class App extends React.Component {
       body: JSON.stringify(this.state)
     }).then(res => (res))
       .then(data => (data))
-      .catch(err => console.log(err))
+      .catch(err => { return ((err)) })
 
   }
 
@@ -67,7 +67,7 @@ export default class App extends React.Component {
           userId: data.userId
         })
       })
-      .catch(err => console.log(err))
+      .catch(err => { return ((err)) })
     window.location.reload();
   }
 

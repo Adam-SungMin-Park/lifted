@@ -22,9 +22,9 @@ export default class SignUp extends React.Component {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(this.state)
-      }).then(res => console.log(res))
-        .then(data => console.log(data))
-        .catch(err => console.log(err))
+      }).then(res => res.json())
+        .then(data => {return ((data)) })
+        .catch(err => { return ((err)) })
     }
 
 
@@ -43,7 +43,6 @@ export default class SignUp extends React.Component {
 
 
   render(){
-    console.log(this.state)
     return(
       <div className = "signUpPage">
         <h1>Sign Up/ <a href ="#signin">Sign in</a></h1>
