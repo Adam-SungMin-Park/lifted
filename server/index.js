@@ -39,8 +39,7 @@ app.get('/api/exercises', (req,res)=>{
     .then(result => {
       res.json(result.rows);
     })
-    .catch(err => console.log(err))
-})
+    .catch(err => { return err })})
 
 
 
@@ -58,8 +57,7 @@ app.post('/api/workOutPart', (req, res) => {
 
   db.query(sql, params)
     .then(result => res.status(219).json(result.rows))
-    .catch(err => console.log("line 185 : " + err))
-})
+    .catch(err => { return err })})
 
 
 
@@ -86,12 +84,10 @@ app.delete('/api/exercise/delete', (req, res) => {
 
   db.query(sql, params)
     .then(result => res.status(240).json(result.rows))
-    .catch(err => console.log(err))
-})
+    .catch(err => { return err })})
 
 
 app.put('/api/exercise/update', (req, res) => {
-  console.log("Update Happening : "+req.body.exercise[0].exerciseName )
   const sql = `
     update "exercises"
     set "exerciseName" =$1,
@@ -103,8 +99,7 @@ app.put('/api/exercise/update', (req, res) => {
 
   db.query(sql, params)
     .then(result => res.status(215).json(result.rows))
-    .catch(err => console.log("line 151 : " + err))
-})
+    .catch(err => { return err })})
 
 
 app.post('/api/exercises', async (req, res) => {
@@ -118,8 +113,7 @@ app.post('/api/exercises', async (req, res) => {
 
   let workoutId = await db.query(sql, params)
     .then(res => { return res.rows[0].workOutId })
-    .catch(err => console.log(err))
-
+    .catch(err => { return err })
 
 
   const params2 = [workoutId, req.body.createdAt, req.body.workOutPart]
@@ -138,8 +132,7 @@ app.post('/api/exercises', async (req, res) => {
     `
       let testing = db.query(sql2, params2)
         .then(res => { return (res.rows[0]) })
-        .catch(err => console.log("line 145: " + err))
-
+        .catch(err => { return err })
     res.status(203).json()
 })
 
@@ -156,8 +149,7 @@ app.get('/api/weight',(req, res)=>{
     res.json(result.rows)
 
   })
-  .catch(err => console.log(err))
-
+    .catch(err => { return err })
 })
 
 app.get('/api/foods',(req,res)=>{
@@ -171,8 +163,7 @@ app.get('/api/foods',(req,res)=>{
   .then(result =>{
     res.json(result.rows)
   })
-  .catch(err=> console.log(err))
-})
+    .catch(err => { return err })})
 
 
 app.post('/api/signin',(req,res)=>{
@@ -191,7 +182,7 @@ app.post('/api/signin',(req,res)=>{
     return argon2.verify(res.rows[0].userPW, req.body.password)
     }
     if(res === undefined ){
-      console.log("login failed")
+     return ""
     }
   })
   .then(isMatching =>{
@@ -203,19 +194,15 @@ app.post('/api/signin',(req,res)=>{
       db.query(sql,params)
       .then(result => {
         payloads.userId = result.rows[0].userId
-        console.log(payloads)
         const token = jwt.sign(payloads, process.env.TOKEN_SECRET);
         res.status(210).json(payloads)
       })
-      .catch(err => console.log("login Failed"))
-
+        .catch(err => { return err })
     }
     else{
-      console.log("nice try :) again.")
       res.status(404).json("nice try :) again")
     }})
-  .catch(err=>console.log("login failed"))
-
+    .catch(err => { return err })
 })
 
 
@@ -229,8 +216,7 @@ app.delete('/api/foods/delete',(req,res)=>{
 
   db.query(sql,params)
   .then(result => res.status(210).json(result.rows))
-  .catch(err => console.log(err))
-
+    .catch(err => { return err })
 })
 
 
@@ -248,8 +234,8 @@ app.put('/api/foods/update',(req,res)=>{
 
   db.query(sql, params)
   .then(result=> res.status(211).json(result.rows))
-  .catch(err =>console.log("updating err : "+ err))
-})
+    .catch(err => { return err })
+  })
 
 
 app.put('/api/weight/update',(req,res)=>{
@@ -263,8 +249,8 @@ app.put('/api/weight/update',(req,res)=>{
 
   db.query(sql,params)
   .then(result =>res.status(219).json(result.rows))
-  .catch(err => console.log(err))
-})
+    .catch(err => { return err })
+  })
 
 
 
@@ -279,8 +265,7 @@ app.post('/api/weight/reload',(req,res)=>{
 
   db.query(sql,params)
   .then(result => res.status(210).json(result.rows))
-  .catch(err=> console.log("err reloading weight: "+err))
-
+    .catch(err => { return err })
 })
 
 
@@ -296,8 +281,7 @@ app.post('/api/foodsReload',(req,res)=>{
 
   db.query(sql, params)
   .then(result => res.status(203).json(result.rows))
-  .catch(err=>console.log("HERE IS THE ERRROR" +err))
-})
+    .catch(err => { return err })})
 
 
 app.post('/api/signup',(req,res)=>{
@@ -313,8 +297,7 @@ app.post('/api/signup',(req,res)=>{
       db.query (sql, [req.body.email,hashedPassword])})
       .then(result => {res.status(201).json(res.rows)
       })
-      .catch(err=>console.log(err))
-
+      .catch(err => { return err })
 
 })
 
@@ -332,8 +315,7 @@ app.post('/api/foods',async (req,res)=>{
 
   let mealId = await db.query(sql, params)
     .then(res => { return (res.rows[0].userMealId) })
-    .catch(err => console.log(err))
-
+    .catch(err => { return err })
   const caloriesParams = [mealId, req.body.createdAt];
 
   let paramNum = 2;
@@ -350,9 +332,9 @@ app.post('/api/foods',async (req,res)=>{
 `;
 
   db.query(caloriesSql, caloriesParams)
-    .then(res => console.log(res.rows))
-    .catch(err => console.log(err))
-  res.status(207).json()
+    .then(res => {return(res.rows)})
+    .catch(err => { return err })
+      res.status(207).json()
 })
 
 app.post('/api/weight',(req,res)=>{
@@ -364,14 +346,12 @@ app.post('/api/weight',(req,res)=>{
   const params = [ req.body.userId, req.body.weight, req.body.date]
 
   db.query(sql,params)
-  .then(res => console.log(res))
-  .catch(err => console.log("line 312 : "+err))
-
+  .then(res => {return(res)})
+    .catch(err => { return err })
   res.status(205).json()
 })
 
 
 app.listen(process.env.PORT, () => {
   // eslint-disable-next-line no-console
-  console.log(`express server listening on port ${process.env.PORT}`);
 });

@@ -45,7 +45,6 @@ export default class Home extends React.Component {
             weight: this.state.weight.concat(parseInt(res[i].userWeight)),
             date: this.state.date.concat(res[i].createdAt.slice(0, 10))
           })
-          console.log(this.state)
         }
       })
       .catch(error => this.setState({ error, isLoading: false }))
@@ -64,7 +63,6 @@ export default class Home extends React.Component {
           })
         }
 
-        console.log(this.state.calories)
       })
       .catch(error => this.setState({ error, isLoading: false }))
   }
@@ -76,7 +74,6 @@ export default class Home extends React.Component {
 
 
 render(){
-  console.log(this.state.weight)
   return (
   <div id = "homeContainer">
       <div className = "homeWorkoutGraph">

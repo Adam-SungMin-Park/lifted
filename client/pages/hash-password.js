@@ -5,8 +5,7 @@ const password = process.argv[2];
 argon2
   .hash(password)
   .then(hashedPassword => {
-    console.log(hashedPassword);
+    return(hashedPassword);
   })
-  .catch(err => {
-    console.error(err);
+  .catch(err => { return err })
   });
