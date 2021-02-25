@@ -191,9 +191,7 @@ foodReload(event){
 
   render() {
     console.log(this.state)
-//1. data exist. no date chosen
-//2. data dont exist. no date chose
-//3. data dont exist. date chosen
+
     if(this.state.createdAt === "" && this.state.foods.length > 1 ){
       return (
         <div id="weightFoodContainer">
