@@ -67,7 +67,7 @@ export default class App extends React.Component {
         })
       })
       .catch(err => { return err })
-          window.location.reload();
+
   }
 
 
