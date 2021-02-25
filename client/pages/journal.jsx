@@ -133,7 +133,7 @@ export default class Journal extends React.Component{
   }
 
   render(){
-
+console.log
     for(var i = 0 ; i < this.state.dateData.length ; i++){
       if (this.state.date !== "" && this.state.date.slice(0, 10) === this.state.dateData[i]){
         return (
@@ -167,7 +167,7 @@ export default class Journal extends React.Component{
         )
       }
     }
-    if (this.state.date !== "" && this.state.date.slice(0, 10) !== this.state.dateData[i]){
+    if (this.state.date !== "" && this.state.dateData.length !==0){
     return(
       <div id="weightFoodContainer">
         <div id="weightFoodPageTitle">
@@ -189,14 +189,35 @@ export default class Journal extends React.Component{
 
 
           <div id="caloriesGraphPlace">
-          <LineGraph2
-            label = {this.state.dateData}
-            data = {this.state.weightData}
-          />
+            <LineGraph2
+              label={this.state.dateData}
+              data={this.state.weightData}
+            />
           </div>
-
         </div>
     )}
+    if(this.state.dateData.length === 0 ){
+      return (
+        <div id="weightFoodContainer">
+          <div id="weightFoodPageTitle">
+            Weight Room
+        </div>
+          <div className="weightFoodDate">
+            <input onChange={e => this.handleChangeDate(e)} required type="date"></input>
+            <div className="foodFoodDateButton">
+              <button onClick={e => this.handleSubmitDate(e)}>GO to this Date!</button>
+            </div>
+          </div>
+          <div className="weightFoodWeight">
+            <input onChange={this.handleChangeWeight} type="integer" placeholder="weight in lbs" value={this.state.weight} ></input>
+          </div>
+          <div className="addWeightButton">
+            <a href="#workout" onClick={this.handleSubmit}><button type="submit" >Save Weight!</button></a>
+          </div>
+          </div>
+      )
+    }
+
 
   }
 }

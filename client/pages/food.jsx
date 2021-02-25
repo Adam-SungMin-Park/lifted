@@ -190,8 +190,11 @@ foodReload(event){
   }
 
   render() {
-
-    if(this.state.createdAt === ""){
+    console.log(this.state)
+//1. data exist. no date chosen
+//2. data dont exist. no date chose
+//3. data dont exist. date chosen
+    if(this.state.createdAt === "" && this.state.foods.length > 1 ){
       return (
         <div id="weightFoodContainer">
           <div id="weightFoodPageTitle">
@@ -216,7 +219,7 @@ foodReload(event){
         </div>
       )
     }
-    if(this.state.foods[0].food === "" && this.state.createdAt !== ""){
+    if(this.state.foods[0].food === "" && this.state.createdAt === ""){
       return(
         <div id="weightFoodContainer">
           <div id="weightFoodPageTitle">
@@ -238,37 +241,11 @@ foodReload(event){
               <button type="submit">GO to this Date!</button>
             </div>
           </form>
-          <form id="foodForm">
 
-            {this.state.newFoods.map((food, index) => {
-              return (
-                <div key={index} className="foodCaloriesEntries">
-                  <div className="foodCalories">
-                    <div className="foodNameInput">
-                      <input id="newFoodsName" required onChange={e => this.handleNewFoodName(e, index)} type="text" placeholder="food" value={this.state.newFoods[index].food}></input>
-                    </div>
-                    <div className="caloriesInput">
-                      <input id="newFoodsCalories" required onChange={e => this.handleNewFoodCalories(e, index)} type="integer" placeholder="calories" value={this.state.newFoods[index].calories}></input>
-                    </div>
-                  </div>
-                  <div className="updateOrRemove">
-                    {this.state.newFoods.length > 1 && <button onClick={() => this.handleRemoveClick(index)} className="removeButton">Remove</button>}
-                    {this.state.newFoods.length !== 0 && <button onClick={() => this.handleUpdateClick(index)} className="updateButton">Update!</button>}
-                  </div>
-                </div>
-              )
-            })}
-            <div className="extraFoodButton" >
-              <button onClick={this.handleAddClick}>Add!</button>
-            </div>
-            <div className="submitFood">
-              <a className ="saveFoodsButton" href="#workout" onClick={this.handleSubmit}>Save Foods!</a>
-            </div>
-          </form>
         </div>
       )
     }
-  if(this.state.foods[0].food !== "" && this.state.createdAt !=="") {
+  if(this.state.foods[0].food === "" && this.state.createdAt !=="") {
     return (
       <div id="weightFoodContainer">
         <div id="weightFoodPageTitle">
@@ -276,10 +253,7 @@ foodReload(event){
         </div>
         <div id="caloriesGraphPlace">
           <div className="linegraph3">
-          <LineGraph3
-          data = {this.state.data}
-          label = {this.state.label}
-          />
+
           </div>
         </div>
           <form onSubmit = {this.foodReload} id ="dateForm">
@@ -290,26 +264,7 @@ foodReload(event){
               <button type ="submit">GO to this Date!</button>
             </div>
           </form>
-        {this.state.foods.map((food, index) => {
-          return (
-            <div key={index} className="foodCaloriesEntries">
-              <div className="foodCalories">
-                <div className="foodNameInput">
-                  <input  required onChange={e => this.handleFoodName(e, index)} type="text" placeholder="food" value={this.state.foods[index].food}></input>
-                </div>
-                <div className="caloriesInput">
-                  <input  required onChange={e => this.handleCalories(e, index)} type="integer" placeholder="calories" value={this.state.foods[index].calories}></input>
-                </div>
-              </div>
-              <div className="updateOrRemove">
-                {this.state.foods.length > 1 && <button onClick={() => this.handleRemoveClick(index)} className="removeButton">Remove</button>}
-                {this.state.foods.length !== 0 && <button onClick={() => this.handleUpdateClick(index)} className="updateButton">Update!</button>}
-              </div>
 
-            </div>
-          )
-        })
-        }
         <form id="foodForm">
 
         {this.state.newFoods.map((food, index) => {
@@ -341,4 +296,77 @@ foodReload(event){
     </div>
   )
   }
+  if(this.state.foods[0].food !=="" & this.state.createdAt !==""){
+
+      return (
+        <div id="weightFoodContainer">
+          <div id="weightFoodPageTitle">
+            Food
+        </div>
+          <div id="caloriesGraphPlace">
+            <div className="linegraph3">
+
+            </div>
+          </div>
+          <form onSubmit={this.foodReload} id="dateForm">
+            <div className="foodFoodDate">
+              <input required onChange={this.handleChangeDate} type="date"></input>
+            </div>
+            <div className="foodFoodDateButton">
+              <button type="submit">GO to this Date!</button>
+            </div>
+          </form>
+          {this.state.foods.map((food, index) => {
+            return (
+              <div key={index} className="foodCaloriesEntries">
+                <div className="foodCalories">
+                  <div className="foodNameInput">
+                    <input required onChange={e => this.handleFoodName(e, index)} type="text" placeholder="food" value={this.state.foods[index].food}></input>
+                  </div>
+                  <div className="caloriesInput">
+                    <input required onChange={e => this.handleCalories(e, index)} type="integer" placeholder="calories" value={this.state.foods[index].calories}></input>
+                  </div>
+                </div>
+                <div className="updateOrRemove">
+                  {this.state.foods.length > 1 && <button onClick={() => this.handleRemoveClick(index)} className="removeButton">Remove</button>}
+                  {this.state.foods.length !== 0 && <button onClick={() => this.handleUpdateClick(index)} className="updateButton">Update!</button>}
+                </div>
+
+              </div>
+            )
+          })
+          }
+          <form id="foodForm">
+
+            {this.state.newFoods.map((food, index) => {
+              return (
+                <div key={index} className="foodCaloriesEntries">
+                  <div className="foodCalories">
+                    <div className="foodNameInput">
+                      <input id="newFoodsName" required onChange={e => this.handleNewFoodName(e, index)} type="text" placeholder="food" value={this.state.newFoods[index].food}></input>
+                    </div>
+                    <div className="caloriesInput">
+                      <input id="newFoodsCalories" required onChange={e => this.handleNewFoodCalories(e, index)} type="integer" placeholder="calories" value={this.state.newFoods[index].calories}></input>
+                    </div>
+                  </div>
+                  <div className="updateOrRemove">
+                    {this.state.newFoods.length > 1 && <button onClick={() => this.handleRemoveClick(index)} className="removeButton">Remove</button>}
+                    {this.state.newFoods.length !== 0 && <button onClick={() => this.handleUpdateClick(index)} className="updateButton">Update!</button>}
+                  </div>
+                  <div className="extraFoodButton" >
+                    <button onClick={this.handleAddClick}>Add!</button>
+                  </div>
+                  <div className="submitFood">
+                    <a className="saveFoodsButton" href="#workout" onClick={this.handleSubmit}>Save Foods!</a>
+                  </div>
+                </div>
+              )
+            })
+            }
+          </form>
+        </div>
+      )
+    }
+
+
 }}
