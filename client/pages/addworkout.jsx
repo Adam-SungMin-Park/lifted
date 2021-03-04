@@ -212,13 +212,8 @@ export default class AddWorkOut extends React.Component{
     })
       .then(res =>(res))
       .then(data => (data))
-<<<<<<< HEAD
-      .catch(err => { return ((err)) })
-  }
-=======
       .catch(err => { return err })
       }
->>>>>>> 8cabd617fbbd09fa46fcb0cb3b99e1b4f6066a2b
 
   handleVolume() {
     let totalVolume = 0;
@@ -244,13 +239,8 @@ export default class AddWorkOut extends React.Component{
       body: JSON.stringify(this.state)
     }).then(res =>(res))
       .then(data => (data))
-<<<<<<< HEAD
-    .catch(err => {return((err))})
-  }
-=======
       .catch(err => { return err })
       }
->>>>>>> 8cabd617fbbd09fa46fcb0cb3b99e1b4f6066a2b
 
   render(){
     this.handleVolume()

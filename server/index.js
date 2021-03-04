@@ -39,12 +39,7 @@ app.get('/api/exercises', (req,res)=>{
     .then(result => {
       res.json(result.rows);
     })
-<<<<<<< HEAD
-    .catch(err => { return (err) })
-})
-=======
     .catch(err => { return err })})
->>>>>>> 8cabd617fbbd09fa46fcb0cb3b99e1b4f6066a2b
 
 
 
@@ -62,12 +57,7 @@ app.post('/api/workOutPart', (req, res) => {
 
   db.query(sql, params)
     .then(result => res.status(219).json(result.rows))
-<<<<<<< HEAD
-    .catch(err => { return (err) })
-})
-=======
     .catch(err => { return err })})
->>>>>>> 8cabd617fbbd09fa46fcb0cb3b99e1b4f6066a2b
 
 
 
@@ -94,12 +84,7 @@ app.delete('/api/exercise/delete', (req, res) => {
 
   db.query(sql, params)
     .then(result => res.status(240).json(result.rows))
-<<<<<<< HEAD
-    .catch(err => { return (err) })
-})
-=======
     .catch(err => { return err })})
->>>>>>> 8cabd617fbbd09fa46fcb0cb3b99e1b4f6066a2b
 
 
 app.put('/api/exercise/update', (req, res) => {
@@ -114,12 +99,7 @@ app.put('/api/exercise/update', (req, res) => {
 
   db.query(sql, params)
     .then(result => res.status(215).json(result.rows))
-<<<<<<< HEAD
-    .catch(err => { return (err) })
-})
-=======
     .catch(err => { return err })})
->>>>>>> 8cabd617fbbd09fa46fcb0cb3b99e1b4f6066a2b
 
 
 app.post('/api/exercises', async (req, res) => {
@@ -133,12 +113,7 @@ app.post('/api/exercises', async (req, res) => {
 
   let workoutId = await db.query(sql, params)
     .then(res => { return res.rows[0].workOutId })
-<<<<<<< HEAD
-    .catch(err => { return (err) })
-
-=======
     .catch(err => { return err })
->>>>>>> 8cabd617fbbd09fa46fcb0cb3b99e1b4f6066a2b
 
 
   const params2 = [workoutId, req.body.createdAt, req.body.workOutPart]
@@ -157,12 +132,7 @@ app.post('/api/exercises', async (req, res) => {
     `
       let testing = db.query(sql2, params2)
         .then(res => { return (res.rows[0]) })
-<<<<<<< HEAD
-    .catch(err => { return (err) })
-
-=======
         .catch(err => { return err })
->>>>>>> 8cabd617fbbd09fa46fcb0cb3b99e1b4f6066a2b
     res.status(203).json()
 })
 
@@ -179,12 +149,7 @@ app.get('/api/weight',(req, res)=>{
     res.json(result.rows)
 
   })
-<<<<<<< HEAD
-    .catch(err => { return (err) })
-
-=======
     .catch(err => { return err })
->>>>>>> 8cabd617fbbd09fa46fcb0cb3b99e1b4f6066a2b
 })
 
 app.get('/api/foods',(req,res)=>{
@@ -198,12 +163,7 @@ app.get('/api/foods',(req,res)=>{
   .then(result =>{
     res.json(result.rows)
   })
-<<<<<<< HEAD
-    .catch(err => { return (err) })
-})
-=======
     .catch(err => { return err })})
->>>>>>> 8cabd617fbbd09fa46fcb0cb3b99e1b4f6066a2b
 
 
 app.post('/api/signin',(req,res)=>{
@@ -222,11 +182,7 @@ app.post('/api/signin',(req,res)=>{
     return argon2.verify(res.rows[0].userPW, req.body.password)
     }
     if(res === undefined ){
-<<<<<<< HEAD
-      return ""
-=======
      return ""
->>>>>>> 8cabd617fbbd09fa46fcb0cb3b99e1b4f6066a2b
     }
   })
   .then(isMatching =>{
@@ -241,22 +197,12 @@ app.post('/api/signin',(req,res)=>{
         const token = jwt.sign(payloads, process.env.TOKEN_SECRET);
         res.status(210).json(payloads)
       })
-<<<<<<< HEAD
-        .catch(err => { return (err) })
-
-=======
         .catch(err => { return err })
->>>>>>> 8cabd617fbbd09fa46fcb0cb3b99e1b4f6066a2b
     }
     else{
       res.status(404).json("nice try :) again")
     }})
-<<<<<<< HEAD
-    .catch(err => { return (err) })
-
-=======
     .catch(err => { return err })
->>>>>>> 8cabd617fbbd09fa46fcb0cb3b99e1b4f6066a2b
 })
 
 
@@ -270,12 +216,7 @@ app.delete('/api/foods/delete',(req,res)=>{
 
   db.query(sql,params)
   .then(result => res.status(210).json(result.rows))
-<<<<<<< HEAD
-    .catch(err => { return (err) })
-
-=======
     .catch(err => { return err })
->>>>>>> 8cabd617fbbd09fa46fcb0cb3b99e1b4f6066a2b
 })
 
 
@@ -293,13 +234,8 @@ app.put('/api/foods/update',(req,res)=>{
 
   db.query(sql, params)
   .then(result=> res.status(211).json(result.rows))
-<<<<<<< HEAD
-    .catch(err => { return (err) })
-})
-=======
     .catch(err => { return err })
   })
->>>>>>> 8cabd617fbbd09fa46fcb0cb3b99e1b4f6066a2b
 
 
 app.put('/api/weight/update',(req,res)=>{
@@ -313,13 +249,8 @@ app.put('/api/weight/update',(req,res)=>{
 
   db.query(sql,params)
   .then(result =>res.status(219).json(result.rows))
-<<<<<<< HEAD
-    .catch(err => { return (err) })
-})
-=======
     .catch(err => { return err })
   })
->>>>>>> 8cabd617fbbd09fa46fcb0cb3b99e1b4f6066a2b
 
 
 
@@ -334,12 +265,7 @@ app.post('/api/weight/reload',(req,res)=>{
 
   db.query(sql,params)
   .then(result => res.status(210).json(result.rows))
-<<<<<<< HEAD
-    .catch(err => { return (err) })
-
-=======
     .catch(err => { return err })
->>>>>>> 8cabd617fbbd09fa46fcb0cb3b99e1b4f6066a2b
 })
 
 
@@ -355,12 +281,7 @@ app.post('/api/foodsReload',(req,res)=>{
 
   db.query(sql, params)
   .then(result => res.status(203).json(result.rows))
-<<<<<<< HEAD
-    .catch(err => { return (err) })
-})
-=======
     .catch(err => { return err })})
->>>>>>> 8cabd617fbbd09fa46fcb0cb3b99e1b4f6066a2b
 
 
 app.post('/api/signup',(req,res)=>{
@@ -376,12 +297,7 @@ app.post('/api/signup',(req,res)=>{
       db.query (sql, [req.body.email,hashedPassword])})
       .then(result => {res.status(201).json(res.rows)
       })
-<<<<<<< HEAD
-    .catch(err => { return (err) })
-
-=======
       .catch(err => { return err })
->>>>>>> 8cabd617fbbd09fa46fcb0cb3b99e1b4f6066a2b
 
 })
 
@@ -399,12 +315,7 @@ app.post('/api/foods',async (req,res)=>{
 
   let mealId = await db.query(sql, params)
     .then(res => { return (res.rows[0].userMealId) })
-<<<<<<< HEAD
-    .catch(err => { return ((err)) })
-
-=======
     .catch(err => { return err })
->>>>>>> 8cabd617fbbd09fa46fcb0cb3b99e1b4f6066a2b
   const caloriesParams = [mealId, req.body.createdAt];
 
   let paramNum = 2;
@@ -421,15 +332,9 @@ app.post('/api/foods',async (req,res)=>{
 `;
 
   db.query(caloriesSql, caloriesParams)
-<<<<<<< HEAD
-    .then(res => {return(res.rows) })
-    .catch(err => { return (err) })
-  res.status(207).json()
-=======
     .then(res => {return(res.rows)})
     .catch(err => { return err })
       res.status(207).json()
->>>>>>> 8cabd617fbbd09fa46fcb0cb3b99e1b4f6066a2b
 })
 
 app.post('/api/weight',(req,res)=>{
@@ -442,12 +347,7 @@ app.post('/api/weight',(req,res)=>{
 
   db.query(sql,params)
   .then(res => {return(res)})
-<<<<<<< HEAD
-    .catch(err => { return (err) })
-
-=======
     .catch(err => { return err })
->>>>>>> 8cabd617fbbd09fa46fcb0cb3b99e1b4f6066a2b
   res.status(205).json()
 })
 

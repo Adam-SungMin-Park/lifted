@@ -105,14 +105,8 @@ export default class Journal extends React.Component{
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(this.state)
-<<<<<<< HEAD
-    }).then(res => {return (res.json())})
-      .catch(err => {return((err))})
-
-=======
     }).then(res => res.json())
       .catch(err => { return err })
->>>>>>> 8cabd617fbbd09fa46fcb0cb3b99e1b4f6066a2b
       //this.componentDidMount()
 
   }

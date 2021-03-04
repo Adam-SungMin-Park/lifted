@@ -55,11 +55,9 @@ export default class WorkOut extends React.Component {
           })
         }
         })
-<<<<<<< HEAD
-        .catch(err => {return (err)})
-=======
+
         .catch(err => { return err })
->>>>>>> 8cabd617fbbd09fa46fcb0cb3b99e1b4f6066a2b
+
     }
     if (this.state.workOutPart === "Select WorkOut Part!") {
       this.getData()
