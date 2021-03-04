@@ -115,7 +115,7 @@ export default class WorkOut extends React.Component {
       </div>
       <div id = "workOutAddButtonPlace">
         <a href= "#addworkout" id = "workOutAdd" >
-          Add
+          Add Work Out
         </a>
       </div>
     </div>

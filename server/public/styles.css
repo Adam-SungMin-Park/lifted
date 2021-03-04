@@ -39,12 +39,8 @@ font-size:60px;
   padding-top: 1rem;
 }
 #workOutAddButtonPlace{
-  text-align: right;
+  text-align: center;
   margin-top: 3rem;
-}
-#workOutAdd{
-  width: 70px;
-  height: 40px;
 }
 .tab{
   text-decoration:none;
@@ -174,6 +170,7 @@ font-size:60px;
   box-shadow: 1rem;
   background-color:rgb(40,127,62);
   color:white;
+
 }
 .container{
   text-align:center;
@@ -239,13 +236,12 @@ width:80%;
 }
 .submitWorkOut{
   padding-top: 3rem;
+  text-align: center;
 }
 .rowWorkOutVolume{
   text-align:center;
 }
-#workOutForm{
-  text-align:center;
-}
+
 #exerciseAddButtonPlace{
   text-align:center;
 }
@@ -260,4 +256,40 @@ width:80%;
 }
 .rowNumber{
   padding-bottom: 1rem;
+  padding-top:1rem;
+}
+.addWorkOutInputField{
+  display: flex;
+  justify-content: space-evenly;
+}
+.addWorkOutName{
+  display:flex;
+  flex-direction:column;
+}
+.addWorkOutWeight{
+  display:flex;
+  flex-direction:column;
+}
+.addWorkOutReps{
+  display:flex;
+  flex-direction:column;
+}
+
+.previousWorkOutInputField{
+  display:flex;
+  justify-content: space-evenly;
+}
+
+.previousWorkOutName{
+  display:flex;
+  flex-direction:column;
+}
+
+.previousWorkOutWeight{
+  display:flex;
+  flex-direction:column;
+}
+.previousWorkOutReps{
+  display:flex;
+  flex-direction:column;
 }
