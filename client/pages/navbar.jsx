@@ -29,7 +29,6 @@ export default class NavBar extends React.Component{
     }
   }
   handleSignOut(){
-    console.log("signout fire")
     window.localStorage.removeItem("token")
     this.setState({
       userId: 0,

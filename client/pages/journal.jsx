@@ -42,7 +42,7 @@ export default class Journal extends React.Component{
           })
       }
     })
-      .catch(err => console.log(err))
+      .catch(err => {return err})
   };
 
   handleChangeWeight(){
@@ -107,11 +107,8 @@ export default class Journal extends React.Component{
       },
       body: JSON.stringify(this.state)
     }).then(res => res.json())
-      .catch(err => console.log(err))
-      this.setState({
-        render : !this.state.render
-      })
-      this.componentDidMount()
+      .catch(err => { return err })
+      //this.componentDidMount()
 
   }
   handleRemoveClick(index) {

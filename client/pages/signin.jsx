@@ -32,7 +32,7 @@ export default class SignIn extends React.Component {
       },
       body: JSON.stringify(this.state)
     })
-      .then(res => console.log(res.json()))
+      .then(res => {return(res.json())})
       .then(data => {
         this.setState({
           userId: data.userId
@@ -47,9 +47,8 @@ export default class SignIn extends React.Component {
           }
         }
       )
-      .catch(err => console.log(err))
+      .catch(err => { return err })
 
-    console.log(this.state)
 
   }
 
@@ -70,7 +69,6 @@ export default class SignIn extends React.Component {
   render(){
 
     if(this.state.view  === true ){
-      console.log(this.state)
       return(
         <div className = "welcomePage">
           <h1>Welcome Back!</h1>

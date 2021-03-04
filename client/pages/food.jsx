@@ -45,8 +45,7 @@ export default class Food extends React.Component {
           })
         }
       })
-      .catch(err => console.log(err))
-  }
+      .catch(err => { return err })  }
 
   handleSubmit() {
     fetch('/api/foods', {
@@ -57,8 +56,7 @@ export default class Food extends React.Component {
       body: JSON.stringify(this.state)
     }).then(res => (res))
       .then(data => (data))
-      .catch(err => console.log(err))
-
+      .catch(err => { return err })
 }
 
 foodReload(event){
@@ -108,8 +106,7 @@ foodReload(event){
     })
     .then(res =>(res))
     .then(data =>(data))
-    .catch(err => console.log(err))
-
+      .catch(err => { return err })
   }
 
   handleChangeDate(){
