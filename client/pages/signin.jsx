@@ -32,7 +32,11 @@ export default class SignIn extends React.Component {
       },
       body: JSON.stringify(this.state)
     })
+<<<<<<< HEAD
       .then(res =>res.json())
+=======
+      .then(res => {return(res.json())})
+>>>>>>> 8cabd617fbbd09fa46fcb0cb3b99e1b4f6066a2b
       .then(data => {
         this.setState({
           userId: data.userId
@@ -47,7 +51,11 @@ export default class SignIn extends React.Component {
           }
         }
       )
+<<<<<<< HEAD
       .catch(err => { return ((err)) })
+=======
+      .catch(err => { return err })
+>>>>>>> 8cabd617fbbd09fa46fcb0cb3b99e1b4f6066a2b
 
 
   }

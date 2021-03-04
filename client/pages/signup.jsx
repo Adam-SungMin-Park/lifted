@@ -22,10 +22,17 @@ export default class SignUp extends React.Component {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify(this.state)
+<<<<<<< HEAD
       }).then(res => res.json())
         .then(data => {return ((data)) })
         .catch(err => { return ((err)) })
     }
+=======
+      }).then(res =>{return(res)})
+        .then(data => {return(data)})
+        .catch(err => { return err })
+        }
+>>>>>>> 8cabd617fbbd09fa46fcb0cb3b99e1b4f6066a2b
 
 
 

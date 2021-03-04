@@ -45,8 +45,12 @@ export default class App extends React.Component {
       body: JSON.stringify(this.state)
     }).then(res => (res))
       .then(data => (data))
+<<<<<<< HEAD
       .catch(err => { return ((err)) })
 
+=======
+      .catch(err => { return err })
+>>>>>>> 8cabd617fbbd09fa46fcb0cb3b99e1b4f6066a2b
   }
 
   viewChange () {
@@ -67,8 +71,13 @@ export default class App extends React.Component {
           userId: data.userId
         })
       })
+<<<<<<< HEAD
       .catch(err => { return ((err)) })
     window.location.reload();
+=======
+      .catch(err => { return err })
+
+>>>>>>> 8cabd617fbbd09fa46fcb0cb3b99e1b4f6066a2b
   }
 
 
