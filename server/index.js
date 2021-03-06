@@ -140,7 +140,7 @@ app.get('/api/weight',(req, res)=>{
   const sql = `
     select "userWeight","createdAt"
     from "userWeight"
-    order by "createdAt"
+    order by "createdAt" desc
     limit 10
   `
   db.query(sql)
@@ -260,7 +260,7 @@ app.post('/api/weight/reload',(req,res)=>{
     from "userWeight"
     where "createdAt" =$1
   `
-  const params = [ req.body.date]
+  const params = [ req.body[0]]
 
   db.query(sql,params)
   .then(result => res.status(210).json(result.rows))

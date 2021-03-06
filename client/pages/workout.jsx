@@ -26,7 +26,6 @@ export default class WorkOut extends React.Component {
   }
 
   handleWorkOutPart() {
-    console.log(event.target.value)
     this.setState({
       workOutPart: event.target.value
     })
@@ -35,14 +34,12 @@ export default class WorkOut extends React.Component {
   }
 
   getData3(){
-    console.log(this.state.workOutPart)
     let dataArray = [];
     let labelArray = [];
     const allDataArray = [];
     const allLabelArray = [];
     for(var i = 0 ; i < this.state.allData.length; i++){
       if(event.target.value === this.state.allData[i].workOutPart){
-        console.log('matching found')
         dataArray.push(this.state.allData[i].data);
         labelArray.push(this.state.allData[i].label);
         this.setState({
@@ -62,50 +59,6 @@ export default class WorkOut extends React.Component {
     }
   }
 
-
-/*
-  getData2() {
-    console.log("firree")
-
-    if (this.state.workOutPart !== "Select WorkOut Part!") {
-      fetch('/api/workOutPart', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(this.state)
-      })
-        .then(res => res.json())
-        .then(res => {
-          const dataArray = [];
-          const labelArray = [];
-          if (res.length !== 0) {
-            for (var i = 0; i < res.length; i++) {
-              dataArray.push(res[i].total_volume)
-              labelArray.push(res[i].createdAt.slice(0, 10))
-            }
-            this.setState({
-              data: dataArray,
-              label: labelArray
-            })
-          }
-          else {
-            this.setState({
-              data: this.state.data,
-              label: this.state.label
-            })
-          }
-        })
-
-        .catch(err => { return err })
-
-    }
-    if (this.state.workOutPart === "Select WorkOut Part!") {
-      this.getData()
-    }
-
-  }
-*/
   componentDidMount() {
     this.getData();
   }
@@ -133,10 +86,7 @@ export default class WorkOut extends React.Component {
 
 
   render(){
-console.log(this.state)
-
-return (
-
+  return (
     <div id="workOutContainer">
       <div id = "workOutPageTitle">
         Workout Overview
