@@ -206,33 +206,28 @@ font-size:60px;
   padding:1rem;
 }
 .linegraph{
-  width:80%;
-
+  width:100%;
   margin:0 auto;
 }
 .linegraph2{
-width:80%;
-
+  width:100%;
   margin:0 auto;
 }
 .linegraph3{
-width:80%;
-
+  width:100%;
   margin:0 auto;
 }
 .linegraph4{
-width:80%;
-
+  width:100%;
   margin:0 auto;
 }
 .linegraph5{
-width:80%;
-
+  width:100%;
   margin:0 auto;
 }
 #dateForm{
   text-align: center;
-    padding-top: 3rem;
+  padding-top: 3rem;
 }
 .submitWorkOut{
   padding-top: 3rem;
@@ -246,10 +241,8 @@ width:80%;
   text-align:center;
 }
 .addOrRemove{
-  position: relative;
-  left: 10rem;
-  padding-top: 1rem;
-  margin-right: 4rem;
+  padding-top: 2rem;
+  padding-left: 1rem;
 }
 .removeButton{
   margin-right:2rem;
@@ -299,6 +292,16 @@ width:80%;
   margin:auto;
 }
 .rowExerciseWeightRep{
-  width:50%;
+  width:95%;
   margin:auto;
+}
+@media only screen and (max-width:420px) {
+  .newExerciseName{
+    margin-right:1rem;
+    width:7rem;
+  }
+  .workOutExerciseDropDown{
+    margin-right:1rem;
+    width:7rem;
+  }
 }
