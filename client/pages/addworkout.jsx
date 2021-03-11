@@ -142,10 +142,7 @@ export default class AddWorkOut extends React.Component{
   }
 
   handleRepsChange(e, index) {
-    console.log(typeof (parseInt(e.target.value)))
-    console.log(e.target.id)
     if (e.target.className === "newExerciseReps" && typeof (parseInt(e.target.value)) === 'number') {
-      console.log('1')
       let testing = [...this.state.newExercise];
       let testing2 = { ...this.state.newExercise[index] };
       testing2.exerciseReps = Number(e.target.value);
@@ -155,20 +152,17 @@ export default class AddWorkOut extends React.Component{
       })
     }
     else {
-      console.log('3')
     let test = [...this.state.exercise];
     let test2 = { ...this.state.exercise[index] };
     test2.exerciseReps = Number(e.target.value);
     //test2.exerciseWeight = Number(this.state.exercise[index].exerciseWeight)
     test[index] = test2;
-      console.log(test)
     this.setState({
       exercise: test
     })
   }
   }
   handleAddClick(event) {
-    console.log(this.state.newExercise)
     event.preventDefault()
 
     const extraExercise =
@@ -197,7 +191,6 @@ export default class AddWorkOut extends React.Component{
   }
 
   handleRemoveClick(index) {
-    console.log(event.target.className)
     event.preventDefault()
     const list = [...this.state.exercise];
     list.splice(event.target.className, 1);
@@ -243,9 +236,7 @@ export default class AddWorkOut extends React.Component{
   }
 
   handleSubmit(){
-    console.log(this.state.workOutPart)
     if(this.state.workOutPart === "default"){
-      console.log('no workout part')
       this.setState({
         workOutSaved: "#addworkout"
       })
