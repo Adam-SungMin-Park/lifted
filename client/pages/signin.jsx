@@ -21,7 +21,7 @@ export default class SignIn extends React.Component {
     this.setState({
       view: !this.state.view
     })
-    window.location.reload()
+
   }
 
   handleSubmit(){
@@ -67,16 +67,8 @@ export default class SignIn extends React.Component {
 
 
   render(){
-
-    if(this.state.view  === true ){
-      return(
-        <div className = "welcomePage">
-          <h1>Welcome Back!</h1>
-        </div>
-      )
-    }
-
-if(this.state.view === true && this.userId ===""){
+    console.log(this.state)
+  if(this.state.view === true){
     return(
       <div className="signInPage">
         <h1><a href="#signup" onClick = {this.viewChange}>Sign Up</a>/Sign in</h1>

@@ -68,14 +68,14 @@ font-size:60px;
 .rowWorkOutExerciseWeightRep{
   text-align:center;
 }
-#workOutExerciseRep{
+.workOutExerciseRep{
   width:40px;
 }
-#workOutExerciseWeight{
+.workOutExerciseWeight{
   width:60px;
   margin-right:2rem;
 }
-#workOutExerciseDropDown{
+.workOutExerciseDropDown{
   width: 200px;
   margin-right: 2rem;
 }
@@ -186,17 +186,17 @@ font-size:60px;
 .demoButtonPlace{
   padding-top:2rem;
 }
-#newExerciseName{
+.newExerciseName{
   width: 200px;
   margin-right: 2rem;
 
 }
-#newExerciseWeight{
+.newExerciseWeight{
   width: 60px;
   margin-right: 2rem;
 
 }
-#newExerciseReps{
+.newExerciseReps{
   width: 40px;
 }
 .saveFoodsButton{
@@ -296,5 +296,9 @@ width:80%;
 .foodCaloriesEntries{
   text-align:center;
   width:60%;
+  margin:auto;
+}
+.rowExerciseWeightRep{
+  width:50%;
   margin:auto;
 }
