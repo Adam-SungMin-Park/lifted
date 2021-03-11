@@ -5,3 +5,6 @@ A full stack solo project made using Node.js, React.js, HTML, CSS3, Chart.js, Po
 
 # Demo Site 
 
+https://lifted-by-adam-park.herokuapp.com/
+
+# How it works 
