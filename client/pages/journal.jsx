@@ -52,9 +52,17 @@ export default class Journal extends React.Component{
     })
   }
   handleChangeDate(e) {
+
     e.preventDefault();
     let test = [];
     test[0]=  e.target.value;
+   if(this.state.dateData.length === 0) {
+     this.setState({
+       weight: "",
+       weightId: "",
+       date: [e.target.value]
+     })
+   }
 
     for(var i = 0 ; i < this.state.dateData.length; i++){
         if(test[0] === this.state.dateData[i]){
@@ -77,6 +85,7 @@ export default class Journal extends React.Component{
           })
         }
         if(!this.state.dateData.includes(test[0])){
+
           this.setState({
             weight:"",
             weightId:"",
@@ -84,6 +93,7 @@ export default class Journal extends React.Component{
           })
         }
     }
+
   }
 
   handleUpdate(){
