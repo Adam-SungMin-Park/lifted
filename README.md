@@ -4,7 +4,7 @@ Lifted is a web application for people who wants to record their fitness journey
 A full stack solo project made using Node.js, React.js, HTML, CSS3, Chart.js, PostgreSQL, npm, Webpack, Babel and Express.js.
 
 
-#Features
+# Features
 
 Lifted is currently consist of 3 parts. 
 1 . User Work Out 
