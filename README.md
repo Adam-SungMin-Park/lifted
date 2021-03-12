@@ -35,7 +35,20 @@ https://lifted-by-adam-park.herokuapp.com/
 # How it works 
 
 
-#Work Out 
+# Work Out 
+
+adding workout
+
+![recording (7)](https://user-images.githubusercontent.com/57808972/110874399-85fc4e00-8288-11eb-965c-cea15101b6d1.gif)
+
+adding weight 
+
+![recording (8)](https://user-images.githubusercontent.com/57808972/110874583-db385f80-8288-11eb-8bcb-8713ccb5edb7.gif)
+
+adding calories intake
+
+![recording (9)](https://user-images.githubusercontent.com/57808972/110874706-15a1fc80-8289-11eb-9b4d-9b39c5457c91.gif)
+
 
 
 
