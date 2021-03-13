@@ -191,7 +191,6 @@ export default class Food extends React.Component {
   render() {
     console.log(this.state)
     if (this.state.data.length === 0 && this.state.createdAt === "") {
-      console.log("here!")
       return(
         <div id="weightFoodContainer">
           <div id="weightFoodPageTitle">
@@ -210,7 +209,6 @@ export default class Food extends React.Component {
       )
     }
     if (this.state.data.length === 0 && this.state.createdAt !== "" && this.state.foods[0].calories === "") {
-      console.log("here!")
       return (
         <div id="weightFoodContainer">
           <div id="weightFoodPageTitle">
@@ -230,10 +228,7 @@ export default class Food extends React.Component {
     }
 
     if (this.state.createdAt === "" && this.state.foods.length > 1) {
-
-
       return (
-
         <div id="weightFoodContainer">
           <div id="weightFoodPageTitle">
             Food
@@ -257,6 +252,63 @@ export default class Food extends React.Component {
         </div>
       )
     }
+    if (this.state.foods[0].food === "" && this.state.createdAt !== "" && this.state.data.length !== 0) {
+      console.log('date set')
+      return (
+        <div id="weightFoodContainer">
+          <div id="weightFoodPageTitle">
+            Food
+        </div>
+          <div id="caloriesGraphPlace">
+            <div className="linegraph3">
+              <LineGraph3
+                data={this.state.data}
+                label={this.state.label}
+              />
+            </div>
+          </div>
+          <form onSubmit={(event) => this.foodReload(event)} id="dateForm">
+            <div className="foodFoodDate">
+              <input required onChange={this.handleChangeDate} type="date"></input>
+            </div>
+            <div className="foodFoodDateButton">
+              <button type="submit">Select Date</button>
+            </div>
+          </form>
+            {this.state.newFoods.map((food, index) => {
+              return (
+                <div key={index} className="foodCaloriesEntries">
+                  <div className="foodCalories">
+                    <div className="foodNameInput">
+                      Food {index + 1}
+                      <input id="newFoodsName" required onChange={e => this.handleNewFoodName(e, index)} type="text" placeholder="food" value={this.state.newFoods[index].food}></input>
+                    </div>
+                    <div className="caloriesInput">
+                      <input id="newFoodsCalories" required onChange={e => this.handleNewFoodCalories(e, index)} type="integer" placeholder="calories" value={this.state.newFoods[index].calories}></input>
+                    </div>
+                  </div>
+                  <div className="updateOrRemove">
+                    {this.state.newFoods.length > 1 && <button onClick={() => this.handleRemoveClick(index)} className="removeButton">Remove</button>}
+                    {this.state.newFoods.length !== 0 && <button onClick={() => this.handleUpdateClick(index)} className="updateButton">Update!</button>}
+                  </div>
+                  <div className="extraFoodButton" >
+                    <button onClick={this.handleAddClick}>Add!</button>
+                  </div>
+
+                </div>
+              )
+            })
+            }
+            <div className="submitFood">
+              <a className="saveFoodsButton" href="#workout" onClick={this.handleSubmit}>Save Foods!</a>
+            </div>
+
+
+        </div>
+      )
+    }
+
+
     if (this.state.foods[0].food === "" && this.state.createdAt === "" && this.state.data.length !== 0) {
       console.log("here!")
 
@@ -281,35 +333,7 @@ export default class Food extends React.Component {
               <button type="submit">Select Date</button>
             </div>
           </form>
-          <form id="foodForm">
 
-            {this.state.newFoods.map((food, index) => {
-              return (
-                <div key={index} className="foodCaloriesEntries">
-                  <div className="foodCalories">
-                    <div className="foodNameInput">
-                      <input id="newFoodsName" required onChange={e => this.handleNewFoodName(e, index)} type="text" placeholder="food" value={this.state.newFoods[index].food}></input>
-                    </div>
-                    <div className="caloriesInput">
-                      <input id="newFoodsCalories" required onChange={e => this.handleNewFoodCalories(e, index)} type="integer" placeholder="calories" value={this.state.newFoods[index].calories}></input>
-                    </div>
-                  </div>
-                  <div className="updateOrRemove">
-                    {this.state.newFoods.length > 1 && <button onClick={() => this.handleRemoveClick(index)} className="removeButton">Remove</button>}
-                    {this.state.newFoods.length !== 0 && <button onClick={() => this.handleUpdateClick(index)} className="updateButton">Update!</button>}
-                  </div>
-                  <div className="extraFoodButton" >
-                    <button onClick={this.handleAddClick}>Add!</button>
-                  </div>
-
-                </div>
-              )
-            })
-            }
-            <div className="submitFood">
-              <a className="saveFoodsButton" href="#workout" onClick={this.handleSubmit}>Save Foods!</a>
-            </div>
-          </form>
 
         </div>
       )
@@ -339,6 +363,7 @@ export default class Food extends React.Component {
                 <div key={index} className="foodCaloriesEntries">
                   <div className="foodCalories">
                     <div className="foodNameInput">
+                      Food {index + 1}
                       <input id="newFoodsName" required onChange={e => this.handleNewFoodName(e, index)} type="text" placeholder="food" value={this.state.newFoods[index].food}></input>
                     </div>
                     <div className="caloriesInput">
@@ -394,9 +419,11 @@ export default class Food extends React.Component {
               <div key={index} className="foodCaloriesEntries">
                 <div className="foodCalories">
                   <div className="foodNameInput">
+                    Previous Food {index + 1}
                     <input required onChange={e => this.handleFoodName(e, index)} type="text" placeholder="food" value={this.state.foods[index].food}></input>
                   </div>
                   <div className="caloriesInput">
+                    Calories
                     <input required onChange={e => this.handleCalories(e, index)} type="integer" placeholder="calories" value={this.state.foods[index].calories}></input>
                   </div>
                 </div>
@@ -416,9 +443,11 @@ export default class Food extends React.Component {
                 <div key={index} className="foodCaloriesEntries">
                   <div className="foodCalories">
                     <div className="foodNameInput">
+                      New Food {index + 1}
                       <input id="newFoodsName" required onChange={e => this.handleNewFoodName(e, index)} type="text" placeholder="food" value={this.state.newFoods[index].food}></input>
                     </div>
                     <div className="caloriesInput">
+                      Calories
                       <input id="newFoodsCalories" required onChange={e => this.handleNewFoodCalories(e, index)} type="integer" placeholder="calories" value={this.state.newFoods[index].calories}></input>
                     </div>
                   </div>
