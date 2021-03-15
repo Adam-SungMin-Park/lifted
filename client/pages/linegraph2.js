@@ -60,6 +60,13 @@ export default class LineGraph2 extends React.Component {
         ]
       },
       options:{
+        animation: {
+          duration: 0
+        },
+        hover: {
+          animationDuration: 0
+        },
+        responsiveAnimationDuration: 0,
         events: ['click'],
         responsive: true,
         legend:{
