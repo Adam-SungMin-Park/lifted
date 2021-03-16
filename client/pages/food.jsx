@@ -189,7 +189,6 @@ export default class Food extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     if (this.state.data.length === 0 && this.state.createdAt === "") {
       return(
         <div id="weightFoodContainer">
@@ -253,7 +252,6 @@ export default class Food extends React.Component {
       )
     }
     if (this.state.foods[0].food === "" && this.state.createdAt !== "" && this.state.data.length !== 0) {
-      console.log('date set')
       return (
         <div id="weightFoodContainer">
           <div id="weightFoodPageTitle">
@@ -280,10 +278,11 @@ export default class Food extends React.Component {
                 <div key={index} className="foodCaloriesEntries">
                   <div className="foodCalories">
                     <div className="foodNameInput">
-                      Food {index + 1}
+                      Food {index + 1} :
                       <input id="newFoodsName" required onChange={e => this.handleNewFoodName(e, index)} type="text" placeholder="food" value={this.state.newFoods[index].food}></input>
                     </div>
                     <div className="caloriesInput">
+
                       <input id="newFoodsCalories" required onChange={e => this.handleNewFoodCalories(e, index)} type="integer" placeholder="calories" value={this.state.newFoods[index].calories}></input>
                     </div>
                   </div>
@@ -310,7 +309,6 @@ export default class Food extends React.Component {
 
 
     if (this.state.foods[0].food === "" && this.state.createdAt === "" && this.state.data.length !== 0) {
-      console.log("here!")
 
       return (
         <div id="weightFoodContainer">
@@ -339,7 +337,6 @@ export default class Food extends React.Component {
       )
     }
     if (this.state.foods[0].food === "" && this.state.createdAt !== "" && this.state.foods[0].calories !== "") {
-      console.log("yeyeyey")
 
       return (
         <div id="weightFoodContainer">
@@ -363,10 +360,11 @@ export default class Food extends React.Component {
                 <div key={index} className="foodCaloriesEntries">
                   <div className="foodCalories">
                     <div className="foodNameInput">
-                      Food {index + 1}
+                      Food {index + 1} :
                       <input id="newFoodsName" required onChange={e => this.handleNewFoodName(e, index)} type="text" placeholder="food" value={this.state.newFoods[index].food}></input>
                     </div>
                     <div className="caloriesInput">
+
                       <input id="newFoodsCalories" required onChange={e => this.handleNewFoodCalories(e, index)} type="integer" placeholder="calories" value={this.state.newFoods[index].calories}></input>
                     </div>
                   </div>
@@ -419,11 +417,11 @@ export default class Food extends React.Component {
               <div key={index} className="foodCaloriesEntries">
                 <div className="foodCalories">
                   <div className="foodNameInput">
-                    Previous Food {index + 1}
+                    Previous Food {index + 1} :
                     <input required onChange={e => this.handleFoodName(e, index)} type="text" placeholder="food" value={this.state.foods[index].food}></input>
                   </div>
                   <div className="caloriesInput">
-                    Calories
+
                     <input required onChange={e => this.handleCalories(e, index)} type="integer" placeholder="calories" value={this.state.foods[index].calories}></input>
                   </div>
                 </div>
@@ -447,7 +445,7 @@ export default class Food extends React.Component {
                       <input id="newFoodsName" required onChange={e => this.handleNewFoodName(e, index)} type="text" placeholder="food" value={this.state.newFoods[index].food}></input>
                     </div>
                     <div className="caloriesInput">
-                      Calories
+                      Calories :
                       <input id="newFoodsCalories" required onChange={e => this.handleNewFoodCalories(e, index)} type="integer" placeholder="calories" value={this.state.newFoods[index].calories}></input>
                     </div>
                   </div>
