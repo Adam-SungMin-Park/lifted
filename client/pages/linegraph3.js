@@ -71,6 +71,7 @@ export default class LineGraph3 extends React.Component {
         events: ['click'],
         responsive: true,
         legend: {
+          onClick: (e) => e.stopPropagation(),
           labels: {
             fontColor: 'rgb(40,127,62)'
           }
@@ -78,6 +79,7 @@ export default class LineGraph3 extends React.Component {
         scales: {
           yAxes: [{
             ticks: {
+              beginAtZero:true,
               fontColor: 'rgb(40,127,62)'
             }
           }],

@@ -77,6 +77,7 @@ export default class LineGraph2 extends React.Component {
         scales:{
           yAxes:[{
             ticks:{
+              beginAtZero: true,
               fontColor: 'rgb(40,127,62)'
             }
           }],

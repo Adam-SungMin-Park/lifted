@@ -120,15 +120,19 @@ font-size:60px;
   text-align: center;
   padding-top:1rem;
   padding-bottom:1rem;
-  display:flex;
-  padding-left: 1rem;
+
+
+
 }
 .extraFoodButton{
   text-align: right;
   padding-top:1rem;
+  padding-bottom:2rem;
 }
 .caloriesInput{
   padding-left: 3rem;
+  padding-top:1rem;
+
 }
 .signUpPlace{
   text-align: right;
@@ -288,7 +292,6 @@ font-size:60px;
 }
 .foodCaloriesEntries{
   text-align:center;
-  width:60%;
   margin:auto;
 }
 .rowExerciseWeightRep{
