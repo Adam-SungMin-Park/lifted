@@ -5,6 +5,7 @@ export default class SignUp extends React.Component {
     constructor(props){
       super(props)
       this.state ={
+        userId:"",
         email:"",
         password:"",
         name:""
@@ -24,7 +25,10 @@ export default class SignUp extends React.Component {
         body: JSON.stringify(this.state)
 
       }).then(res =>{return(res)})
-        .then(data => {return(data)})
+        .then(data => {return(
+          this.setState({
+            userId:data.userId
+          }))})
         .catch(err => { return err })
         }
 

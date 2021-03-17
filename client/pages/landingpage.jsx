@@ -9,6 +9,9 @@ render(){
       <div className = "demoButtonPlace">
         <a className="demoButton" href ="#workout">Try it out on Demo!</a>
       </div>
+      <div className="demoSignUpButtonPlace">
+        <a className="demoSignUpButton" href="#signin">Sign In or Sign Up</a>
+      </div>
     </div>
   )
 }

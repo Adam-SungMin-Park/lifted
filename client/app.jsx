@@ -16,7 +16,7 @@ export default class App extends React.Component {
     super(props)
     this.state = {
       route: parseRoute(window.location.hash),
-      userId: window.localStorage.getItem("token"),
+      userId: window.localStorage.getItem('token'),
       email:"",
       password:"",
       view:true
@@ -29,6 +29,7 @@ export default class App extends React.Component {
     this.handleRegistration = this.handleRegistration.bind(this);
   }
   componentDidMount(){
+    console.log(this.state)
     window.addEventListener('hashchange',(event)=>{
       this.setState({
         route: parseRoute(window.location.hash)
@@ -44,7 +45,10 @@ export default class App extends React.Component {
       },
       body: JSON.stringify(this.state)
     }).then(res => (res))
-      .then(data => (data))
+      .then(data => (
+        this.setState({
+          userId:data.userId
+        })))
       .catch(err => { return err })
   }
 
@@ -65,6 +69,7 @@ export default class App extends React.Component {
         this.setState({
           userId: data.userId
         })
+        window.localStorage.setItem('token',data.userId)
       })
       .catch(err => { return err })
 
@@ -117,9 +122,9 @@ export default class App extends React.Component {
   }
 
   render(){
+    console.log(this.state)
     const { route } = this.state;
-    if( route.path !== '' ){
-
+    if (route.path !== '' && route.path !== 'signup' && route.path !== 'signin' && route.path !== 'signedin' ){
       return (
         <div id = "container">
           <NavBar userId={this.state.userId} />
@@ -135,5 +140,60 @@ export default class App extends React.Component {
         </div>
       )
     }
+    if(route.path === 'signup') {
+      return(
+        <div id="container">
+          <NavBar userId={this.state.userId} />
+          <div className="signUpPage">
+            <h1>Sign Up/ <a href="#signin" onClick={this.viewChange}>Sign in</a></h1>
+            <form className="signUpForm">
+              <div className="emailInput">
+                <input required onChange={this.handleChangeEmail} type="email" placeholder="youremail@idk.com"></input>
+              </div>
+              <div className="passwordInput">
+                <input required onChange={this.handleChangePassword} type="password" placeholder="Password"></input>
+              </div>
+              <div className="submitButton">
+                <a href="#workout" onClick={this.handleSubmit}>Continue!</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      )
+    }
+    if(route.path === 'signin') {
+      return (
+        <div id="container">
+          <NavBar userId={this.state.userId} />
+          <div className="signInPage">
+            <h1><a href="#signup" onClick={this.viewChange}>Sign Up</a>/Sign in</h1>
+            <form className="signInForm">
+              <div className="emailInput">
+                <input onChange={this.handleChangeEmail} type="email" placeholder="youremail@idk.com"></input>
+              </div>
+              <div className="passwordInput">
+                <input onChange={this.handleChangePassword} type="password" placeholder="Password"></input>
+              </div>
+              <div className="submitButton">
+                <a href="#signedin" onClick={this.handleSubmit}>LogIn!</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      )
+    }
+    if(route.path === 'signedin') {
+      return (
+        <div id="container">
+          <NavBar userId={this.state.userId} />
+          <div className="signedInPage">
+            <h1>
+            Welcome user ID {this.state.userId}
+            </h1>
+          </div>
+        </div>
+      )
+    }
+
     }
   }

@@ -8,7 +8,7 @@ export default class SignIn extends React.Component {
     this.state= {
       email:"",
       password:"",
-      userId:"",
+      userId:[],
       view:true
     }
     this.handleSubmit= this.handleSubmit.bind(this);
@@ -34,17 +34,8 @@ export default class SignIn extends React.Component {
     })
       .then(res => {return(res.json())})
       .then(data => {
-        this.setState({
-          userId: data.userId
-        })
-        if(data==="nice try :) again"){
-
-        }
-        else{
-
-          window.location.reload();
-
-          }
+        let test = [];
+        data.userId = test[0]
         }
       )
       .catch(err => { return err })
@@ -80,7 +71,7 @@ export default class SignIn extends React.Component {
             <input onChange={this.handleChangePassword} type="password" placeholder="Password"></input>
           </div>
           <div className="submitButton">
-            <a href="#user" onClick={this.handleSubmit}>LogIn!</a>
+            <a href="#workout" onClick={this.handleSubmit}>LogIn!</a>
           </div>
         </form>
       </div>
@@ -99,7 +90,7 @@ export default class SignIn extends React.Component {
             <input required onChange={this.handleChangePassword} type="password" placeholder="Password"></input>
           </div>
           <div className="submitButton">
-            <a href="#user" onClick={this.handleSubmit}>Continue!</a>
+            <a href="#workout" onClick={this.handleSubmit}>Continue!</a>
           </div>
         </form>
 

@@ -135,6 +135,7 @@ export default class Journal extends React.Component{
   }
 
   render(){
+    console.log(this.state)
     for(var i = 0 ; i < this.state.dateData.length ; i++){
       if (this.state.date !== "" && this.state.weight !== "" && this.state.weightId !== "" ){
         return (
