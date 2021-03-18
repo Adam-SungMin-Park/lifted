@@ -8,6 +8,7 @@ export default class WorkOut extends React.Component {
   constructor(props){
     super(props)
     this.state={
+      userId:this.props.userId,
       allData:[
         {
           data:[],
@@ -61,6 +62,7 @@ export default class WorkOut extends React.Component {
 
   componentDidMount() {
     this.getData();
+    console.log(this.state)
   }
 
 
