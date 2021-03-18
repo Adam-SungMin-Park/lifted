@@ -71,7 +71,7 @@ export default class SignIn extends React.Component {
             <input onChange={this.handleChangePassword} type="password" placeholder="Password"></input>
           </div>
           <div className="submitButton">
-            <a href="#workout" onClick={this.handleSubmit}>LogIn!</a>
+            <a href="#workout" onClick={this.handleSubmit}>Log In</a>
           </div>
         </form>
       </div>
@@ -90,7 +90,7 @@ export default class SignIn extends React.Component {
             <input required onChange={this.handleChangePassword} type="password" placeholder="Password"></input>
           </div>
           <div className="submitButton">
-            <a href="#workout" onClick={this.handleSubmit}>Continue!</a>
+            <a href="#workout" onClick={this.handleSubmit}>Continue</a>
           </div>
         </form>
 

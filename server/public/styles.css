@@ -310,6 +310,12 @@ font-size:60px;
   color: white;
   background-color: rgb(40,127,62);
 }
+.signInPage{
+  text-align:center;
+}
+.submitButton{
+  padding-top:1rem;
+}
 @media only screen and (max-width:420px) {
   .newExerciseName{
     margin-right:1rem;
