@@ -10,6 +10,7 @@ export default class LineGraph3 extends React.Component {
   }
 
   componentDidUpdate() {
+
     let calLength = this.props.data.length;
     let averageCal = 0;
     let averageCalArray = [];
@@ -90,6 +91,7 @@ export default class LineGraph3 extends React.Component {
           }]
         }
       }
+
     });
   }
 
@@ -104,6 +106,8 @@ export default class LineGraph3 extends React.Component {
         <canvas
           id="myChart3"
           ref={this.chartRef}
+          data={this.props.data}
+          label={this.props}
         />
       </div>
     )
