@@ -120,9 +120,8 @@ font-size:60px;
   text-align: center;
   padding-top:1rem;
   padding-bottom:1rem;
-
-
-
+  display: flex;
+  justify-content: center
 }
 .extraFoodButton{
   text-align: right;
@@ -131,8 +130,6 @@ font-size:60px;
 }
 .caloriesInput{
   padding-left: 3rem;
-  padding-top:1rem;
-
 }
 .signUpPlace{
   text-align: right;
