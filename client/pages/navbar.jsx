@@ -44,14 +44,27 @@ export default class NavBar extends React.Component{
   render(){
 
   return (
-    <div>
-      <div id = "navBarContainer">
-        <a className = "tab" href = "#workout"><span className="material-icons md-60">fitness_center</span>Workout</a>
-        <a className="tab " href="#food"><span className="material-icons md-60">restaurant_menu</span>Food</a>
-        <a className = "tab "href = "#journal"><span className="material-icons md-60">text_snippet</span>Weight</a>
+    <div className = "wrapper">
+      <header className ="nav-header">
+        <nav>
+          <ul>
+            <li>
+              <a className="tab" href="#workout"><span className="material-icons md-60">fitness_center</span>Workout</a>
+            </li>
+            <li>
+              <a className="tab " href="#food"><span className="material-icons md-60">restaurant_menu</span>Food</a>
+            </li>
+            <li>
+              <a className="tab " href="#journal"><span className="material-icons md-60">text_snippet</span>Weight</a>
+            </li>
 
-      </div>
+          </ul>
+        </nav>
+
+
+      </header>
     </div>
+
   );
 
 }

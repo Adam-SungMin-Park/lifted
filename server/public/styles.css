@@ -7,6 +7,12 @@
   border-radius:5px;
 
 }
+.wrapper {
+  max-width: 640px;
+  height: 100vh;
+  margin: 0 auto;
+}
+
 .material-icons.md-60{
 font-size:60px;
 }
@@ -206,10 +212,7 @@ font-size:60px;
   color:white;
   padding:1rem;
 }
-.linegraph{
-  width:100%;
-  margin:0 auto;
-}
+
 .linegraph2{
   width:100%;
   margin:0 auto;

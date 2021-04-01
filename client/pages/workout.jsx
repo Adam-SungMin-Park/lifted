@@ -89,7 +89,7 @@ export default class WorkOut extends React.Component {
 
   render(){
   return (
-    <div id="workOutContainer">
+<>
       <div id = "workOutPageTitle">
         Workout Overview
       </div>
@@ -108,18 +108,21 @@ export default class WorkOut extends React.Component {
 
         </div>
       </div>
-      <div id="workOutGraphPlace">
-        <LineGraph
-          data= {this.state.data}
-          label = {this.state.label}
-        />
-      </div>
+      <figure className ="figure">
+
+        <div className="figure-img img-fluid rounded">
+          <LineGraph
+            data= {this.state.data}
+            label = {this.state.label}
+          />
+        </div>
+      </figure>
       <div id = "workOutAddButtonPlace">
         <a href= "#addworkout" id = "workOutAdd" >
           Add Work Out
         </a>
       </div>
-    </div>
+</>
   );
   }
 }
