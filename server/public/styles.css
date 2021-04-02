@@ -7,8 +7,11 @@
   border-radius:5px;
 
 }
+#root{
+  background-color:darkgray;
+}
 .wrapper {
-  max-width: 640px;
+  max-width: 1000px;
   height: 100vh;
   margin: 0 auto;
 }

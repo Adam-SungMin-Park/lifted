@@ -58,7 +58,6 @@ export default class SignIn extends React.Component {
 
 
   render(){
-    console.log(this.state)
   if(this.state.view === true){
     return(
       <div className="signInPage">

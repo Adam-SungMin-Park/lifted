@@ -29,7 +29,6 @@ export default class App extends React.Component {
     this.handleRegistration = this.handleRegistration.bind(this);
   }
   componentDidMount(){
-    console.log(this.state)
     window.addEventListener('hashchange',(event)=>{
       this.setState({
         route: parseRoute(window.location.hash)
@@ -67,7 +66,7 @@ export default class App extends React.Component {
     }).then(res => res.json())
       .then(data => {
         if(!data){
-         console.log('pw failed')
+          return ""
         }
         else{
           this.setState({
@@ -128,21 +127,23 @@ export default class App extends React.Component {
   }
 
   render(){
-    console.log(this.state)
     const { route } = this.state;
     if (route.path !== '' && route.path !== 'signup' && route.path !== 'signin' && route.path !== 'signedin' ){
       return (
         <div className = "container">
+          <div className = "wrapper">
           <NavBar userId={this.state.userId} />
-
           {this.renderPage()}
+          </div>
         </div>
       )
     }
     if( route.path === '') {
       return (
         <div className="container">
-        {this.renderPage()}
+          <div className ="wrapper">
+            {this.renderPage()}
+          </div>
         </div>
       )
     }
