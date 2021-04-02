@@ -29,7 +29,6 @@ export default class App extends React.Component {
     this.handleRegistration = this.handleRegistration.bind(this);
   }
   componentDidMount(){
-    console.log(this.state)
     window.addEventListener('hashchange',(event)=>{
       this.setState({
         route: parseRoute(window.location.hash)
@@ -67,7 +66,7 @@ export default class App extends React.Component {
     }).then(res => res.json())
       .then(data => {
         if(!data){
-         console.log('pw failed')
+          return ""
         }
         else{
           this.setState({
@@ -128,27 +127,29 @@ export default class App extends React.Component {
   }
 
   render(){
-    console.log(this.state)
     const { route } = this.state;
     if (route.path !== '' && route.path !== 'signup' && route.path !== 'signin' && route.path !== 'signedin' ){
       return (
-        <div id = "container">
+        <div className = "container">
+          <div className = "wrapper">
           <NavBar userId={this.state.userId} />
-
           {this.renderPage()}
+          </div>
         </div>
       )
     }
     if( route.path === '') {
       return (
-        <div id="container">
-        {this.renderPage()}
+        <div className="container">
+          <div className ="wrapper">
+            {this.renderPage()}
+          </div>
         </div>
       )
     }
     if(route.path === 'signup') {
       return(
-        <div id="container">
+        <div className="container">
 
           <div className="signUpPage">
             <h1>Sign Up/ <a href="#signin" onClick={this.viewChange}>Sign in</a></h1>
@@ -169,7 +170,7 @@ export default class App extends React.Component {
     }
     if(route.path === 'signin') {
       return (
-        <div id="container">
+        <div className="container">
 
           <div className="signInPage">
             <h1><a href="#signup" onClick={this.viewChange}>Sign Up</a>/Sign in</h1>
@@ -190,7 +191,7 @@ export default class App extends React.Component {
     }
     if(route.path === 'signedin' && this.state.userId !== "undefined") {
       return (
-        <div id="container">
+        <div className="container">
           <NavBar userId={this.state.userId} />
           <div className="signedInPage">
             <h1>
@@ -202,7 +203,7 @@ export default class App extends React.Component {
     }
     if(route.path === 'signedin' && this.state.userId === "undefined") {
       return(
-        <div id="container">
+        <div className="container">
 
           <div className="signedInPage">
             <h1>

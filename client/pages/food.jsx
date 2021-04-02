@@ -189,7 +189,6 @@ export default class Food extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     if (this.state.data.length === 0 && this.state.createdAt === "") {
       return(
         <div id="weightFoodContainer">

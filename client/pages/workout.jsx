@@ -59,13 +59,9 @@ export default class WorkOut extends React.Component {
 
     }
   }
-
   componentDidMount() {
     this.getData();
-    console.log(this.state)
   }
-
-
   getData(){
     fetch('/api/exercises').then(res => res.json())
       .then(res => {
@@ -82,14 +78,14 @@ export default class WorkOut extends React.Component {
            label : this.state.label.concat(res[i].createdAt.slice(0,10))
          })}
       })
-      .catch(error => this.setState({ error, isLoading: false }))
+      .catch(error => {return(error)})
   }
 
 
 
   render(){
   return (
-    <div id="workOutContainer">
+<>
       <div id = "workOutPageTitle">
         Workout Overview
       </div>
@@ -105,21 +101,18 @@ export default class WorkOut extends React.Component {
           <option value="Pull">Pull</option>
         </select>
         <div className="foodFoodDateButton">
-
         </div>
       </div>
-      <div id="workOutGraphPlace">
-        <LineGraph
-          data= {this.state.data}
-          label = {this.state.label}
-        />
-      </div>
+          <LineGraph
+            data= {this.state.data}
+            label = {this.state.label}
+          />
       <div id = "workOutAddButtonPlace">
         <a href= "#addworkout" id = "workOutAdd" >
           Add Work Out
         </a>
       </div>
-    </div>
+</>
   );
   }
 }
