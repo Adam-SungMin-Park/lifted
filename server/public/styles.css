@@ -1,23 +1,28 @@
-
 *{
   font-family: 'Montserrat', sans-serif;
   color:rgb(40,127,62);
   background-color:white;
   text-decoration: none;
-  border-radius:5px;
+  margin:0;
+  padding:0;
 
 }
+html{
+  background-color:darkgray
+}
+
 #root{
   background-color:darkgray;
 }
 .wrapper {
   max-width: 1000px;
-  height: 100vh;
   margin: 0 auto;
 }
-
+.caloriesInput{
+  margin-top:1rem;
+}
 .material-icons.md-60{
-font-size:60px;
+  font-size:60px;
 }
 #navBarContainer{
   display:flex;
@@ -98,6 +103,7 @@ font-size:60px;
 }
 .updateOrRemove{
   text-align: right;
+  margin-top:1rem;
 }
 #weightFoodPageTitle{
   text-align: center;
@@ -125,20 +131,15 @@ font-size:60px;
   text-align: right;
   padding-top: 2rem;
 }
-.foodCalories{
-  text-align: center;
-  padding-top:1rem;
-  padding-bottom:1rem;
-  display: flex;
-  justify-content: center
-}
+
 .extraFoodButton{
   text-align: right;
   padding-top:1rem;
   padding-bottom:2rem;
 }
-.caloriesInput{
-  padding-left: 3rem;
+.foodNameInput{
+  text-align:center;
+  margin-top:1rem;
 }
 .signUpPlace{
   text-align: right;
@@ -185,6 +186,8 @@ font-size:60px;
 .container{
   text-align:center;
   padding-top:2rem;
+  padding-bottom: 20rem;
+
 }
 .demoButton{
   margin-top:1rem;
@@ -248,7 +251,7 @@ font-size:60px;
   text-align:center;
 }
 .addOrRemove{
-  padding-top: 2rem;
+  padding-top: 1.5rem;
   padding-left: 1rem;
 }
 .removeButton{
