@@ -1,13 +1,10 @@
 import React, { useState } from 'react';
 import Chart from "chart.js";
 import LineGraph3 from './linegraph3';
-
 export default class Food extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
-
       userId: this.props.userId,
       createdAt: "",
       foods: [{
@@ -32,6 +29,7 @@ export default class Food extends React.Component {
     this.handleUpdateClick = this.handleUpdateClick.bind(this);
     this.handleNewFoodName = this.handleNewFoodName.bind(this);
     this.handleNewFoodCalories = this.handleNewFoodCalories.bind(this);
+    this.handleRemoveClickNew = this.handleRemoveClickNew.bind(this);
   }
 
   componentDidMount() {
@@ -61,7 +59,6 @@ export default class Food extends React.Component {
   }
 
   foodReload(event) {
-
     event.preventDefault();
     fetch('/api/foodsReload', {
       method: 'POST',
@@ -74,7 +71,6 @@ export default class Food extends React.Component {
       .then(res => {
         if (res.length !== 0) {
           let foodsArray = [];
-
           for (var i = 0; i < res.length; i++) {
             foodsArray.push(res[i]);
           }
@@ -82,9 +78,7 @@ export default class Food extends React.Component {
             foods: foodsArray
           })
         }
-
         if (res.length === 0) {
-
           this.setState({
             foods: [{
               food: "",
@@ -98,7 +92,6 @@ export default class Food extends React.Component {
   }
 
   handleUpdateClick(index) {
-
     fetch('/api/foods/update', {
       method: 'PUT',
       headers: {
@@ -126,6 +119,7 @@ export default class Food extends React.Component {
       newFoods: test
     })
   }
+
   handleFoodName(e, index) {
     let test = [...this.state.foods];
     let test2 = { ...this.state.foods[index] };
@@ -135,6 +129,7 @@ export default class Food extends React.Component {
       foods: test
     })
   }
+
   handleNewFoodCalories(e, index) {
     let testing = [...this.state.newFoods];
     let testing2 = { ...this.state.newFoods[index] };
@@ -146,7 +141,6 @@ export default class Food extends React.Component {
   }
 
   handleCalories(e, index) {
-
     let test = [...this.state.foods];
     let test2 = { ...this.state.foods[index] };
     test2.calories = Number(e.target.value);
@@ -154,14 +148,11 @@ export default class Food extends React.Component {
     this.setState({
       foods: test
     })
-
   }
 
   handleRemoveClick(index) {
-
     event.preventDefault()
     const list = [...this.state.foods]
-
     list.splice(index, 1);
     this.setState({
       foods: list
@@ -173,7 +164,15 @@ export default class Food extends React.Component {
       },
       body: JSON.stringify(this.state.foods[index])
     })
+  }
 
+  handleRemoveClickNew(index) {
+    event.preventDefault();
+    const list = [...this.state.newFoods];
+    list.splice(index,1);
+    this.setState({
+      newFoods:list
+    })
   }
 
   handleAddClick() {
@@ -221,7 +220,6 @@ export default class Food extends React.Component {
               <button type="submit">Select Date</button>
             </div>
           </form>
-
         </div>
       )
     }
@@ -286,31 +284,27 @@ export default class Food extends React.Component {
                       <input id="newFoodsCalories" required onChange={e => this.handleNewFoodCalories(e, index)} type="number" placeholder="calories" value={this.state.newFoods[index].calories}></input>
 
                     </div>
+                    <div className="updateOrRemove">
+                      {this.state.newFoods.length > 1 && <button onClick={() => this.handleRemoveClickNew(index)} className="removeButton">Remove</button>}
+                      {this.state.newFoods.length !== 0 && <button onClick={() => this.handleUpdateClick(index)} className="updateButton">Update!</button>}
+                    </div>
                   </div>
-                  <div className="updateOrRemove">
-                    {this.state.newFoods.length > 1 && <button onClick={() => this.handleRemoveClick(index)} className="removeButton">Remove</button>}
-                    {this.state.newFoods.length !== 0 && <button onClick={() => this.handleUpdateClick(index)} className="updateButton">Update!</button>}
-                  </div>
-                  <div className="extraFoodButton" >
-                    <button onClick={this.handleAddClick}>Add!</button>
-                  </div>
-
                 </div>
               )
             })
             }
+          <div className="extraFoodButton" >
+            <button onClick={this.handleAddClick}>Add!</button>
+          </div>
             <div className="submitFood">
               <a className="saveFoodsButton" href="#workout" onClick={this.handleSubmit}>Save Foods!</a>
             </div>
-
-
         </div>
       )
     }
 
 
     if (this.state.foods[0].food === "" && this.state.createdAt === "" && this.state.data.length !== 0) {
-
       return (
         <div id="weightFoodContainer">
           <div id="weightFoodPageTitle">
@@ -332,19 +326,15 @@ export default class Food extends React.Component {
               <button type="submit">Select Date</button>
             </div>
           </form>
-
-
         </div>
       )
     }
     if (this.state.foods[0].food === "" && this.state.createdAt !== "" && this.state.foods[0].calories !== "") {
-
       return (
         <div id="weightFoodContainer">
           <div id="weightFoodPageTitle">
             Food
         </div>
-
           <form onSubmit={this.foodReload} id="dateForm">
             <div className="foodFoodDate">
               <input required onChange={this.handleChangeDate} type="date"></input>
@@ -353,9 +343,7 @@ export default class Food extends React.Component {
               <button type="submit">Select Date</button>
             </div>
           </form>
-
           <form id="foodForm">
-
             {this.state.newFoods.map((food, index) => {
               return (
                 <div key={index} className="foodCaloriesEntries">
@@ -367,21 +355,19 @@ export default class Food extends React.Component {
                     <div className="caloriesInput">
                     Calories :
                       <input id="newFoodsCalories" required onChange={e => this.handleNewFoodCalories(e, index)} type="number" placeholder="calories" value={this.state.newFoods[index].calories}></input>
-
+                    </div>
+                    <div className="updateOrRemove">
+                      {this.state.newFoods.length > 1 && <button onClick={() => this.handleRemoveClickNew(index)} className="removeButton">Remove</button>}
+                      {this.state.newFoods.length !== 0 && <button onClick={() => this.handleUpdateClick(index)} className="updateButton">Update!</button>}
                     </div>
                   </div>
-                  <div className="updateOrRemove">
-                    {this.state.newFoods.length > 1 && <button onClick={() => this.handleRemoveClick(index)} className="removeButton">Remove</button>}
-                    {this.state.newFoods.length !== 0 && <button onClick={() => this.handleUpdateClick(index)} className="updateButton">Update!</button>}
-                  </div>
-                  <div className="extraFoodButton" >
-                    <button onClick={this.handleAddClick}>Add!</button>
-                  </div>
-
                 </div>
               )
             })
             }
+            <div className="extraFoodButton" >
+              <button onClick={this.handleAddClick}>Add!</button>
+            </div>
             <div className="submitFood">
               <a className="saveFoodsButton" href="#workout" onClick={this.handleSubmit}>Save Foods!</a>
             </div>
@@ -390,9 +376,6 @@ export default class Food extends React.Component {
       )
     }
     if (this.state.foods[0].food !== "" & this.state.createdAt !== "") {
-
-
-
       return (
         <div id="weightFoodContainer">
           <div id="weightFoodPageTitle">
@@ -427,12 +410,11 @@ export default class Food extends React.Component {
                     <input required onChange={e => this.handleCalories(e, index)} type="number" placeholder="calories" value={this.state.foods[index].calories}></input>
 
                   </div>
+                  <div className="updateOrRemove">
+                    {this.state.foods.length > 1 && <button onClick={() => this.handleRemoveClick(index)} className="removeButton">Remove</button>}
+                    {this.state.foods.length !== 0 && <button onClick={() => this.handleUpdateClick(index)} className="updateButton">Update!</button>}
+                  </div>
                 </div>
-                <div className="updateOrRemove">
-                  {this.state.foods.length > 1 && <button onClick={() => this.handleRemoveClick(index)} className="removeButton">Remove</button>}
-                  {this.state.foods.length !== 0 && <button onClick={() => this.handleUpdateClick(index)} className="updateButton">Update!</button>}
-                </div>
-
               </div>
             )
           })
@@ -450,21 +432,19 @@ export default class Food extends React.Component {
                     <div className="caloriesInput">
                       Calories :
                       <input id="newFoodsCalories" required onChange={e => this.handleNewFoodCalories(e, index)} type="number" placeholder="calories" value={this.state.newFoods[index].calories}></input>
-
+                    </div>
+                    <div className="updateOrRemove">
+                      {this.state.newFoods.length > 1 && <button onClick={() => this.handleRemoveClickNe0w(index)} className="removeButton">Remove</button>}
+                      {this.state.newFoods.length !== 0 && <button onClick={() => this.handleUpdateClick(index)} className="updateButton">Update!</button>}
                     </div>
                   </div>
-                  <div className="updateOrRemove">
-                    {this.state.newFoods.length > 1 && <button onClick={() => this.handleRemoveClick(index)} className="removeButton">Remove</button>}
-                    {this.state.newFoods.length !== 0 && <button onClick={() => this.handleUpdateClick(index)} className="updateButton">Update!</button>}
-                  </div>
-                  <div className="extraFoodButton" >
-                    <button onClick={this.handleAddClick}>Add!</button>
-                  </div>
-
                 </div>
               )
             })
             }
+            <div className="extraFoodButton" >
+              <button onClick={this.handleAddClick}>Add!</button>
+            </div>
             <div className="submitFood">
               <a className="saveFoodsButton" href="#workout" onClick={this.handleSubmit}>Save Foods!</a>
             </div>
@@ -472,7 +452,5 @@ export default class Food extends React.Component {
         </div>
       )
     }
-
-
   }
 }

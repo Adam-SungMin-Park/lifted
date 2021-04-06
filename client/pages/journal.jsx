@@ -140,7 +140,7 @@ export default class Journal extends React.Component{
         return (
           <div id="weightFoodContainer">
             <div id="weightFoodPageTitle">
-              Weight Room
+              Body Weight
         </div>
             <div className="weightFoodDate">
               <input onChange={e => this.handleChangeDate(e)} required type="date"></input>
@@ -169,7 +169,7 @@ export default class Journal extends React.Component{
     return(
       <div id="weightFoodContainer">
         <div id="weightFoodPageTitle">
-          Weight Room
+          Body Weight
         </div>
         <div className="weightFoodDate">
           <input onChange={e =>this.handleChangeDate(e)} required type="date"></input>
@@ -196,7 +196,7 @@ export default class Journal extends React.Component{
       return (
         <div id="weightFoodContainer">
           <div id="weightFoodPageTitle">
-            Weight Room
+            Body Weight
         </div>
           <div className="weightFoodDate">
             <input onChange={e => this.handleChangeDate(e)} required type="date"></input>
