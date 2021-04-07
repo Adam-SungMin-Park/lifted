@@ -19,7 +19,14 @@ html{
   margin: 0 auto;
 }
 .caloriesInput{
+  margin-right: 1rem;
   margin-top:1rem;
+  align-items: left;
+  display: flex;
+  flex-direction: column;
+}
+.workOutDateButton{
+  color:blue
 }
 .material-icons.md-60{
   font-size:60px;
@@ -102,8 +109,8 @@ html{
   padding-top: 1rem;
 }
 .updateOrRemove{
-  text-align: right;
-  margin-top:1rem;
+  text-align: center;
+  margin-top:2.5rem;
 }
 #weightFoodPageTitle{
   text-align: center;
@@ -133,12 +140,14 @@ html{
 }
 
 .extraFoodButton{
-  text-align: right;
-  padding-top:1rem;
+  text-align: center;
+  padding-top:2rem;
   padding-bottom:2rem;
 }
 .foodNameInput{
-  text-align:center;
+  display:flex;
+  padding-right:1rem;
+  flex-direction:column;
   margin-top:1rem;
 }
 .signUpPlace{
@@ -254,8 +263,23 @@ html{
   padding-top: 1.5rem;
   padding-left: 1rem;
 }
+.newAddOrRemove{
+  padding-top: 1.5rem;
+  padding-left: 1rem;
+}
 .removeButton{
   margin-right:2rem;
+  color:red;
+}
+.foodRemoveButton{
+  margin-right:2rem;
+  color:red;
+
+}
+.foodCalories{
+  display:flex;
+  justify-content:center;
+  text-align: left;
 }
 .rowNumber{
   padding-bottom: 1rem;
@@ -263,34 +287,45 @@ html{
 }
 .addWorkOutInputField{
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 .addWorkOutName{
   display:flex;
   flex-direction:column;
+  text-align:left;
 }
 .addWorkOutWeight{
   display:flex;
   flex-direction:column;
+  text-align: left;
+  position:relative;
+  left:-2rem;
 }
 .addWorkOutReps{
   display:flex;
   flex-direction:column;
+  text-align: left;
+  position:relative;
+  left:-4rem;
 }
-
+.newRemoveButton{
+  color:red;
+}
 .previousWorkOutInputField{
   display:flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 .previousWorkOutName{
   display:flex;
   flex-direction:column;
+  text-align: left;
 }
 
 .previousWorkOutWeight{
   display:flex;
   flex-direction:column;
+  text-align: left;
 }
 .previousWorkOutReps{
   display:flex;
@@ -298,7 +333,9 @@ html{
 }
 .foodCaloriesEntries{
   text-align:center;
+  justify-content:center;
   margin:auto;
+  padding-top:1rem;
 }
 .rowExerciseWeightRep{
   width:95%;
@@ -306,6 +343,9 @@ html{
 }
 .submitFood{
   text-align: center
+}
+.foodSelectDateButton{
+  color:blue;
 }
 .demoSignUpButtonPlace{
   padding-top:3rem;
@@ -325,10 +365,27 @@ html{
 @media only screen and (max-width:420px) {
   .newExerciseName{
     margin-right:1rem;
-    width:7rem;
+    width:5rem;
   }
   .workOutExerciseDropDown{
     margin-right:1rem;
-    width:7rem;
+    width:5rem;
+  }
+  .foodCalories{
+    display:block;
+  }
+  .updateButton{
+    margin-right:2rem;
+  }
+
+  .addWorkOutReps{
+    left:-0.7rem;
+  }
+  .addWorkOutWeight{
+    left:-0.3rem;
+  }
+  .newRemoveButton{
+    position:relative;
+    left:-1rem;
   }
 }
