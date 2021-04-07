@@ -20,6 +20,9 @@ html{
 }
 .caloriesInput{
   margin-top:1rem;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 .workOutDateButton{
   color:blue
@@ -105,7 +108,7 @@ html{
   padding-top: 1rem;
 }
 .updateOrRemove{
-  text-align: right;
+  text-align: center;
   margin-top:1rem;
 }
 #weightFoodPageTitle{
@@ -136,12 +139,14 @@ html{
 }
 
 .extraFoodButton{
-  text-align: right;
-  padding-top:1rem;
+  text-align: center;
+  padding-top:2rem;
   padding-bottom:2rem;
 }
 .foodNameInput{
-  text-align:center;
+  align-items:center;
+  display:flex;
+  flex-direction:column;
   margin-top:1rem;
 }
 .signUpPlace{
@@ -307,6 +312,7 @@ html{
 .foodCaloriesEntries{
   text-align:center;
   margin:auto;
+  padding-top:1rem;
 }
 .rowExerciseWeightRep{
   width:95%;
@@ -314,6 +320,9 @@ html{
 }
 .submitFood{
   text-align: center
+}
+.foodSelectDateButton{
+  color:blue;
 }
 .demoSignUpButtonPlace{
   padding-top:3rem;
