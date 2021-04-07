@@ -188,7 +188,6 @@ export default class Food extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     if (this.state.data.length === 0 && this.state.createdAt === "") {
       return(
         <div id="weightFoodContainer">
@@ -281,12 +280,12 @@ export default class Food extends React.Component {
                       <input id="newFoodsName" required onChange={e => this.handleNewFoodName(e, index)} type="text" placeholder="food" value={this.state.newFoods[index].food}></input>
                     </div>
                     <div className="caloriesInput">
-                      <label>Caloriessss</label>
+                      <label>Calories</label>
                       <input id="newFoodsCalories" required onChange={e => this.handleNewFoodCalories(e, index)} type="number" placeholder="calories" value={this.state.newFoods[index].calories}></input>
 
                     </div>
                     <div className="updateOrRemove">
-                      {this.state.newFoods.length > 1 && <button onClick={() => this.handleRemoveClickNew(index)} className="removeButton">Remove</button>}
+                      {this.state.newFoods.length > 1 && <button onClick={() => this.handleRemoveClickNew(index)} className="foodRemoveButton">Remove</button>}
                     </div>
                   </div>
                 </div>
@@ -331,7 +330,6 @@ export default class Food extends React.Component {
       )
     }
     if (this.state.foods[0].food === "" && this.state.createdAt !== "" && this.state.foods[0].calories !== "") {
-      console.log("this is the one")
       return (
         <div id="weightFoodContainer">
           <div id="weightFoodPageTitle">
@@ -355,11 +353,11 @@ export default class Food extends React.Component {
                       <input id="newFoodsName" required onChange={e => this.handleNewFoodName(e, index)} type="text" placeholder="food" value={this.state.newFoods[index].food}></input>
                     </div>
                     <div className="caloriesInput">
-                      <label>Caloriessss</label>
+                      <label>Calories</label>
                       <input id="newFoodsCalories" required onChange={e => this.handleNewFoodCalories(e, index)} type="number" placeholder="calories" value={this.state.newFoods[index].calories}></input>
                     </div>
                     <div className="updateOrRemove">
-                      {this.state.newFoods.length > 1 && <button onClick={() => this.handleRemoveClickNew(index)} className="removeButton">Remove</button>}
+                      {this.state.newFoods.length > 1 && <button onClick={() => this.handleRemoveClickNew(index)} className="foodRemoveButton">Remove</button>}
                     </div>
                   </div>
                 </div>
@@ -412,7 +410,7 @@ export default class Food extends React.Component {
 
                   </div>
                   <div className="updateOrRemove">
-                    {this.state.foods.length > 1&& <button onClick={() => this.handleRemoveClick(index)} className="removeButton">Remove</button>}
+                    {this.state.foods.length > 1&& <button onClick={() => this.handleRemoveClick(index)} className="foodRemoveButton">Remove</button>}
                     {this.state.foods.length !== 0&& <button onClick={() => this.handleUpdateClick(index)} className="updateButton">Update!</button>}
                   </div>
                 </div>
@@ -435,7 +433,7 @@ export default class Food extends React.Component {
                       <input id="newFoodsCalories" required onChange={e => this.handleNewFoodCalories(e, index)} type="number" placeholder="calories" value={this.state.newFoods[index].calories}></input>
                     </div>
                     <div className="updateOrRemove">
-                      {this.state.newFoods.length > 1 && <button onClick={() => this.handleRemoveClickNew(index)} className="removeButton">Remove</button>}
+                      {this.state.newFoods.length > 1 && <button onClick={() => this.handleRemoveClickNew(index)} className="foodRemoveButton">Remove</button>}
                     </div>
                   </div>
                 </div>

@@ -330,7 +330,7 @@ export default class AddWorkOut extends React.Component{
                   </div>
                   <div className="addOrRemove">
                     {this.state.exercise.length !== 0 && <button onClick={(e) => this.handleRemoveClick(e, index)} className="removeButton">Remove</button>}
-                    {this.state.exercise.length !== 0 && <button onClick={(e) => this.handleUpdateClick(e, index)} className={index}>Update!</button>}
+                    {this.state.exercise.length !== 0 && <button onClick={(e) => this.handleUpdateClick(e, index)} className="updateButton">Update!</button>}
                   </div>
                 </div>
               </div>
@@ -351,8 +351,8 @@ export default class AddWorkOut extends React.Component{
                   <div className="addWorkOutReps">Reps
                     <input required onChange={(e) => this.handleRepsChange(e, index)} name="exerciseReps" value={this.state.newExercise[index].exerciseReps} placeholder="0" className="newExerciseReps" type="number" ></input>
                   </div>
-                  <div className="addOrRemove">
-                    {this.state.newExercise.length !== 0 && <button onClick={(e) => this.handleRemoveNew(e, index)} className={index}>Remove</button>}
+                  <div className="newAddOrRemove">
+                    {this.state.newExercise.length !== 0 && <button onClick={(e) => this.handleRemoveNew(e, index)} className="newRemoveButton">Remove</button>}
                   </div>
                 </div>
               </div>
@@ -360,7 +360,7 @@ export default class AddWorkOut extends React.Component{
           })}
 
           <div id="exerciseAddButtonPlace">
-            <button id="exerciseAddButton" onClick={this.handleAddClick}>Add More Exercises</button>
+            <button id="exerciseAddButton" onClick={this.handleAddClick}>Add More Exercise</button>
           </div>
 
           <div className="rowWorkOutVolume">
@@ -420,7 +420,7 @@ export default class AddWorkOut extends React.Component{
                 </div>
                 <div className = "addOrRemove">
                   {this.state.exercise.length !== 0 && <button onClick ={(e)=>this.handleRemoveClick(e, index)} className = "removeButton">Remove</button>}
-                  {this.state.exercise.length !== 0 && <button onClick={(e) => this.handleUpdateClick(e, index)} className={index}>Update!</button>}
+                  {this.state.exercise.length !== 0 && <button onClick={(e) => this.handleUpdateClick(e, index)} className="updateButton">Update!</button>}
                 </div>
               </div>
             </div>
@@ -441,8 +441,8 @@ export default class AddWorkOut extends React.Component{
                 <div className="addWorkOutReps">Reps
                     <input required onChange={(e) => this.handleRepsChange(e, index)} name="exerciseReps" value={this.state.newExercise[index].exerciseReps} placeholder="0" className="newExerciseReps" type="number" ></input>
                 </div>
-                <div className="addOrRemove">
-                  {this.state.newExercise.length !== 0 && <button onClick={(e) => this.handleRemoveNew(e, index)} className={index}>Remove</button>}
+                <div className="newAddOrRemove">
+                  {this.state.newExercise.length !== 0 && <button onClick={(e) => this.handleRemoveNew(e, index)} className="newRemoveButton">Remove</button>}
                 </div>
               </div>
             </div>
@@ -450,7 +450,7 @@ export default class AddWorkOut extends React.Component{
         })}
 
           <div id ="exerciseAddButtonPlace">
-            <button id= "exerciseAddButton" onClick = {this.handleAddClick}>Add More Exercises</button>
+            <button id= "exerciseAddButton" onClick = {this.handleAddClick}>Add More Exercise</button>
           </div>
 
           <div className = "rowWorkOutVolume">
@@ -506,8 +506,8 @@ export default class AddWorkOut extends React.Component{
                   <div className = "addWorkOutReps">Reps
                     <input required onChange={(e) => this.handleRepsChange(e, index)} name="exerciseReps" value={this.state.newExercise[index].exerciseReps} placeholder="0" className="newExerciseReps" type="number" ></input>
                   </div>
-                  <div className="addOrRemove">
-                    {this.state.newExercise.length !== 0 && <button onClick={(e) => this.handleRemoveNew(e, index)} className="removeButton">Remove</button>}
+                  <div className="newAddOrRemove">
+                    {this.state.newExercise.length !== 0 && <button onClick={(e) => this.handleRemoveNew(e, index)} className="newRemoveButton">Remove</button>}
                   </div>
                 </div>
               </div>
@@ -515,7 +515,7 @@ export default class AddWorkOut extends React.Component{
           })}
 
           <div id="exerciseAddButtonPlace">
-            <button id="exerciseAddButton" onClick={this.handleAddClick}>Add More Exercises</button>
+            <button id="exerciseAddButton" onClick={this.handleAddClick}>Add More Exercise</button>
           </div>
 
           <div className="rowWorkOutVolume">

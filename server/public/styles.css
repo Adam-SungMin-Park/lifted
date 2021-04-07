@@ -19,8 +19,9 @@ html{
   margin: 0 auto;
 }
 .caloriesInput{
+  margin-right: 1rem;
   margin-top:1rem;
-  align-items: center;
+  align-items: left;
   display: flex;
   flex-direction: column;
 }
@@ -109,7 +110,7 @@ html{
 }
 .updateOrRemove{
   text-align: center;
-  margin-top:1rem;
+  margin-top:2.5rem;
 }
 #weightFoodPageTitle{
   text-align: center;
@@ -144,8 +145,8 @@ html{
   padding-bottom:2rem;
 }
 .foodNameInput{
-  align-items:center;
   display:flex;
+  padding-right:1rem;
   flex-direction:column;
   margin-top:1rem;
 }
@@ -262,18 +263,31 @@ html{
   padding-top: 1.5rem;
   padding-left: 1rem;
 }
+.newAddOrRemove{
+  padding-top: 1.5rem;
+  padding-left: 1rem;
+}
 .removeButton{
   margin-right:2rem;
   color:red;
 }
+.foodRemoveButton{
+  margin-right:2rem;
+  color:red;
 
+}
+.foodCalories{
+  display:flex;
+  justify-content:center;
+  text-align: left;
+}
 .rowNumber{
   padding-bottom: 1rem;
   padding-top:1rem;
 }
 .addWorkOutInputField{
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 .addWorkOutName{
   display:flex;
@@ -283,27 +297,35 @@ html{
 .addWorkOutWeight{
   display:flex;
   flex-direction:column;
-  text-align: left
+  text-align: left;
+  position:relative;
+  left:-2rem;
 }
 .addWorkOutReps{
   display:flex;
   flex-direction:column;
-  text-align: left
+  text-align: left;
+  position:relative;
+  left:-4rem;
 }
-
+.newRemoveButton{
+  color:red;
+}
 .previousWorkOutInputField{
   display:flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
 }
 
 .previousWorkOutName{
   display:flex;
   flex-direction:column;
+  text-align: left;
 }
 
 .previousWorkOutWeight{
   display:flex;
   flex-direction:column;
+  text-align: left;
 }
 .previousWorkOutReps{
   display:flex;
@@ -311,6 +333,7 @@ html{
 }
 .foodCaloriesEntries{
   text-align:center;
+  justify-content:center;
   margin:auto;
   padding-top:1rem;
 }
@@ -346,6 +369,23 @@ html{
   }
   .workOutExerciseDropDown{
     margin-right:1rem;
-    width:7rem;
+    width:5rem;
+  }
+  .foodCalories{
+    display:block;
+  }
+  .updateButton{
+    margin-right:2rem;
+  }
+
+  .addWorkOutReps{
+    left:-0.7rem;
+  }
+  .addWorkOutWeight{
+    left:-0.3rem;
+  }
+  .newRemoveButton{
+    position:relative;
+    left:-1rem;
   }
 }
