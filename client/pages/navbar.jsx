@@ -49,7 +49,7 @@ export default class NavBar extends React.Component{
           <div className="collapse navbar-collapse" id="navbarText">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <a className="nav-link" href="#workout" onClick = {this.handleClick}>WorkOut</a>
+                <a className="nav-link" href="#workout" onClick = {this.handleClick}>Workout</a>
               </li>
               <li className="nav-item">
                 <a className="nav-link" href="#food" onClick={this.handleClick}>Food</a>

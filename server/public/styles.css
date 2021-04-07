@@ -21,6 +21,9 @@ html{
 .caloriesInput{
   margin-top:1rem;
 }
+.workOutDateButton{
+  color:blue
+}
 .material-icons.md-60{
   font-size:60px;
 }
@@ -256,7 +259,9 @@ html{
 }
 .removeButton{
   margin-right:2rem;
+  color:red;
 }
+
 .rowNumber{
   padding-bottom: 1rem;
   padding-top:1rem;
@@ -268,14 +273,17 @@ html{
 .addWorkOutName{
   display:flex;
   flex-direction:column;
+  text-align:left;
 }
 .addWorkOutWeight{
   display:flex;
   flex-direction:column;
+  text-align: left
 }
 .addWorkOutReps{
   display:flex;
   flex-direction:column;
+  text-align: left
 }
 
 .previousWorkOutInputField{
@@ -325,7 +333,7 @@ html{
 @media only screen and (max-width:420px) {
   .newExerciseName{
     margin-right:1rem;
-    width:7rem;
+    width:5rem;
   }
   .workOutExerciseDropDown{
     margin-right:1rem;

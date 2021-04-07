@@ -48,7 +48,7 @@ export default class WorkOut extends React.Component {
           label: labelArray
         })
       }
-      if(event.target.value === "Select WorkOut Part!"){
+      if(event.target.value === "Select Workout Part!"){
         allDataArray.push(this.state.allData[i].data)
         allLabelArray.push(this.state.allData[i].label);
         this.setState({
@@ -91,7 +91,7 @@ export default class WorkOut extends React.Component {
       </div>
       <div id="homeWorkOutPartsDropDown">
         <select onChange={this.handleWorkOutPart}name="workoutParts" id="workOutPartsDropDown" value ={this.state.workOutPart}>
-          <option>Select WorkOut Part!</option>
+          <option>Select Workout Part!</option>
           <option value="Chest">Chest</option>
           <option value="Shoulder">Shoulder</option>
           <option value="Back">Back</option>
@@ -109,7 +109,7 @@ export default class WorkOut extends React.Component {
           />
       <div id = "workOutAddButtonPlace">
         <a href= "#addworkout" id = "workOutAdd" >
-          Add Work Out
+          Add Workout
         </a>
       </div>
 </>
