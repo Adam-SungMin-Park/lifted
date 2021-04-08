@@ -267,14 +267,14 @@ export default class AddWorkOut extends React.Component{
             Add Workout
           </div>
           <div className="weightFoodDate">
-            <input onChange={e => this.handleChangeDate(e)} required type="date"></input>
+            <input className="addWorkOutDate" onChange={e => this.handleChangeDate(e)} required type="date"></input>
             <div className="foodFoodDateButton">
               <button className = "workOutDateButton" onClick={e => this.handleSubmitDate(e)}>Set Workout Date</button>
             </div>
           </div>
             <div className="rowWorkOutPartsDate">
               <select required value={this.state.workOutPart} onChange={this.handleInputChange('workOutPart')} name="workOutWorkOutPartDrop" id="workOutWorkOutPartDropDown">
-                <option value = "default">Select WorkOut Part!</option>
+                <option value = "default">Select Workout Part</option>
                 <option value="Chest">Chest</option>
                 <option value="Shoulder">Shoulder</option>
                 <option value="Back">Back</option>
@@ -294,7 +294,7 @@ export default class AddWorkOut extends React.Component{
             Add Workout
         </div>
           <div className="weightFoodDate">
-            <input onChange={e => this.handleChangeDate(e)} required type="date"></input>
+            <input className="addWorkOutDate" onChange={e => this.handleChangeDate(e)} required type="date"></input>
             <div className="foodFoodDateButton">
               <button className = "workOutDateButton" onClick={e => this.handleSubmitDate(e)}>Set Workout Date</button>
             </div>
@@ -303,7 +303,7 @@ export default class AddWorkOut extends React.Component{
 
           <div className="rowWorkOutPartsDate">
             <select required value={this.state.workOutPart} onChange={this.handleInputChange('workOutPart')} name="workOutWorkOutPartDrop" id="workOutWorkOutPartDropDown">
-              <option>Select WorkOut Part!</option>
+              <option>Select Workout Part</option>
               <option value="Chest">Chest</option>
               <option value="Shoulder">Shoulder</option>
               <option value="Back">Back</option>
@@ -317,12 +317,11 @@ export default class AddWorkOut extends React.Component{
           {this.state.exercise.map((exercise, index) => {
             return (
               <div key={index} className="rowExerciseWeightRep">
-
                 <div className="previousWorkOutInputField">
                   <div className="previousWorkOutName">Name
                   <input required onChange={(e) => this.handleExerciseNameChange(e, index)} name="exerciseName" placeholder ="Exercise Name" value={this.state.exercise[index].exerciseName} className="workOutExerciseDropDown"></input>
                   </div>
-                  <div className="previousWorkOutWeight">Weight
+                  <div className="previousWorkOutWeight">Weight (lbs)
                   <input required onChange={(e) => this.handleWeightChange(e, index)} name="exerciseWeight" value={this.state.exercise[index].exerciseWeight} placeholder="weight" className="workOutExerciseWeight" type="number" ></input>
                   </div>
                   <div className="previousWorkOutReps">Reps
@@ -330,7 +329,7 @@ export default class AddWorkOut extends React.Component{
                   </div>
                   <div className="addOrRemove">
                     {this.state.exercise.length !== 0 && <button onClick={(e) => this.handleRemoveClick(e, index)} className="removeButton">Remove</button>}
-                    {this.state.exercise.length !== 0 && <button onClick={(e) => this.handleUpdateClick(e, index)} className="updateButton">Update!</button>}
+                    {this.state.exercise.length !== 0 && <button onClick={(e) => this.handleUpdateClick(e, index)} className="updateButton">Update</button>}
                   </div>
                 </div>
               </div>
@@ -339,17 +338,15 @@ export default class AddWorkOut extends React.Component{
           {this.state.newExercise.map((exercise, index) => {
             return (
               <div key={index} className="rowExerciseWeightRep">
-
-
                 <div className="addWorkOutInputField">
                   <div className="addWorkOutName">Name
                     <input placeholder="Exercise Name" label="Exercise Name" required onChange={(e) => this.handleExerciseNameChange(e, index)} name="exerciseName" value={this.state.newExercise[index].exerciseName} className="newExerciseName"></input>
                   </div>
-                  <div className="addWorkOutWeight">Weight
-                    <input required onChange={(e) => this.handleWeightChange(e, index)} name="exerciseWeight" value={this.state.newExercise[index].exerciseWeight} placeholder="0" className="newExerciseWeight" type="number" ></input>
+                  <div className="addWorkOutWeight">Weight (lbs)
+                    <input min ="0" required onChange={(e) => this.handleWeightChange(e, index)} name="exerciseWeight" value={this.state.newExercise[index].exerciseWeight} placeholder="0" className="newExerciseWeight" type="number" ></input>
                   </div>
                   <div className="addWorkOutReps">Reps
-                    <input required onChange={(e) => this.handleRepsChange(e, index)} name="exerciseReps" value={this.state.newExercise[index].exerciseReps} placeholder="0" className="newExerciseReps" type="number" ></input>
+                    <input min="0" required onChange={(e) => this.handleRepsChange(e, index)} name="exerciseReps" value={this.state.newExercise[index].exerciseReps} placeholder="0" className="newExerciseReps" type="number" ></input>
                   </div>
                   <div className="newAddOrRemove">
                     {this.state.newExercise.length !== 0 && <button onClick={(e) => this.handleRemoveNew(e, index)} className="newRemoveButton">Remove</button>}
@@ -360,14 +357,14 @@ export default class AddWorkOut extends React.Component{
           })}
 
           <div id="exerciseAddButtonPlace">
-            <button id="exerciseAddButton" onClick={this.handleAddClick}>Add More Exercise</button>
+            <button id="exerciseAddButton" onClick={this.handleAddClick}>Add Another Exercise</button>
           </div>
 
           <div className="rowWorkOutVolume">
             <input value={this.handleVolume()} id="workOutVolume" type="number" placeholder="Total volume" readOnly></input>
           </div>
           <div className="submitWorkOut">
-            <a className="addWorkOut" href={this.state.workOutSaved} onClick={this.handleSubmit}>Save Work Out</a>
+            <a className="addWorkOut" href={this.state.workOutSaved} onClick={this.handleSubmit}>Save Workout</a>
           </div>
 
         </div>
@@ -384,7 +381,7 @@ export default class AddWorkOut extends React.Component{
           Add Workout
         </div>
         <div className="weightFoodDate">
-          <input onChange={e => this.handleChangeDate(e)} required type="date"></input>
+            <input className="addWorkOutDate" onChange={e => this.handleChangeDate(e)} required type="date"></input>
           <div className="foodFoodDateButton">
               <button className="workOutDateButton" onClick={e => this.handleSubmitDate(e)}>Set Workout Date</button>
           </div>
@@ -393,7 +390,7 @@ export default class AddWorkOut extends React.Component{
 
           <div className = "rowWorkOutPartsDate">
             <select required value = {this.state.workOutPart} onChange={this.handleInputChange('workOutPart')} name="workOutWorkOutPartDrop" id="workOutWorkOutPartDropDown">
-              <option>Select WorkOut Part!</option>
+              <option>Select Workout Part</option>
               <option value="Chest">Chest</option>
               <option value="Shoulder">Shoulder</option>
               <option value="Back">Back</option>
@@ -407,12 +404,11 @@ export default class AddWorkOut extends React.Component{
         {this.state.exercise.map((exercise,index)=>{
           return(
             <div key = {index} className="rowExerciseWeightRep">
-
               <div className = "previousWorkOutInputField">
                 <div className ="previousWorkOutName">Name
                   <input  required onChange={(e)=> this.handleExerciseNameChange(e,index)} name="exerciseName" value={this.state.exercise[index].exerciseName} className="workOutExerciseDropDown"></input>
                 </div>
-                <div className ="previousWorkOutWeight">Weight
+                <div className ="previousWorkOutWeight">Weight (lbs)
                   <input required onChange={(e) => this.handleWeightChange(e, index)} name="exerciseWeight" value={this.state.exercise[index].exerciseWeight} placeholder="weight" className="workOutExerciseWeight" type="number" ></input>
                 </div>
                 <div className = "previousWorkOutReps">Reps
@@ -420,7 +416,7 @@ export default class AddWorkOut extends React.Component{
                 </div>
                 <div className = "addOrRemove">
                   {this.state.exercise.length !== 0 && <button onClick ={(e)=>this.handleRemoveClick(e, index)} className = "removeButton">Remove</button>}
-                  {this.state.exercise.length !== 0 && <button onClick={(e) => this.handleUpdateClick(e, index)} className="updateButton">Update!</button>}
+                  {this.state.exercise.length !== 0 && <button onClick={(e) => this.handleUpdateClick(e, index)} className="updateButton">Update</button>}
                 </div>
               </div>
             </div>
@@ -429,17 +425,15 @@ export default class AddWorkOut extends React.Component{
         {this.state.newExercise.map((exercise,index)=>{
           return (
             <div key={index} className="rowExerciseWeightRep">
-
-
               <div className="addWorkOutInputField">
                 <div className="addWorkOutName">Name
                     <input label="Exercise Name" required onChange={(e) => this.handleExerciseNameChange(e, index)} name="exerciseName" value={this.state.newExercise[index].exerciseName} className="newExerciseName"></input>
                 </div>
-                <div className="addWorkOutWeight">Weight
-                    <input required onChange={(e) => this.handleWeightChange(e, index)} name="exerciseWeight" value={this.state.newExercise[index].exerciseWeight} placeholder="0" className="newExerciseWeight" type="number" ></input>
+                <div className="addWorkOutWeight">Weight (lbs)
+                    <input min="0" required onChange={(e) => this.handleWeightChange(e, index)} name="exerciseWeight" value={this.state.newExercise[index].exerciseWeight} placeholder="0" className="newExerciseWeight" type="number" ></input>
                 </div>
                 <div className="addWorkOutReps">Reps
-                    <input required onChange={(e) => this.handleRepsChange(e, index)} name="exerciseReps" value={this.state.newExercise[index].exerciseReps} placeholder="0" className="newExerciseReps" type="number" ></input>
+                    <input min="0" required onChange={(e) => this.handleRepsChange(e, index)} name="exerciseReps" value={this.state.newExercise[index].exerciseReps} placeholder="0" className="newExerciseReps" type="number" ></input>
                 </div>
                 <div className="newAddOrRemove">
                   {this.state.newExercise.length !== 0 && <button onClick={(e) => this.handleRemoveNew(e, index)} className="newRemoveButton">Remove</button>}
@@ -448,40 +442,33 @@ export default class AddWorkOut extends React.Component{
             </div>
           )
         })}
-
           <div id ="exerciseAddButtonPlace">
-            <button id= "exerciseAddButton" onClick = {this.handleAddClick}>Add More Exercise</button>
+            <button id= "exerciseAddButton" onClick = {this.handleAddClick}>Add Another Exercise</button>
           </div>
-
           <div className = "rowWorkOutVolume">
             <input value ={this.handleVolume()} id = "workOutVolume" type = "number" placeholder="Total volume" readOnly></input>
           </div>
           <div className = "submitWorkOut">
-            <a className="addWorkOut" href = {this.state.workOutSaved} onClick ={this.handleSubmit}>Save Work Out</a>
+            <a className="addWorkOut" href = {this.state.workOutSaved} onClick ={this.handleSubmit}>Save Workout</a>
           </div>
-
       </div>
-
     )
   }
     if (this.state.exercise[0].exerciseName === ""){
-
     return(
       <div id="addWorkOutContainer">
         <div id="addWorkOutPageTitle">
           Add Workout
         </div>
         <div className="weightFoodDate">
-          <input onChange={e => this.handleChangeDate(e)} required type="date"></input>
+          <input className="addWorkOutDate" onChange={e => this.handleChangeDate(e)} required type="date"></input>
           <div className="foodFoodDateButton">
             <button className = "workOutDateButton" onClick={e => this.handleSubmitDate(e)}>Set Workout Date</button>
           </div>
         </div>
-
-
           <div className="rowWorkOutPartsDate">
             <select required value={this.state.workOutPart} onChange={this.handleInputChange('workOutPart')} name="workOutWorkOutPartDrop" id="workOutWorkOutPartDropDown">
-              <option>Select WorkOut Part!</option>
+              <option>Select Workout Part</option>
               <option value="Chest">Chest</option>
               <option value="Shoulder">Shoulder</option>
               <option value="Back">Back</option>
@@ -494,17 +481,15 @@ export default class AddWorkOut extends React.Component{
           {this.state.newExercise.map((exercise, index) => {
             return (
               <div key={index} className="rowExerciseWeightRep">
-
-
                   <div className = "addWorkOutInputField">
                   <div className ="addWorkOutName">Name
                     <input placeholder="Exercise Name" label="Exercise Name" required onChange={(e) => this.handleExerciseNameChange(e, index)} name="exerciseName" value={this.state.newExercise[index].exerciseName} className="newExerciseName"></input>
                   </div>
-                  <div className = "addWorkOutWeight">Weight
-                    <input required onChange={(e) => this.handleWeightChange(e, index)} name="exerciseWeight" value={this.state.newExercise[index].exerciseWeight} placeholder="0" className="newExerciseWeight" type="number" ></input>
+                  <div className = "addWorkOutWeight">Weight (lbs)
+                    <input min="0" required onChange={(e) => this.handleWeightChange(e, index)} name="exerciseWeight" value={this.state.newExercise[index].exerciseWeight} placeholder="0" className="newExerciseWeight" type="number" ></input>
                   </div>
                   <div className = "addWorkOutReps">Reps
-                    <input required onChange={(e) => this.handleRepsChange(e, index)} name="exerciseReps" value={this.state.newExercise[index].exerciseReps} placeholder="0" className="newExerciseReps" type="number" ></input>
+                    <input min="0" required onChange={(e) => this.handleRepsChange(e, index)} name="exerciseReps" value={this.state.newExercise[index].exerciseReps} placeholder="0" className="newExerciseReps" type="number" ></input>
                   </div>
                   <div className="newAddOrRemove">
                     {this.state.newExercise.length !== 0 && <button onClick={(e) => this.handleRemoveNew(e, index)} className="newRemoveButton">Remove</button>}
@@ -513,18 +498,15 @@ export default class AddWorkOut extends React.Component{
               </div>
             )
           })}
-
           <div id="exerciseAddButtonPlace">
-            <button id="exerciseAddButton" onClick={this.handleAddClick}>Add More Exercise</button>
+            <button id="exerciseAddButton" onClick={this.handleAddClick}>Add Another Exercise</button>
           </div>
-
           <div className="rowWorkOutVolume">
             <input value={this.handleVolume()} id="workOutVolume" type="number" placeholder="Total volume" readOnly></input>
           </div>
           <div className="submitWorkOut">
-          <a className="addWorkOut" href={this.state.workOutSaved} onClick={this.handleSubmit}>Save Work Out</a>
+          <a className="addWorkOut" href={this.state.workOutSaved} onClick={this.handleSubmit}>Save Workout</a>
           </div>
-
       </div>
     )
   }

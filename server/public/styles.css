@@ -10,7 +10,12 @@
 html{
   background-color:darkgray
 }
-
+input{
+  padding:0 0.3rem;
+}
+button{
+  padding:0 0.3rem;
+}
 #root{
   background-color:darkgray;
 }
@@ -26,7 +31,8 @@ html{
   flex-direction: column;
 }
 .workOutDateButton{
-  color:blue
+  color:blue;
+  padding:0 0.3rem;
 }
 .material-icons.md-60{
   font-size:60px;
@@ -90,7 +96,7 @@ html{
   text-align:center;
 }
 .workOutExerciseRep{
-  width:40px;
+  width:50px;
 }
 .workOutExerciseWeight{
   width:60px;
@@ -100,6 +106,13 @@ html{
   width: 200px;
   margin-right: 2rem;
 }
+#workOutWorkOutPartDropDown{
+  padding:0 0.3rem;
+}
+
+.addWorkOutDate{
+  padding: 0 0.3rem;
+}
 .rowWorkOutVolume{
   text-align: right;
   padding-top: 2rem;
@@ -107,6 +120,9 @@ html{
 #exerciseAddButtonPlace{
   text-align: right;
   padding-top: 1rem;
+}
+#exerciseAddButton{
+  padding: 0 0.3rem;
 }
 .updateOrRemove{
   text-align: center;
@@ -211,15 +227,13 @@ html{
 .newExerciseName{
   width: 200px;
   margin-right: 2rem;
-
 }
 .newExerciseWeight{
   width: 60px;
   margin-right: 2rem;
-
 }
 .newExerciseReps{
-  width: 40px;
+  width: 50px;
 }
 .saveFoodsButton{
   border: 1px solid;
@@ -270,6 +284,7 @@ html{
 .removeButton{
   margin-right:2rem;
   color:red;
+  padding: 0 0.3rem;
 }
 .foodRemoveButton{
   margin-right:2rem;
@@ -306,10 +321,11 @@ html{
   flex-direction:column;
   text-align: left;
   position:relative;
-  left:-4rem;
+  left:-4.4rem;
 }
 .newRemoveButton{
   color:red;
+  padding: 0 0.3rem;
 }
 .previousWorkOutInputField{
   display:flex;
@@ -330,6 +346,7 @@ html{
 .previousWorkOutReps{
   display:flex;
   flex-direction:column;
+  text-align:left;
 }
 .foodCaloriesEntries{
   text-align:center;
@@ -340,6 +357,8 @@ html{
 .rowExerciseWeightRep{
   width:95%;
   margin:auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }
 .submitFood{
   text-align: center
@@ -379,7 +398,7 @@ html{
   }
 
   .addWorkOutReps{
-    left:-0.7rem;
+    left:-0.5rem;
   }
   .addWorkOutWeight{
     left:-0.3rem;
@@ -388,4 +407,19 @@ html{
     position:relative;
     left:-1rem;
   }
+  .newAddOrRemove{
+    padding-top:1.2rem;
+    position: relative;
+    left: 0.3rem;
+  }
+  .addWorkOutInputField{
+    font-size:0.8rem;
+  }
+  .rowExerciseWeightRep{
+    font-size: 0.8rem
+  }
+  .addOrRemove{
+    padding-top:1.2rem;
+  }
+
 }
