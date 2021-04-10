@@ -56,6 +56,7 @@ export default class Food extends React.Component {
     }).then(res => (res))
       .then(data => (data))
       .catch(err => { return err })
+    window.location.reload();
   }
 
   foodReload(event) {
@@ -102,6 +103,7 @@ export default class Food extends React.Component {
       .then(res => (res))
       .then(data => (data))
       .catch(err => { return err })
+    window.location.reload();
   }
 
   handleChangeDate() {
@@ -235,7 +237,7 @@ export default class Food extends React.Component {
             <button onClick={this.handleAddClick}>Add Extra Food</button>
           </div>
           <div className="submitFood">
-            <a className="saveFoodsButton" href="#workout" onClick={this.handleSubmit}>Save Foods!</a>
+            <a className="saveFoodsButton" href="#food" onClick={this.handleSubmit}>Save Foods!</a>
           </div>
         </div>
       )
@@ -347,7 +349,7 @@ export default class Food extends React.Component {
             <button onClick={this.handleAddClick}>Add Extra Food</button>
           </div>
             <div className="submitFood">
-              <a className="saveFoodsButton" href="#workout" onClick={this.handleSubmit}>Save Foods!</a>
+              <a className="saveFoodsButton" href="#food" onClick={this.handleSubmit}>Save Foods!</a>
             </div>
         </div>
       )
@@ -416,7 +418,7 @@ export default class Food extends React.Component {
               <button onClick={this.handleAddClick}>Add Extra Food</button>
             </div>
             <div className="submitFood">
-              <a className="saveFoodsButton" href="#workout" onClick={this.handleSubmit}>Save Foods!</a>
+              <a className="saveFoodsButton" href="#food" onClick={this.handleSubmit}>Save Foods!</a>
             </div>
           </form>
         </div>
@@ -490,7 +492,7 @@ export default class Food extends React.Component {
               <button onClick={this.handleAddClick}>Add Extra Food</button>
             </div>
             <div className="submitFood">
-              <a className="saveFoodsButton" href="#workout" onClick={this.handleSubmit}>Save Foods!</a>
+              <a className="saveFoodsButton" href="#food" onClick={this.handleSubmit}>Save Foods!</a>
             </div>
           </form>
         </div>

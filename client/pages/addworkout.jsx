@@ -360,12 +360,16 @@ export default class AddWorkOut extends React.Component{
           </div>
 
           <div className="rowWorkOutVolume">
-            <input value={this.handleVolume()} id="workOutVolume" type="number" placeholder="Total volume" readOnly></input>
-          </div>
+            <div className="rowWorkOutVolume">
+              <div className="volumeLabel">
+                <label>Total Volume (reps x weight)</label>
+              </div>
+              <input value={this.handleVolume()} id="workOutVolume" type="number" placeholder="Total volume" readOnly></input>
+            </div>
           <div className="submitWorkOut">
             <a className="addWorkOut" href={this.state.workOutSaved} onClick={this.handleSubmit}>Save Workout</a>
           </div>
-
+        </div>
         </div>
       )
     }
@@ -445,6 +449,9 @@ export default class AddWorkOut extends React.Component{
             <button id= "exerciseAddButton" onClick = {this.handleAddClick}>Add Another Exercise</button>
           </div>
           <div className = "rowWorkOutVolume">
+              <div className="volumeLabel">
+                <label>Total Volume (reps x weight)</label>
+              </div>
             <input value ={this.handleVolume()} id = "workOutVolume" type = "number" placeholder="Total volume" readOnly></input>
           </div>
           <div className = "submitWorkOut">
@@ -501,6 +508,9 @@ export default class AddWorkOut extends React.Component{
             <button id="exerciseAddButton" onClick={this.handleAddClick}>Add Another Exercise</button>
           </div>
           <div className="rowWorkOutVolume">
+            <div className="volumeLabel">
+              <label>Total Volume (reps x weight)</label>
+            </div>
             <input value={this.handleVolume()} id="workOutVolume" type="number" placeholder="Total volume" readOnly></input>
           </div>
           <div className="submitWorkOut">

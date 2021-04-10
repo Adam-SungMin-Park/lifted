@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import Chart from "chart.js";
 import LineGraph from './linegraph';
-
 import App from '../app';
+import { render } from 'react-dom';
+
+
 export default class WorkOut extends React.Component {
 
   constructor(props){

@@ -10,6 +10,7 @@ export default class LineGraph2 extends React.Component {
   }
 
   componentDidUpdate() {
+
     let weightLength =this.props.data.length;
     let averageWeight =0;
     let averageWeightArray=[];
@@ -83,6 +84,7 @@ export default class LineGraph2 extends React.Component {
           }],
           xAxes:[{
             ticks:{
+              reverse:true,
               fontColor: 'rgb(40,127,62)'
             }
           }]

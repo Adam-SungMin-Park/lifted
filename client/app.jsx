@@ -130,7 +130,7 @@ export default class App extends React.Component {
     const { route } = this.state;
     if (route.path !== '' && route.path !== 'signup' && route.path !== 'signin' && route.path !== 'signedin' ){
       return (
-        <div className = "container">
+        <div className = "container-sm">
           <div className = "wrapper">
           <NavBar userId={this.state.userId} />
           {this.renderPage()}
@@ -140,7 +140,7 @@ export default class App extends React.Component {
     }
     if( route.path === '') {
       return (
-        <div className="container">
+        <div className="container-sm">
           <div className ="wrapper">
             {this.renderPage()}
           </div>
@@ -149,7 +149,7 @@ export default class App extends React.Component {
     }
     if(route.path === 'signup') {
       return(
-        <div className="container">
+        <div className="container-sm">
 
           <div className="signUpPage">
             <h1>Sign Up/ <a href="#signin" onClick={this.viewChange}>Sign in</a></h1>
@@ -170,7 +170,7 @@ export default class App extends React.Component {
     }
     if(route.path === 'signin') {
       return (
-        <div className="container">
+        <div className="container-sm">
 
           <div className="signInPage">
             <h1><a href="#signup" onClick={this.viewChange}>Sign Up</a>/Sign in</h1>
@@ -203,7 +203,7 @@ export default class App extends React.Component {
     }
     if(route.path === 'signedin' && this.state.userId === "undefined") {
       return(
-        <div className="container">
+        <div className="container-sm">
 
           <div className="signedInPage">
             <h1>
