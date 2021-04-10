@@ -7,18 +7,24 @@
   padding:0;
 
 }
-html{
-  background-color:darkgray
-}
+
 input{
   padding:0 0.3rem;
 }
 button{
   padding:0 0.3rem;
 }
-#root{
-  background-color:darkgray;
+.linegraph{
+  pointer-events: none;
 }
+.linegraph2{
+  pointer-events: none;
+}
+.linegraph3{
+  pointer-events: none;
+}
+
+
 .wrapper {
   max-width: 1000px;
   margin: 0 auto;

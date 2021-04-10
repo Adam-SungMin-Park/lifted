@@ -28,6 +28,14 @@ export default class LineGraph extends React.Component {
         ]
       },
       options: {
+        animation: {
+          duration: 0
+        },
+        hover: {
+          animationDuration: 0
+        },
+
+        responsiveAnimationDuration: 0,
         events: ['click'],
         responsive: true,
         legend: {
@@ -72,3 +80,6 @@ export default class LineGraph extends React.Component {
 
 }
 }
+window.addEventListener('resize', () => {
+  window.location.reload();
+})

@@ -46,13 +46,7 @@ export default class Journal extends React.Component{
     })
   }
 
-  handleSubmitWeight(){
-    this.setState({
-      weight: Number(event.target.value)
-    })
-  }
   handleChangeDate(e) {
-
     e.preventDefault();
     let test = [];
     test[0]=  e.target.value;
@@ -93,7 +87,6 @@ export default class Journal extends React.Component{
           })
         }
     }
-
   }
 
   handleUpdate(){
@@ -104,6 +97,7 @@ export default class Journal extends React.Component{
       },
       body:JSON.stringify(this.state)
     })
+    window.location.reload();
   }
 
   handleSubmit() {
@@ -115,7 +109,7 @@ export default class Journal extends React.Component{
       body: JSON.stringify(this.state)
     }).then(res => res.json())
       .catch(err => { return err })
-
+    window.location.reload();
   }
   handleRemoveClick(index) {
     event.preventDefault()
@@ -141,26 +135,22 @@ export default class Journal extends React.Component{
           <div id="weightFoodContainer">
             <div id="weightFoodPageTitle">
               Body Weight
-        </div>
+            </div>
             <div className="weightFoodDate">
               <input onChange={e => this.handleChangeDate(e)} required type="date"></input>
             </div>
-
             <div className="weightFoodWeight">
               <input min="0" onChange={this.handleChangeWeight} type="number" placeholder="weight in lbs" value={this.state.weight} ></input>
             </div>
             <div className="addWeightButton">
-              <a href="#workout" onClick={this.handleUpdate}><button type="submit" >Update Weight!</button></a>
+              <a onClick={this.handleUpdate}><button type="submit" >Update Weight!</button></a>
             </div>
-
-
             <div id="caloriesGraphPlace">
               <LineGraph2
                 label={this.state.dateData}
                 data={this.state.weightData}
               />
             </div>
-
           </div>
         )
       }
@@ -173,17 +163,13 @@ export default class Journal extends React.Component{
         </div>
         <div className="weightFoodDate">
           <input onChange={e =>this.handleChangeDate(e)} required type="date"></input>
-
         </div>
-
           <div className="weightFoodWeight">
           <input min="0" onChange ={this.handleChangeWeight}  type = "number" placeholder = "weight in lbs" value ={this.state.weight} ></input>
           </div>
           <div className = "addWeightButton">
-            <a href="#workout" onClick={this.handleSubmit}><button type = "submit" >Save Weight!</button></a>
+            <a onClick={this.handleSubmit}><button type = "submit" >Save Weight!</button></a>
           </div>
-
-
           <div id="caloriesGraphPlace">
             <LineGraph2
               label={this.state.dateData}
@@ -200,13 +186,12 @@ export default class Journal extends React.Component{
         </div>
           <div className="weightFoodDate">
             <input onChange={e => this.handleChangeDate(e)} required type="date"></input>
-
           </div>
           <div className="weightFoodWeight">
             <input min="0" onChange={this.handleChangeWeight} type="number" placeholder="weight in lbs" value={this.state.weight} ></input>
           </div>
           <div className="addWeightButton">
-            <a href="#workout" onClick={this.handleSubmit}><button type="submit" >Save Weight!</button></a>
+            <a onClick={this.handleSubmit}><button type="submit" >Save Weight!</button></a>
           </div>
           </div>
       )

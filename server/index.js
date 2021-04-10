@@ -140,7 +140,7 @@ app.get('/api/weight',(req, res)=>{
   const sql = `
     select "userWeight","createdAt"
     from "userWeight"
-    order by "createdAt"
+    order by "createdAt" desc
     limit 10
   `
   db.query(sql)
