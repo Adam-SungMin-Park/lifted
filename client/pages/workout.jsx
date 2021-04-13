@@ -87,6 +87,7 @@ export default class WorkOut extends React.Component {
 
 
   render(){
+
   return (
     <div className="wrapper" onChange ={console.log('hihi')}>
       <div id = "workOutPageTitle">
@@ -117,7 +118,9 @@ export default class WorkOut extends React.Component {
           Add Workout
         </a>
       </div>
-      </div>
+    </div>
+
+
 
   );
   }

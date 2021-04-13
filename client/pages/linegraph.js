@@ -42,6 +42,7 @@ export default class LineGraph extends React.Component {
         ]
       },
       options: {
+        responsive: true,
         animation: {
           duration: 0
         },
@@ -54,8 +55,6 @@ export default class LineGraph extends React.Component {
             fontColor: 'rgb(40,127,62)'
           }
         },
-        responsive:true,
-        maintainAspectRatio: false,
         scales: {
           yAxes: [{
             ticks: {
