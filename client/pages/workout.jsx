@@ -89,7 +89,7 @@ export default class WorkOut extends React.Component {
   render(){
 
   return (
-    <div className="wrapper" onChange ={console.log('hihi')}>
+    <div className="wrapper">
       <div id = "workOutPageTitle">
         Workout Overview
       </div>
