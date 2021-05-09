@@ -188,7 +188,6 @@ export default class AddWorkOut extends React.Component{
   }
 
   handleRemoveClick(index) {
-    console.log(event.target)
     event.preventDefault()
     const list = [...this.state.exercise];
     list.splice(event.target.id, 1);
@@ -258,7 +257,6 @@ export default class AddWorkOut extends React.Component{
 
   render(){
     this.handleVolume()
-    console.log(this.state)
     if(this.state.createdAt === null && this.state.exercise[0].exerciseName===""){
       return(
         <div id="addWorkOutContainer">

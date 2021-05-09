@@ -16,7 +16,6 @@ export default class LineGraph extends React.Component {
   }
 
   handleChange(){
-    console.log(this.state);
     this.setState({
       height:window.innerHeight,
       width:window.innerWidth
@@ -82,7 +81,7 @@ export default class LineGraph extends React.Component {
      )
    }
     return (
-      <div className= "wrapper" onChange ={console.log('he')}>
+      <div className= "wrapper">
         <canvas
           className = "chartjs-render-monitor"
           id="myChart"
