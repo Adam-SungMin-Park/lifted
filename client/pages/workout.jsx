@@ -33,7 +33,6 @@ export default class WorkOut extends React.Component {
       workOutPart: event.target.value
     })
     this.getData3();
-
   }
 
   getData3(){
@@ -50,6 +49,8 @@ export default class WorkOut extends React.Component {
           label: labelArray
         })
       }
+    }
+    for(var i = 1 ; i < this.state.allData.length; i++){
       if(event.target.value === "Select Workout Part!"){
         allDataArray.push(this.state.allData[i].data)
         allLabelArray.push(this.state.allData[i].label);
@@ -58,8 +59,8 @@ export default class WorkOut extends React.Component {
           label: allLabelArray
         })
       }
-
     }
+
   }
   componentDidMount() {
     this.getData();
@@ -68,15 +69,13 @@ export default class WorkOut extends React.Component {
   getData(){
     fetch('/api/exercises').then(res => res.json())
       .then(res => {
-        for (var i=0 ; i < res.length;i++){
-
+        for (var i = res.length-1 ; i > 0; i--){
           let test = {};
           test.data = parseInt(res[i].total_volume)
           test.label = res[i].createdAt.slice(0,10)
           test.workOutPart = res[i].workOutPart
-
          this.setState({
-           allData: this.state.allData.concat(test).slice(0,15),
+           allData: this.state.allData.concat(test),
            data: this.state.data.concat(parseInt(res[i].total_volume)),
            label : this.state.label.concat(res[i].createdAt.slice(0,10))
          })}
@@ -84,10 +83,7 @@ export default class WorkOut extends React.Component {
       .catch(error => {return(error)})
   }
 
-
-
   render(){
-
   return (
     <div className="wrapper">
       <div id = "workOutPageTitle">
@@ -107,21 +103,16 @@ export default class WorkOut extends React.Component {
         <div className="foodFoodDateButton">
         </div>
       </div>
-
           <LineGraph
             data= {this.state.data}
             label = {this.state.label}
           />
-
       <div id = "workOutAddButtonPlace">
         <a href= "#addworkout" id = "workOutAdd" >
           Add Workout
         </a>
       </div>
     </div>
-
-
-
   );
   }
 }

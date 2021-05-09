@@ -31,7 +31,8 @@ app.get('/api/exercises', (req,res)=>{
     from "exercises"
     join "userWorkOut" using ("workOutId")
     group by "exercises"."workOutId", "userWorkOut"."createdAt" ,"userWorkOut"."workOutPart"
-    order by "createdAt"
+    order by "createdAt" desc
+    limit 31
   `
 
   db.query(sql)

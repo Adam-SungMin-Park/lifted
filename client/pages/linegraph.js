@@ -7,12 +7,7 @@ export default class LineGraph extends React.Component {
 
   constructor(props){
     super(props);
-    /*this.state = {
-      height:window.innerHeight,
-      width:window.innerWidth
-    }*/
     this.chartRef = React.createRef();
-    //this.handleChange = this.handleChange.bind(this)
   }
 
   handleChange(){
