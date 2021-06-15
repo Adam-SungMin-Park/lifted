@@ -24,7 +24,6 @@ export default class WorkOut extends React.Component {
       workOutPart:""
     }
    this.getData = this.getData.bind(this);
-   this.getData3 = this.getData3.bind(this);
    this.handleWorkOutPart = this.handleWorkOutPart.bind(this);
   }
 
@@ -32,10 +31,10 @@ export default class WorkOut extends React.Component {
     this.setState({
       workOutPart: event.target.value
     })
-    this.getData3();
+    this.getData();
   }
 
-  getData3(){
+  getData(){
     let dataArray = [];
     let labelArray = [];
     const allDataArray = [];
@@ -63,10 +62,6 @@ export default class WorkOut extends React.Component {
 
   }
   componentDidMount() {
-    this.getData();
-
-  }
-  getData(){
     fetch('/api/exercises').then(res => res.json())
       .then(res => {
         for (var i = res.length-1 ; i > 0; i--){
@@ -82,6 +77,7 @@ export default class WorkOut extends React.Component {
       })
       .catch(error => {return(error)})
   }
+
 
   render(){
   return (
