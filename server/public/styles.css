@@ -1,431 +1,427 @@
-*{
-  font-family: 'Montserrat', sans-serif;
-  color:rgb(40,127,62);
-  background-color:white;
+* {
+  font-family: "Montserrat", sans-serif;
+  color: rgb(40, 127, 62);
+  background-color: white;
   text-decoration: none;
-  margin:0;
-  padding:0;
-
+  margin: 0;
+  padding: 0;
 }
 
-input{
-  padding:0 0.3rem;
+input {
+  padding: 0 0.3rem;
 }
-button{
-  padding:0 0.3rem;
+button {
+  padding: 0 0.3rem;
 }
-.linegraph{
+.linegraph {
   pointer-events: none;
 }
-.linegraph2{
+.linegraph2 {
   pointer-events: none;
 }
-.linegraph3{
+.linegraph3 {
   pointer-events: none;
 }
-
 
 .wrapper {
-  max-width:1000px;
+  max-width: 1000px;
   margin: 0 auto;
 }
-.caloriesInput{
+.caloriesInput {
   margin-right: 1rem;
-  margin-top:1rem;
+  margin-top: 1rem;
   align-items: left;
   display: flex;
   flex-direction: column;
 }
-.workOutDateButton{
-  color:blue;
-  padding:0 0.3rem;
+.workOutDateButton {
+  color: blue;
+  padding: 0 0.3rem;
 }
-.material-icons.md-60{
-  font-size:60px;
+.material-icons.md-60 {
+  font-size: 60px;
 }
-#navBarContainer{
-  display:flex;
+#navBarContainer {
+  display: flex;
   justify-content: space-evenly;
 }
-#navBarText{
+#navBarText {
   text-align: center;
 }
 
-#workOutPartsDropDown{
+#workOutPartsDropDown {
   width: 200px;
   height: 40px;
 }
-#homeWorkOutPartsDropDown{
+#homeWorkOutPartsDropDown {
   padding-top: 2rem;
   text-align: center;
 }
-#workOutGraphPlace{
+#workOutGraphPlace {
   padding-top: 1rem;
   text-align: center;
 }
-#workOutGraph{
-  border:1px solid black;
+#workOutGraph {
+  border: 1px solid black;
   width: 250px;
 }
-#homeWeightGraphPlace{
+#homeWeightGraphPlace {
   text-align: center;
   padding-top: 1rem;
 }
-#workOutAddButtonPlace{
+#workOutAddButtonPlace {
   text-align: center;
   margin-top: 3rem;
 }
-.tab{
-  text-decoration:none;
+.tab {
+  text-decoration: none;
   text-align: center;
 }
-#workOutPageTitle{
+#workOutPageTitle {
   text-align: center;
   padding-top: 2rem;
   font-size: 2rem;
 }
-#addWorkOutPageTitle{
+#addWorkOutPageTitle {
   text-align: center;
   padding-top: 2rem;
-  padding-bottom:2rem;
+  padding-bottom: 2rem;
   font-size: 2rem;
 }
-.rowRoutineWeight{
-  text-align:center;
-  padding-bottom:1rem;
+.rowRoutineWeight {
+  text-align: center;
+  padding-bottom: 1rem;
 }
-.rowWorkOutPartsDate{
-  text-align:center;
-  padding-bottom:1rem;
+.rowWorkOutPartsDate {
+  text-align: center;
+  padding-bottom: 1rem;
 }
-.rowWorkOutExerciseWeightRep{
-  text-align:center;
+.rowWorkOutExerciseWeightRep {
+  text-align: center;
 }
-.workOutExerciseRep{
-  width:50px;
+.workOutExerciseRep {
+  width: 50px;
 }
-.workOutExerciseWeight{
-  width:60px;
-  margin-right:2rem;
+.workOutExerciseWeight {
+  width: 60px;
+  margin-right: 2rem;
 }
-.workOutExerciseDropDown{
+.workOutExerciseDropDown {
   width: 200px;
   margin-right: 2rem;
 }
-#workOutWorkOutPartDropDown{
-  padding:0 0.3rem;
-}
-
-.addWorkOutDate{
+#workOutWorkOutPartDropDown {
   padding: 0 0.3rem;
 }
-.rowWorkOutVolume{
+
+.addWorkOutDate {
+  padding: 0 0.3rem;
+}
+.rowWorkOutVolume {
   text-align: right;
   padding-top: 2rem;
 }
-#exerciseAddButtonPlace{
+#exerciseAddButtonPlace {
   text-align: right;
   padding-top: 1rem;
 }
-#exerciseAddButton{
+#exerciseAddButton {
   padding: 0 0.3rem;
 }
-.updateOrRemove{
+.updateOrRemove {
   text-align: center;
-  margin-top:2.5rem;
+  margin-top: 2.5rem;
 }
-#weightFoodPageTitle{
+#weightFoodPageTitle {
   text-align: center;
   padding-top: 2rem;
   font-size: 2rem;
 }
-.weightFoodWeight{
+.weightFoodWeight {
   text-align: center;
   padding-top: 2rem;
 }
-.weightFoodDate{
-  text-align:center;
+.weightFoodDate {
+  text-align: center;
   padding-top: 1rem;
-  padding-bottom:1rem;
+  padding-bottom: 1rem;
 }
-.addWeightButton{
-  text-align:center;
-  padding-bottom:1rem;
-  padding-top:1rem;
+.addWeightButton {
+  text-align: center;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
 }
-#caloriesGraphPlace{
-  text-align:center;
+#caloriesGraphPlace {
+  text-align: center;
 }
-#addFoodButton{
+#addFoodButton {
   text-align: right;
   padding-top: 2rem;
 }
 
-.extraFoodButton{
+.extraFoodButton {
   text-align: center;
-  padding-top:2rem;
-  padding-bottom:2rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
-.foodNameInput{
-  display:flex;
-  padding-right:1rem;
-  flex-direction:column;
-  margin-top:1rem;
+.foodNameInput {
+  display: flex;
+  padding-right: 1rem;
+  flex-direction: column;
+  margin-top: 1rem;
 }
-.signUpPlace{
+.signUpPlace {
   text-align: right;
-  margin-top:1rem;
+  margin-top: 1rem;
 }
-.singUp{
+.singUp {
   text-decoration: none;
   border: 1px solid black;
   border-radius: 6px;
 }
-.homeWorkOutTitle{
-  text-align:center;
-   padding-top:1rem;
-
+.homeWorkOutTitle {
+  text-align: center;
+  padding-top: 1rem;
 }
-#homeFoodGraphPlace{
-  text-align:center;
-   padding-top:1rem;
-  padding-bottom:1rem;
+#homeFoodGraphPlace {
+  text-align: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
-#homeWorkOutPartDropDown{
-  text-align:center;
-  padding-top:1rem;
-  padding-bottom:1rem;
+#homeWorkOutPartDropDown {
+  text-align: center;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 }
-.foodFoodDateButton{
-  padding-top:1rem;
+.foodFoodDateButton {
+  padding-top: 1rem;
 }
-.addWorkOut{
-  border:1px rgb(40,127,62) solid;
-  padding:1rem;
+.addWorkOut {
+  border: 1px rgb(40, 127, 62) solid;
+  padding: 1rem;
   box-shadow: 1rem;
-  background-color:rgb(40,127,62);
-  color:white;
+  background-color: rgb(40, 127, 62);
+  color: white;
 }
-#workOutAdd{
-  border:1px rgb(40,127,62);
-  padding:1rem;
+#workOutAdd {
+  border: 1px rgb(40, 127, 62);
+  padding: 1rem;
   box-shadow: 1rem;
-  background-color:rgb(40,127,62);
-  color:white;
-
+  background-color: rgb(40, 127, 62);
+  color: white;
+  text-decoration: none;
 }
-.container{
-  text-align:center;
-  padding-top:2rem;
+.container {
+  text-align: center;
+  padding-top: 2rem;
   padding-bottom: 20rem;
+  height: 100vh;
+}
 
+.demoButton {
+  margin-top: 1rem;
+  border: 1px solid rgb(40, 127, 62);
+  color: white;
+  background-color: rgb(40, 127, 62);
+  padding: 1rem;
 }
-.demoButton{
-  margin-top:1rem;
-  border:1px solid rgb(40,127,62);
-  color:white;
-  background-color:rgb(40,127,62);
-  padding:1rem;
+.demoButtonPlace {
+  padding-top: 2rem;
 }
-.demoButtonPlace{
-  padding-top:2rem;
-}
-.newExerciseName{
+.newExerciseName {
   width: 200px;
   margin-right: 2rem;
 }
-.newExerciseWeight{
+.newExerciseWeight {
   width: 60px;
   margin-right: 2rem;
 }
-.newExerciseReps{
+.newExerciseReps {
   width: 50px;
 }
-.saveFoodsButton{
+.saveFoodsButton {
   border: 1px solid;
-  background-color:rgb(40,127,62);
-  color:white;
-  padding:1rem;
+  background-color: rgb(40, 127, 62);
+  color: white;
+  padding: 1rem;
 }
 
-.linegraph2{
-  width:100%;
-  margin:0 auto;
+.linegraph2 {
+  width: 100%;
+  margin: 0 auto;
 }
-.linegraph3{
-  width:100%;
-  margin:0 auto;
+.linegraph3 {
+  width: 100%;
+  margin: 0 auto;
 }
-.linegraph4{
-  width:100%;
-  margin:0 auto;
+.linegraph4 {
+  width: 100%;
+  margin: 0 auto;
 }
-.linegraph5{
-  width:100%;
-  margin:0 auto;
+.linegraph5 {
+  width: 100%;
+  margin: 0 auto;
 }
-#dateForm{
+#dateForm {
   text-align: center;
   padding-top: 3rem;
 }
-.submitWorkOut{
+.submitWorkOut {
   padding-top: 3rem;
   text-align: center;
 }
-.rowWorkOutVolume{
-  text-align:center;
+.rowWorkOutVolume {
+  text-align: center;
 }
 
-#exerciseAddButtonPlace{
-  text-align:center;
+#exerciseAddButtonPlace {
+  text-align: center;
 }
-.addOrRemove{
+.addOrRemove {
   padding-top: 1.5rem;
   padding-left: 1rem;
 }
-.newAddOrRemove{
+.newAddOrRemove {
   padding-top: 1.5rem;
   padding-left: 1rem;
 }
-.removeButton{
-  margin-right:2rem;
-  color:red;
+.removeButton {
+  margin-right: 2rem;
+  color: red;
   padding: 0 0.3rem;
 }
-.foodRemoveButton{
-  margin-right:2rem;
-  color:red;
-
+.foodRemoveButton {
+  margin-right: 2rem;
+  color: red;
 }
-.foodCalories{
-  display:flex;
-  justify-content:center;
+.foodCalories {
+  display: flex;
+  justify-content: center;
   text-align: left;
 }
-.rowNumber{
+.rowNumber {
   padding-bottom: 1rem;
-  padding-top:1rem;
+  padding-top: 1rem;
 }
-.addWorkOutInputField{
+.addWorkOutInputField {
   display: flex;
   justify-content: space-between;
 }
-.addWorkOutName{
-  display:flex;
-  flex-direction:column;
-  text-align:left;
-}
-.addWorkOutWeight{
-  display:flex;
-  flex-direction:column;
+.addWorkOutName {
+  display: flex;
+  flex-direction: column;
   text-align: left;
-  position:relative;
-  left:-2rem;
 }
-.addWorkOutReps{
-  display:flex;
-  flex-direction:column;
+.addWorkOutWeight {
+  display: flex;
+  flex-direction: column;
   text-align: left;
-  position:relative;
-  left:-4.4rem;
+  position: relative;
+  left: -2rem;
 }
-.newRemoveButton{
-  color:red;
+.addWorkOutReps {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  position: relative;
+  left: -4.4rem;
+}
+.newRemoveButton {
+  color: red;
   padding: 0 0.3rem;
 }
-.previousWorkOutInputField{
-  display:flex;
+.previousWorkOutInputField {
+  display: flex;
   justify-content: space-between;
 }
 
-.previousWorkOutName{
-  display:flex;
-  flex-direction:column;
+.previousWorkOutName {
+  display: flex;
+  flex-direction: column;
   text-align: left;
 }
 
-.previousWorkOutWeight{
-  display:flex;
-  flex-direction:column;
+.previousWorkOutWeight {
+  display: flex;
+  flex-direction: column;
   text-align: left;
 }
-.previousWorkOutReps{
-  display:flex;
-  flex-direction:column;
-  text-align:left;
+.previousWorkOutReps {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
 }
-.foodCaloriesEntries{
-  text-align:center;
-  justify-content:center;
-  margin:auto;
-  padding-top:1rem;
+.foodCaloriesEntries {
+  text-align: center;
+  justify-content: center;
+  margin: auto;
+  padding-top: 1rem;
 }
-.rowExerciseWeightRep{
-  width:95%;
-  margin:auto;
+.rowExerciseWeightRep {
+  width: 95%;
+  margin: auto;
   margin-top: 1rem;
   margin-bottom: 1rem;
 }
-.submitFood{
-  text-align: center
+.submitFood {
+  text-align: center;
 }
-.foodSelectDateButton{
-  color:blue;
+.foodSelectDateButton {
+  color: blue;
 }
-.demoSignUpButtonPlace{
-  padding-top:3rem;
+.demoSignUpButtonPlace {
+  padding-top: 3rem;
 }
-.demoSignUpButton{
+.demoSignUpButton {
   border: 1px solid;
   padding: 1rem;
   color: white;
-  background-color: rgb(40,127,62);
+  background-color: rgb(40, 127, 62);
 }
-.signInPage{
-  text-align:center;
+.signInPage {
+  text-align: center;
 }
-.submitButton{
-  padding-top:1rem;
+.submitButton {
+  padding-top: 1rem;
 }
-@media only screen and (max-width:675px) {
-  .newExerciseName{
-    margin-right:1rem;
-    width:5rem;
+@media only screen and (max-width: 675px) {
+  .newExerciseName {
+    margin-right: 1rem;
+    width: 5rem;
   }
-  .workOutExerciseDropDown{
-    margin-right:1rem;
-    width:5rem;
+  .workOutExerciseDropDown {
+    margin-right: 1rem;
+    width: 5rem;
   }
-  .foodCalories{
-    display:block;
+  .foodCalories {
+    display: block;
   }
-  .updateButton{
-    margin-right:2rem;
+  .updateButton {
+    margin-right: 2rem;
   }
 
-  .addWorkOutReps{
-    left:-0.5rem;
+  .addWorkOutReps {
+    left: -0.5rem;
   }
-  .addWorkOutWeight{
-    left:-0.3rem;
+  .addWorkOutWeight {
+    left: -0.3rem;
   }
-  .newRemoveButton{
-    position:relative;
-    left:-1rem;
+  .newRemoveButton {
+    position: relative;
+    left: -1rem;
   }
-  .newAddOrRemove{
-    padding-top:1.2rem;
+  .newAddOrRemove {
+    padding-top: 1.2rem;
     position: relative;
     left: 0.3rem;
   }
-  .addWorkOutInputField{
-    font-size:0.8rem;
+  .addWorkOutInputField {
+    font-size: 0.8rem;
   }
-  .rowExerciseWeightRep{
-    font-size: 0.8rem
+  .rowExerciseWeightRep {
+    font-size: 0.8rem;
   }
-  .addOrRemove{
-    padding-top:1.2rem;
+  .addOrRemove {
+    padding-top: 1.2rem;
   }
-
 }
