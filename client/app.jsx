@@ -8,6 +8,7 @@ import SignUp from './pages/signup';
 import SignIn from './pages/signin';
 import AddWorkOut from './pages/addworkout';
 import LandingPage from './pages/landingpage';
+import WorkoutOverView from './components/workout';
 import { parseRoute } from './pages/index'
 
 
@@ -103,7 +104,7 @@ export default class App extends React.Component {
     const { route } = this.state;
 
     if(route.path === 'workout'){
-      return <WorkOut userId = {this.state.userId}/>;
+      return <WorkoutOverView userId = {this.state.userId}/>;
     }
     if(route.path === 'addworkout'){
       return <AddWorkOut userId={this.state.userId} updateHash={this.updateHash} />;
