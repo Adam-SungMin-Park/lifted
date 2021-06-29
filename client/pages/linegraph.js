@@ -1,33 +1,29 @@
-import React, { Component } from 'react'
+import React, { useEffect } from 'react'
 import Chart from "chart.js";
 import WorkOut from "./workout"
 
 
-export default class LineGraph extends React.Component {
+export default function LineGraph (props) {
 
-  constructor(props){
-    super(props);
-    this.chartRef = React.createRef();
-  }
+  const {
+    data,
+    label
+  } = props
 
-  handleChange(){
-    this.setState({
-      height:window.innerHeight,
-      width:window.innerWidth
-    });
-  }
+  const chartRef = React.createRef();
 
-  componentDidUpdate(){
+
+  useEffect(()=>{
     var ctx = document.getElementById('myChart');
     var test = new Chart(ctx, {
 
       type: "line",
       data: {
-        labels: this.props.label,
+        labels: label,
         datasets: [
           {
             label: "Workout Volume (lbs)",
-            data: this.props.data,
+            data: data,
             borderWidth:0.1,
             backgroundColor:[
               'rgb(40,127,62)'
@@ -65,26 +61,18 @@ export default class LineGraph extends React.Component {
       }
 
     });
-  }
 
-  render() {
+  },[data,label])
 
-
-   if(this.props.data.length ===0){
-     return(
-       <h1>Oh no workout record yet!</h1>
-     )
-   }
     return (
       <div className= "wrapper">
         <canvas
           className = "chartjs-render-monitor"
           id="myChart"
-          ref={this.chartRef}
-          data = {this.props.data}
-          label ={this.props.label}
+          ref={chartRef}
+          data = {data}
+          label ={label}
         />
       </div>
     )
-}
 }
