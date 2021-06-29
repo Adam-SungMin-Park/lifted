@@ -67,7 +67,8 @@ app.post('/api/workout/reload', (req, res) => {
     from "exercises"
     where "createdAt" =$1
   `
-  const params = [req.body.createdAt];
+  const params = [req.body.date];
+  console.log(req.body.date)
   db.query(sql, params)
     .then(result => res.status(213).json(result.rows))
 })

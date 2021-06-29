@@ -6,9 +6,10 @@ import Journal from './pages/journal';
 import Food from './pages/food';
 import SignUp from './pages/signup';
 import SignIn from './pages/signin';
-import AddWorkOut from './pages/addworkout';
+//import AddWorkOut from './pages/addworkout';
 import LandingPage from './pages/landingpage';
 import WorkoutOverView from './components/workout';
+import AddWorkOut from './components/addworkout';
 import { parseRoute } from './pages/index'
 
 
