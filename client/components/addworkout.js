@@ -1,9 +1,10 @@
 import React , { useEffect, useState }from "react";
 import WorkoutOverView from "./workout";
-export default function AddWorkOut (){
+export default function AddWorkOut ({userId}){
   const [date , setDate] = useState(null);
   const [workOutPart , setWorkOutPart] = useState('Select Workout Part');
   const [exercise , setExercise] = useState('');
+
   const [newExercise , setNewExercise] = useState([{exerciseName : "", exerciseWeight : "" , exerciseReps : "" }])
   const options = ['Select Workout Part', 'Chest' , 'Shoulder', 'Back' , 'Legs' , 'Full Body', 'Push', 'Pull']
 
@@ -37,6 +38,20 @@ export default function AddWorkOut (){
     setExercise(copy)
 
   }
+  function handleSubmit(){
+
+      fetch('/api/exercises',{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json'
+        },
+        body: JSON.stringify({userId, exercise, date, workOutPart, newExercise})
+      }).then(res =>(res))
+        .then(data => (data))
+        .catch(err => { return err })
+
+  }
+
 
 
 
@@ -61,21 +76,22 @@ if(exercise.length === 0 ){
         <div id="addWorkOutPageTitle">
             Add Workout
         </div>
-        <div className="weightFoodDate">
-          <input className="addWorkOutDate" onChange = {e => setDate(e.target.value)} required type="date"></input>
 
-        </div>
-        <div className="rowWorkOutPartsDate">
-          <select required onChange = {e => setWorkOutPart(e.target.value)}  name="workOutWorkOutPartDrop" id="workOutWorkOutPartDropDown">
-           {options.map((options,index)=>{
-             return(
-               <option key = {index} value = {options}>{options}</option>
-             )
-           })}
-          </select>
-        </div>
-         {date && newExercise.map((exercise,index)=>{
-           return(
+          <div className="weightFoodDate">
+            <input className="addWorkOutDate" onChange = {e => setDate(e.target.value)} required type="date"></input>
+
+          </div>
+          <div className="rowWorkOutPartsDate">
+            <select required onChange = {e => setWorkOutPart(e.target.value)}  name="workOutWorkOutPartDrop" id="workOutWorkOutPartDropDown">
+            {options.map((options,index)=>{
+              return(
+                <option key = {index} value = {options}>{options}</option>
+              )
+            })}
+            </select>
+          </div>
+          {date && newExercise.map((exercise,index)=>{
+            return(
             <div key={index} className="rowExerciseWeightRep">
               <div className="addWorkOutInputField">
                 <div className="addWorkOutName">Name
@@ -92,8 +108,14 @@ if(exercise.length === 0 ){
                 </div>
               </div>
             </div>
-           )
-            })}
+            )
+          })}
+          {newExercise[0].exerciseName!=="" && newExercise[0].exerciseWeight!=="" &&newExercise[0].exerciseReps!=="" &&
+            <div className="submitWorkOut">
+              <a  onClick = {handleSubmit} className="addWorkOut" >Save Workout</a>
+            </div>
+          }
+
       </div>
     )
     }
@@ -121,13 +143,13 @@ if(exercise.length === 0 ){
             <div key={index} className="rowExerciseWeightRep">
               <div className="previousWorkOutInputField">
                 <div className="previousWorkOutName">Name
-                <input key = {index} required  name="exerciseName" defaultValue={exercise[index].exerciseName} onChange ={e=> handleExerciseChange(e,index)} className="workOutExerciseDropDown"></input>
+                <input key = {index} required  name="exerciseName" defaultValue={exercises.exerciseName} onChange ={e=> handleExerciseChange(e,index)} className="workOutExerciseDropDown"></input>
                 </div>
                 <div className="previousWorkOutWeight">Weight (lbs)
-                <input required  name="exerciseWeight" defaultValue={exercise[index].exerciseWeight} onChange ={e=> handleExerciseChange(e,index)}  className="workOutExerciseWeight" type="number" ></input>
+                <input required  name="exerciseWeight" defaultValue={exercises.exerciseWeight} onChange ={e=> handleExerciseChange(e,index)}  className="workOutExerciseWeight" type="number" ></input>
                 </div>
                 <div className="previousWorkOutReps">Reps
-                <input required  name="exerciseReps" defaultValue={exercise[index].exerciseReps} onChange ={e=> handleExerciseChange(e,index)}  className="workOutExerciseRep" type="number" ></input>
+                <input required  name="exerciseReps" defaultValue={exercises.exerciseReps} onChange ={e=> handleExerciseChange(e,index)}  className="workOutExerciseRep" type="number" ></input>
                 </div>
                 <div className="addOrRemove" id={index}>
                   {exercise.length !== 0 && <button  id={index} className="removeButton">Remove</button>}
@@ -142,13 +164,13 @@ if(exercise.length === 0 ){
             <div key={index} className="rowExerciseWeightRep">
               <div className="addWorkOutInputField">
                 <div className="addWorkOutName">Name
-                  <input placeholder="Exercise Name" defaultValue = {newExercise[index].exerciseName} onChange ={e=>handleNewExerciseChange(e,index)} name = "exerciseName" label="Exercise Name" required  className="newExerciseName"></input>
+                  <input placeholder="Exercise Name" defaultValue = {exercises.exerciseName} onChange ={e=>handleNewExerciseChange(e,index)} name = "exerciseName" label="Exercise Name" required  className="newExerciseName"></input>
                 </div>
                 <div className="addWorkOutWeight">Weight (lbs)
-                  <input min ="0" required onChange ={e=>handleNewExerciseChange(e,index)} name="exerciseWeight" defaultValue={newExercise[index].exerciseWeight} placeholder="0" className="newExerciseWeight" type="number" ></input>
+                  <input min ="0" required onChange ={e=>handleNewExerciseChange(e,index)} name="exerciseWeight" defaultValue={exercises.exerciseWeight} placeholder="0" className="newExerciseWeight" type="number" ></input>
                 </div>
                 <div className="addWorkOutReps">Reps
-                  <input min="0" required onChange ={e=>handleNewExerciseChange(e,index)} name="exerciseReps" defaultValue={newExercise[index].exerciseReps} placeholder="0" className="newExerciseReps" type="number" ></input>
+                  <input min="0" required onChange ={e=>handleNewExerciseChange(e,index)} name="exerciseReps" defaultValue={exercises.exerciseReps} placeholder="0" className="newExerciseReps" type="number" ></input>
                 </div>
                 <div className="newAddOrRemove">
                   {newExercise.length !== 0 && <button className="newRemoveButton">Remove</button>}
@@ -157,7 +179,11 @@ if(exercise.length === 0 ){
             </div>
           )
         })}
+        <div className="submitWorkOut">
+          <a className="addWorkOut" >Save Workout</a>
+        </div>
       </div>
+
     )
   }
 }

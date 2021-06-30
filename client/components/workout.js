@@ -2,8 +2,6 @@ import React,{ useEffect,useState } from "react";
 import LineGraph from "../pages/linegraph";
 import Chart from "chart.js";
 
-
-
 export default function WorkoutOverView(){
   const [allData , setAllData] = useState([]);
   const [volume, setVolume] = useState([]);
@@ -11,7 +9,6 @@ export default function WorkoutOverView(){
   const [workOutPart , setWorkOutPart] = useState("default");
   const [data, setData] = useState([]);
   const [graphLabel , setGraphLabel] = useState([]);
-
 
   useEffect(()=>{
      fetch('/api/exercises').then(res => res.json())

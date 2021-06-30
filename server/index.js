@@ -104,6 +104,7 @@ app.put('/api/exercise/update', (req, res) => {
 
 
 app.post('/api/exercises', async (req, res) => {
+  console.log(req.body)
 
   const sql = `
    insert into "userWorkOut" ("userId","workOutPart","createdAt")
@@ -123,8 +124,6 @@ app.post('/api/exercises', async (req, res) => {
       params2.push(exercise.exerciseName, exercise.exerciseWeight, exercise.exerciseReps)
       return `($1 , $2 , $3 , $${++paramsNum} , $${++paramsNum}, $${++paramsNum})`
       })
-
-
 
       const sql2 = `
       insert into "exercises" ("workOutId" , "createdAt", "workOutPart", "exerciseName" , "exerciseWeight" , "exerciseReps")
