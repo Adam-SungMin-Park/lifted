@@ -6,9 +6,10 @@ import Journal from './pages/journal';
 import Food from './pages/food';
 import SignUp from './pages/signup';
 import SignIn from './pages/signin';
-import AddWorkOut from './pages/addworkout';
+//import AddWorkOut from './pages/addworkout';
 import LandingPage from './pages/landingpage';
 import WorkoutOverView from './components/workout';
+import AddWorkOut from './components/addworkout';
 import { parseRoute } from './pages/index'
 
 
@@ -17,7 +18,7 @@ export default class App extends React.Component {
     super(props)
     this.state = {
       route: parseRoute(window.location.hash),
-      userId: window.localStorage.getItem('token'),
+      userId: 1,
       email:"",
       password:"",
       view:true
@@ -29,6 +30,7 @@ export default class App extends React.Component {
     this.viewChange = this.viewChange.bind(this);
     this.handleRegistration = this.handleRegistration.bind(this);
   }
+
   componentDidMount(){
     window.addEventListener('hashchange',(event)=>{
       this.setState({

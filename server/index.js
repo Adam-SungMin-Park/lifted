@@ -67,7 +67,8 @@ app.post('/api/workout/reload', (req, res) => {
     from "exercises"
     where "createdAt" =$1
   `
-  const params = [req.body.createdAt];
+  const params = [req.body.date];
+  console.log(req.body.date)
   db.query(sql, params)
     .then(result => res.status(213).json(result.rows))
 })
@@ -103,6 +104,7 @@ app.put('/api/exercise/update', (req, res) => {
 
 
 app.post('/api/exercises', async (req, res) => {
+  console.log(req.body)
 
   const sql = `
    insert into "userWorkOut" ("userId","workOutPart","createdAt")
@@ -122,8 +124,6 @@ app.post('/api/exercises', async (req, res) => {
       params2.push(exercise.exerciseName, exercise.exerciseWeight, exercise.exerciseReps)
       return `($1 , $2 , $3 , $${++paramsNum} , $${++paramsNum}, $${++paramsNum})`
       })
-
-
 
       const sql2 = `
       insert into "exercises" ("workOutId" , "createdAt", "workOutPart", "exerciseName" , "exerciseWeight" , "exerciseReps")
