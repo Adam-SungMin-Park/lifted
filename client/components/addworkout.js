@@ -52,9 +52,6 @@ export default function AddWorkOut ({userId}){
 
   }
 
-
-
-
   function handleNewExerciseChange(e,index){
     let key = e.target.name;
     let copy = [...newExercise]
@@ -66,9 +63,6 @@ export default function AddWorkOut ({userId}){
     setNewExercise(copy)
   }
 
-
-
-  console.log(newExercise)
 
 if(exercise.length === 0 ){
     return (
