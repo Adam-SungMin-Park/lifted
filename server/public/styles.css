@@ -7,12 +7,12 @@
   padding: 0;
 }
 
-input {
-  padding: 0 0.3rem;
-}
+input,
 button {
   padding: 0 0.3rem;
+  border-radius: 10px;
 }
+
 .linegraph {
   pointer-events: none;
 }
@@ -50,6 +50,7 @@ button {
 }
 
 #workOutPartsDropDown {
+  border-radius: 7px;
   width: 200px;
   height: 40px;
 }
@@ -210,8 +211,11 @@ button {
   background-color: rgb(40, 127, 62);
   color: white;
   text-decoration: none;
+  border-radius: 10px;
 }
+
 .container {
+  background: white;
   text-align: center;
   padding-top: 2rem;
   padding-bottom: 20rem;
@@ -219,6 +223,8 @@ button {
 }
 
 .demoButton {
+  text-decoration: none;
+  border-radius: 10px;
   margin-top: 1rem;
   border: 1px solid rgb(40, 127, 62);
   color: white;
