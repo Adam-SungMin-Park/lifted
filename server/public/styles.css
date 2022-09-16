@@ -12,6 +12,13 @@ button {
   padding: 0 0.3rem;
   border-radius: 10px;
 }
+button:hover{
+  color:green;
+  background-color:white;
+}
+
+
+
 
 .linegraph {
   pointer-events: none;
@@ -35,8 +42,11 @@ button {
   flex-direction: column;
 }
 .workOutDateButton {
-  color: blue;
+
   padding: 0 0.3rem;
+  border-radius: 10px;
+    color: white;
+    background-color: green;
 }
 .material-icons.md-60 {
   font-size: 60px;
@@ -128,6 +138,9 @@ button {
 }
 #exerciseAddButton {
   padding: 0 0.3rem;
+  border-radius: 10px;
+    color: white;
+    background-color: green;
 }
 .updateOrRemove {
   text-align: center;
@@ -151,6 +164,9 @@ button {
   text-align: center;
   padding-bottom: 1rem;
   padding-top: 1rem;
+  border-radius: 10px;
+    color: white;
+    background-color: green;
 }
 #caloriesGraphPlace {
   text-align: center;
@@ -158,12 +174,18 @@ button {
 #addFoodButton {
   text-align: right;
   padding-top: 2rem;
+  border-radius: 10px;
+    color: white;
+    background-color: green;
 }
 
 .extraFoodButton {
   text-align: center;
   padding-top: 2rem;
   padding-bottom: 2rem;
+  border-radius: 10px;
+    color: white;
+    background-color: green;
 }
 .foodNameInput {
   display: flex;
@@ -198,9 +220,10 @@ button {
   padding-top: 1rem;
 }
 .addWorkOut {
+  text-decoration: none;
   border: 1px rgb(40, 127, 62) solid;
   padding: 1rem;
-  box-shadow: 1rem;
+  /* box-shadow: 1rem; */
   background-color: rgb(40, 127, 62);
   color: white;
 }
@@ -308,6 +331,11 @@ button {
 .rowNumber {
   padding-bottom: 1rem;
   padding-top: 1rem;
+}
+#addWorkOutContainer{
+  width:900px;
+  max-width:80%;
+  margin:0 auto;
 }
 .addWorkOutInputField {
   display: flex;
